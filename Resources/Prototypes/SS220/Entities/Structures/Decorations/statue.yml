@@ -1,0 +1,505 @@
+﻿- type: entity
+  id: StatueAngelLeft1
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel1left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueAngelRight1
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel1right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueAngelLeft2
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel2left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueAngelRight2
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel2right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueAngelLeft3
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel3left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueAngelRight3
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel3right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueAngelLeft4
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel4left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueAngelRight4
+  parent: BaseStructure
+  name: angel statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: angel4right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueColumnLeft1
+  parent: BaseStructure
+  name: column
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: column1left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueColumnRight1
+  parent: BaseStructure
+  name: column
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: column1right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueColumnLeft2
+  parent: BaseStructure
+  name: column
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: column2left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueColumnRight2
+  parent: BaseStructure
+  name: column
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: column2right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueColumnLeft3
+  parent: BaseStructure
+  name: column
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: column3left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueColumnRight3
+  parent: BaseStructure
+  name: column
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: column3right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueCommunistSanta
+  parent: BaseStructure
+  name: statue of communist santa
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: communist_santa
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueCarp
+  parent: BaseStructure
+  name: carp statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: carp
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueClown
+  parent: BaseStructure
+  name: corgy statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: clown
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueCucumber
+  parent: BaseStructure
+  name: cucumber statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: cucumber
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueHuman
+  parent: BaseStructure
+  name: human statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: human
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatuePlanet
+  parent: BaseStructure
+  name: planets statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: planet
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueGorgulleLeft1
+  parent: BaseStructure
+  name: gorgulle statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: gorgulle1left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueGorgulleRight1
+  parent: BaseStructure
+  name: gorgulle statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: gorgulle1right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueGrave1
+  parent: BaseStructure
+  name: no name grave
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: grave1
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueGrave2
+  parent: BaseStructure
+  name: no name grave
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: grave2
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueKongLeft
+  parent: BaseStructure
+  name: kong statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: kongleft
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueKongRight
+  parent: BaseStructure
+  name: kong statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: kongright
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueVenusLeft
+  parent: BaseStructure
+  name: venus statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: venus_left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueVenusRight
+  parent: BaseStructure
+  name: venus statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: venus_right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueObeliskLeft1
+  parent: BaseStructure
+  name: obelisk
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: obelisk1left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueObeliskRight1
+  parent: BaseStructure
+  name: obelisk
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: obelisk1right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueLeft1
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue1left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueRight1
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue1right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueLeft2
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue2left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueRight2
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue2right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueLeft3
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue3left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueRight3
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue3right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueLeft4
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue4left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueStatueRight4
+  parent: BaseStructure
+  name: statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: statue4right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaLeft1
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva1left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaRight1
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva1right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaLeft2
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva2left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaRight2
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva2right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaLeft3
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva3left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaRight3
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva3right
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaLeft4
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva4left
+    drawdepth: Mobs
+    offset: "0.0,0.5"
+
+- type: entity
+  id: StatueDevaRight4
+  parent: BaseStructure
+  name: deva statue
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decoration/statues.rsi
+    state: deva4right
+    drawdepth: Mobs
+    offset: "0.0,0.5"

@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprite by legionerus (discord) and TTTomaTTT for SS220",
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "angel1left"
+    },
+    {
+      "name": "angel1right"
+    },
+    {
+      "name": "angel2left"
+    },
+    {
+       "name": "angel2right"
+    },
+    {
+       "name": "angel3left"
+    },
+    {
+       "name": "angel3right"
+    },
+    {
+       "name": "carp"
+    },
+    {
+       "name": "clown"
+    },
+    {
+       "name": "cockroach"
+    },
+    {
+       "name": "column1left"
+    },
+    {
+       "name": "column1right"
+    },
+    {
+       "name": "column2left"
+    },
+    {
+       "name": "column2right"
+    },
+    {
+       "name": "column3left"
+    },
+    {
+       "name": "column3right"
+    },
+    {
+       "name": "column1left"
+    },
+    {
+       "name": "communist_santa"
+    },
+    {
+       "name": "corgyleft"
+    },
+    {
+       "name": "corgyright"
+    },
+    {
+       "name": "cucumber"
+    },
+    {
+       "name": "deva1left"
+    },
+    {
+       "name": "deva1right"
+    },
+    {
+       "name": "deva2left"
+    },
+    {
+       "name": "deva2right"
+    },
+    {
+        "name": "deva3left"
+    },
+    {
+        "name": "deva3right"
+    },
+    {
+        "name": "deva4left"
+    },
+    {
+        "name": "deva4right"
+    },
+    {
+        "name": "gorgulle1left"
+    },
+    {
+        "name": "gorgulle1right"
+    },
+    {
+        "name": "grave1"
+    },
+    {
+        "name": "grave2"
+    },
+    {
+        "name": "kongleft"
+    },
+    {
+        "name": "kongright"
+    },
+    {
+        "name": "obelisk1left"
+    },
+    {
+        "name": "obelisk1right"
+    },
+    {
+        "name": "statue1left"
+    },
+    {
+        "name": "statue1right"
+    },
+    {
+        "name": "statue2left"
+    },
+    {
+        "name": "statue2right"
+    },
+    {
+        "name": "statue3left"
+    },
+    {
+        "name": "statue3right"
+    },
+    {
+        "name": "statue4left"
+    },
+    {
+        "name": "statue4right"
+    },
+    {
+        "name": "venus_left"
+    },
+    {
+        "name": "venus_right"
+    }
+  ]
+}
