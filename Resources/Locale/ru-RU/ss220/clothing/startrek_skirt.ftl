@@ -1,4 +1,4 @@
- ent-ClothingStarTrekJumpskirtColorYellowOne = жёлтое платье Стар-Трек
+ent-ClothingStarTrekJumpskirtColorYellowOne = жёлтое платье Стар-Трек
     .desc = Платье для космических путешествий.
     .suffix = стартрек
 ent-ClothingStarTrekJumpskirtColorYellowTwo = жёлтое платье Стар-Трек
@@ -25,7 +25,7 @@ ent-ClothingStarTrekJumpskirtColorRedFour = красное платье Стар
 ent-ClothingStarTrekJumpskirtColorOrangeOne = оранжевое платье Стар-Трек
     .desc = Платье для космических путешествий.
     .suffix = стартрек
-ent-ClothingStarTrekJumpskirtColorOrangeTwo оранжевое платье Стар-Трек
+ent-ClothingStarTrekJumpskirtColorOrangeTwoc = оранжевое платье Стар-Трек
     .desc = Платье для космических путешествий.
     .suffix = стартрек
 ent-ClothingStarTrekJumpskirtColorOrangeThree = оранжевое платье Стар-Трек
