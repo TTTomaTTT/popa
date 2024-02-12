@@ -1,6 +1,6 @@
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtAloe
+  id: ClothingUniformShirtHarvestAloe
   name: aloe shirt
   description: Today im a aloe.
   components:
@@ -11,7 +11,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtAmbrosiaDeus
+  id: ClothingUniformShirtHarvestAmbrosiaDeus
   name: ambrosia deus shirt
   description: Today im a ambrosia deus.
   components:
@@ -22,7 +22,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtAmbrosiaVulgaris
+  id: ClothingUniformShirtHarvestAmbrosiaVulgaris
   name: ambrosia vulgaris shirt
   description: Today im a ambrosia vulgaris.
   components:
@@ -33,7 +33,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtApple
+  id: ClothingUniformShirtHarvestApple
   name: apple shirt
   description: Today im a apple.
   components:
@@ -44,7 +44,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtBanana
+  id: ClothingUniformShirtHarvestBanana
   name: banana shirt
   description: Today im a banana.
   components:
@@ -55,7 +55,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtBerries
+  id: ClothingUniformShirtHarvestBerries
   name: berries shirt
   description: Today im a berries.
   components:
@@ -66,7 +66,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtBloodTomato
+  id: ClothingUniformShirtHarvestBloodTomato
   name: blood tomato shirt
   description: Today im a blood tomato.
   components:
@@ -77,7 +77,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtBlueTomato
+  id: ClothingUniformShirtHarvestBlueTomato
   name: blue tomato shirt
   description: Today im a blue tomato.
   components:
@@ -88,7 +88,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtBungo
+  id: ClothingUniformShirtHarvestBungo
   name: bungo shirt
   description: Today im a bungo.
   components:
@@ -99,7 +99,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtCabbage
+  id: ClothingUniformShirtHarvestCabbage
   name: cabbage shirt
   description: Today im a cabbage.
   components:
@@ -110,7 +110,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtCannabis
+  id: ClothingUniformShirtHarvestCannabis
   name: cannabis shirt
   description: Today im a cannabis.
   components:
@@ -121,7 +121,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtCarrot
+  id: ClothingUniformShirtHarvestCarrot
   name: carrot shirt
   description: Today im a carrot.
   components:
@@ -132,7 +132,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtChanterella
+  id: ClothingUniformShirtHarvestChanterella
   name: chanterella shirt
   description: Today im a chanterella.
   components:
@@ -143,7 +143,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtChili
+  id: ClothingUniformShirtHarvestChili
   name: chili shirt
   description: Today im a chili.
   components:
@@ -154,7 +154,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtChilly
+  id: ClothingUniformShirtHarvestChilly
   name: chilly shirt
   description: Today im a chilly.
   components:
@@ -165,7 +165,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtCocoa
+  id: ClothingUniformShirtHarvestCocoa
   name: cocoa shirt
   description: Today im a cocoa.
   components:
@@ -176,7 +176,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtCorn
+  id: ClothingUniformShirtHarvestCorn
   name: corn shirt
   description: Today im a corn.
   components:
@@ -187,7 +187,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtCotton
+  id: ClothingUniformShirtHarvestCotton
   name: cotton shirt
   description: Today im a cotton.
   components:
@@ -198,7 +198,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtDeathnettle
+  id: ClothingUniformShirtHarvestDeathnettle
   name: death nettle shirt
   description: Today im a death nettle.
   components:
@@ -209,7 +209,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtEggplant
+  id: ClothingUniformShirtHarvestEggplant
   name: eggplant shirt
   description: Today im a eggplant.
   components:
@@ -220,7 +220,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtEggy
+  id: ClothingUniformShirtHarvestEggy
   name: eggy shirt
   description: Today im a eggy.
   components:
@@ -231,7 +231,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtFlyamanita
+  id: ClothingUniformShirtHarvestFlyamanita
   name: flyamanita shirt
   description: Today im a flyamanita.
   components:
@@ -242,7 +242,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtGalaxyThistle
+  id: ClothingUniformShirtHarvestGalaxyThistle
   name: galaxy thistle shirt
   description: Today im a galaxy thistle.
   components:
@@ -253,7 +253,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtGarlic
+  id: ClothingUniformShirtHarvestGarlic
   name: garlic shirt
   description: Today im a garlic.
   components:
@@ -264,7 +264,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtGatfruit
+  id: ClothingUniformShirtHarvestGatfruit
   name: gatfruit shirt
   description: Today im a gatfruit.
   components:
@@ -275,7 +275,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtGrape
+  id: ClothingUniformShirtHarvestGrape
   name: grape shirt
   description: Today im a grape.
   components:
@@ -286,7 +286,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtKoibean
+  id: ClothingUniformShirtHarvestKoibean
   name: koibean shirt
   description: Today im a koibean.
   components:
@@ -297,7 +297,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtLemon
+  id: ClothingUniformShirtHarvestLemon
   name: lemon shirt
   description: Today im a lemon.
   components:
@@ -308,7 +308,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtLemoon
+  id: ClothingUniformShirtHarvestLemoon
   name: lemoon shirt
   description: Today im a lemoon.
   components:
@@ -319,7 +319,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtLime
+  id: ClothingUniformShirtHarvestLime
   name: lime shirt
   description: Today im a lime.
   components:
@@ -330,7 +330,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtLingzhi
+  id: ClothingUniformShirtHarvestLingzhi
   name: lingzhi shirt
   description: Today im a lingzhi.
   components:
@@ -341,7 +341,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtMimana
+  id: ClothingUniformShirtHarvestMimana
   name: mimana shirt
   description: Today im a mimana.
   components:
@@ -352,7 +352,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtNettle
+  id: ClothingUniformShirtHarvestNettle
   name: nettle shirt
   description: Today im a nettle.
   components:
@@ -363,7 +363,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtOat
+  id: ClothingUniformShirtHarvestOat
   name: oat shirt
   description: Today im a oat.
   components:
@@ -374,7 +374,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtOnion
+  id: ClothingUniformShirtHarvestOnion
   name: onion shirt
   description: Today im a onion.
   components:
@@ -385,7 +385,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtOnionRed
+  id: ClothingUniformShirtHarvestOnionRed
   name: onion red shirt
   description: Today im a onion red.
   components:
@@ -396,7 +396,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtOrange
+  id: ClothingUniformShirtHarvestOrange
   name: orange shirt
   description: Today im a orange.
   components:
@@ -407,7 +407,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtPea
+  id: ClothingUniformShirtHarvestPea
   name: pea shirt
   description: Today im a pea.
   components:
@@ -418,7 +418,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtPineapple
+  id: ClothingUniformShirtHarvestPineapple
   name: pineapple shirt
   description: Today im a pineapple.
   components:
@@ -429,7 +429,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtPoppy
+  id: ClothingUniformShirtHarvestPoppy
   name: poppy shirt
   description: Today im a poppy.
   components:
@@ -440,7 +440,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtPotato
+  id: ClothingUniformShirtHarvestPotato
   name: potato shirt
   description: Today im a potato.
   components:
@@ -451,7 +451,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtPumpkin
+  id: ClothingUniformShirtHarvestPumpkin
   name: pumpkin shirt
   description: Today im a pumpkin.
   components:
@@ -462,7 +462,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtRice
+  id: ClothingUniformShirtHarvestRice
   name: rice shirt
   description: Today im a rice.
   components:
@@ -473,7 +473,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtSoybeans
+  id: ClothingUniformShirtHarvestSoybeans
   name: soybeans shirt
   description: Today im a soybeans.
   components:
@@ -484,7 +484,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtSteelcap
+  id: ClothingUniformShirtHarvestSteelcap
   name: steelcap shirt
   description: Today im a steelcap.
   components:
@@ -495,7 +495,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtStobacco
+  id: ClothingUniformShirtHarvestStobacco
   name: stobacco shirt
   description: Today im a stobacco.
   components:
@@ -506,7 +506,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtSugarcane
+  id: ClothingUniformShirtHarvestSugarcane
   name: sugarcane shirt
   description: Today im a sugarcane.
   components:
@@ -517,7 +517,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtTobacco
+  id: ClothingUniformShirtHarvestTobacco
   name: tobacco shirt
   description: Today im a tobacco.
   components:
@@ -528,7 +528,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtTomato
+  id: ClothingUniformShirtHarvestTomato
   name: tomato shirt
   description: Today im a tomato.
   components:
@@ -539,7 +539,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtTowercap
+  id: ClothingUniformShirtHarvestTowercap
   name: towercap shirt
   description: Today im a towercap.
   components:
@@ -550,7 +550,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtWatermelon
+  id: ClothingUniformShirtHarvestWatermelon
   name: watermelon shirt
   description: Today im a watermelon.
   components:
@@ -561,7 +561,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformShirtWheat
+  id: ClothingUniformShirtHarvestWheat
   name: wheat shirt
   description: Today im a wheat.
   components:
