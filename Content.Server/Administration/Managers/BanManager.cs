@@ -52,7 +52,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
         if (e.NewStatus != SessionStatus.Connected || _cachedRoleBans.ContainsKey(e.Session.UserId))
             return;
 
-        var netChannel = e.Session.ConnectedClient;
+        var netChannel = e.Session.Channel;
         ImmutableArray<byte>? hwId = netChannel.UserData.HWId.Length == 0 ? null : netChannel.UserData.HWId;
         await CacheDbRoleBans(e.Session.UserId, netChannel.RemoteEndPoint.Address, hwId);
 
@@ -177,7 +177,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
             return;
         // If they are, kick them
         var message = banDef.FormatBanMessage(_cfg, _localizationManager);
-        targetPlayer.ConnectedClient.Disconnect(message);
+        targetPlayer.Channel.Disconnect(message);
     }
     #endregion
 
@@ -186,7 +186,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
     // Removing it will clutter the note list. Please also make sure that department bans are applied to roles with the same DateTimeOffset.
     public async void CreateRoleBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableArray<byte>? hwid, string role, uint? minutes, NoteSeverity severity, string reason, DateTimeOffset timeOfBan)
     {
-        if (!_prototypeManager.TryIndex(role, out JobPrototype? _))
+        if (!_prototypeManager.TryIndex(role, out JobPrototype? _) && !_prototypeManager.TryIndex(role, out AntagPrototype? _))
         {
             throw new ArgumentException($"Invalid role '{role}'", nameof(role));
         }
@@ -295,7 +295,7 @@ public sealed class BanManager : IBanManager, IPostInjectInit
         };
 
         _sawmill.Debug($"Sent rolebans to {pSession.Name}");
-        _netManager.ServerSendMessage(bans, pSession.ConnectedClient);
+        _netManager.ServerSendMessage(bans, pSession.Channel);
     }
 
     public void PostInject()

@@ -36,6 +36,8 @@
       - On
       - Off
       - Status
+    lastSignals:
+      Status: false
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -100,7 +102,7 @@
             acts: [ "Destruction" ]
           - !type:PlaySoundBehavior
             sound:
-              path: /Audio/Effects/metalbreak.ogg
+              collection: MetalBreak
               params:
                 volume: -8
 

@@ -21,6 +21,7 @@
     slots:
     - suitStorage
     - Belt
+  - type: AmmoCounter
   - type: Gun
     selectedMode: SemiAuto
     fireRate: 1.5
@@ -28,6 +29,8 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
+  - type: UseDelay
+    delay: 0.66
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
@@ -86,6 +89,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
   - type: RevolverAmmoProvider
+    proto: CartridgeMagnumRubber #ss-220 civDec
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
