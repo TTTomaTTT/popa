@@ -20,8 +20,6 @@ using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Server.Traits.Assorted;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -32,14 +30,15 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Pulling.Components;
-using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Zombies;
-using Robust.Shared.Audio;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Prying.Components;
+using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Clothing;
+using Content.Server.Administration.Managers;
+using Robust.Server.Player;
 
 namespace Content.Server.Zombies
 {
@@ -64,6 +63,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly SharedRoleSystem _roles = default!;
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
         /// <summary>
         /// Handles an entity turning into a zombie when they die or go into crit
@@ -102,13 +102,14 @@ namespace Content.Server.Zombies
             var zombiecomp = AddComp<ZombieComponent>(target);
 
             //we need to basically remove all of these because zombies shouldn't
-            //get diseases, breath, be thirst, be hungry, die in space or have offspring
+            //get diseases, breath, be thirst, be hungry, die in space, have offspring or be paraplegic.
             RemComp<RespiratorComponent>(target);
             RemComp<BarotraumaComponent>(target);
             RemComp<HungerComponent>(target);
             RemComp<ThirstComponent>(target);
             RemComp<ReproductiveComponent>(target);
             RemComp<ReproductivePartnerComponent>(target);
+            RemComp<LegsParalyzedComponent>(target);
 
             //funny voice
             var accentType = "zombie";
@@ -240,7 +241,8 @@ namespace Content.Server.Zombies
             _identity.QueueIdentityUpdate(target);
 
             //He's gotta have a mind
-            var hasMind = _mind.TryGetMind(target, out var mindId, out _);
+            var hasMind = _mind.TryGetMind(target, out var mindId, out var mind);
+
             if (hasMind && _mind.TryGetSession(mindId, out var session))
             {
                 //Zombie role for player manifest
@@ -251,6 +253,16 @@ namespace Content.Server.Zombies
 
                 // Notificate player about new role assignment
                 _audio.PlayGlobal(zombiecomp.GreetSoundNotification, session);
+
+                // SS220 role ban restrict
+                if (_banManager.GetJobBans(session.UserId) is { } roleBans && roleBans.Contains("Zombie"))
+                {
+                    // If user has zombie role ban - kick him out of new zombie.
+                    _mind.TransferTo(mindId, null, mind: mind);
+
+                    // Remove flag to make his body as ghost role.
+                    hasMind = false;
+                }
             }
             else
             {

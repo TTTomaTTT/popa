@@ -75,6 +75,7 @@ namespace Content.Client.Preferences.UI
         private Slider _skinColor => CSkin;
         private OptionButton _clothingButton => CClothingButton;
         private OptionButton _backpackButton => CBackpackButton;
+        private OptionButton _spawnPriorityButton => CSpawnPriorityButton;
         private SingleMarkingPicker _hairPicker => CHairStylePicker;
         private SingleMarkingPicker _facialHairPicker => CFacialHairPicker;
         private EyeColorPicker _eyesPicker => CEyeColorPicker;
@@ -354,6 +355,21 @@ namespace Content.Client.Preferences.UI
 
             #endregion Backpack
 
+            #region SpawnPriority
+
+            foreach (var value in Enum.GetValues<SpawnPriorityPreference>())
+            {
+                _spawnPriorityButton.AddItem(Loc.GetString($"humanoid-profile-editor-preference-spawn-priority-{value.ToString().ToLower()}"), (int) value);
+            }
+
+            _spawnPriorityButton.OnItemSelected += args =>
+            {
+                _spawnPriorityButton.SelectId(args.Id);
+                SetSpawnPriority((SpawnPriorityPreference) args.Id);
+            };
+
+            #endregion SpawnPriority
+
             #region Eyes
 
             _eyesPicker.OnEyeColorPicked += newColor =>
@@ -404,26 +420,8 @@ namespace Content.Client.Preferences.UI
 
             _antagPreferences = new List<AntagPreferenceSelector>();
 
-            foreach (var antag in prototypeManager.EnumeratePrototypes<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
-            {
-                if (!antag.SetPreference)
-                    continue;
-
-                var selector = new AntagPreferenceSelector(antag);
-                _antagList.AddChild(selector);
-                _antagPreferences.Add(selector);
-                if (selector.Disabled)
-                {
-                    Profile = Profile?.WithAntagPreference(antag.ID, false);
-                    IsDirty = true;
-                }
-
-                selector.PreferenceChanged += preference =>
-                {
-                    Profile = Profile?.WithAntagPreference(antag.ID, preference);
-                    IsDirty = true;
-                };
-            }
+            // SS220 antag ban
+            _requirements.Updated += UpdateAntagList;
 
             #endregion Antags
 
@@ -538,6 +536,35 @@ namespace Content.Client.Preferences.UI
             RebuildSpriteView();
         }
 
+        private void UpdateAntagList()
+        {
+            _antagPreferences.Clear();
+
+            foreach (var antag in _prototypeManager.EnumeratePrototypes<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
+            {
+                if (!antag.SetPreference)
+                    continue;
+
+                var selector = new AntagPreferenceSelector(antag, Profile);
+
+                _antagList.AddChild(selector);
+                _antagPreferences.Add(selector);
+                if (selector.Disabled)
+                {
+                    Profile = Profile?.WithAntagPreference(antag.ID, false);
+                    IsDirty = true;
+                }
+
+                selector.PreferenceChanged += preference =>
+                {
+                    Profile = Profile?.WithAntagPreference(antag.ID, preference);
+                    IsDirty = true;
+                };
+            }
+
+            UpdateAntagPreferences();
+        }
+
         private void UpdateRoleRequirements()
         {
             _jobList.DisposeAllChildren();
@@ -545,7 +572,12 @@ namespace Content.Client.Preferences.UI
             _jobCategories.Clear();
             var firstCategory = true;
 
-            foreach (var department in _prototypeManager.EnumeratePrototypes<DepartmentPrototype>())
+            var departments = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>()
+                .OrderByDescending(department => department.Weight)
+                .ThenBy(department => Loc.GetString($"department-{department.ID}"))
+                .ToList();
+
+            foreach (var department in departments)
             {
                 var departmentName = Loc.GetString($"department-{department.ID}");
 
@@ -589,8 +621,11 @@ namespace Content.Client.Preferences.UI
                     _jobList.AddChild(category);
                 }
 
-                var jobs = department.Roles.Select(o => _prototypeManager.Index<JobPrototype>(o)).Where(o => o.SetPreference).ToList();
-                jobs.Sort((x, y) => -string.Compare(x.LocalizedName, y.LocalizedName, StringComparison.CurrentCultureIgnoreCase));
+                var jobs = department.Roles.Select(jobId => _prototypeManager.Index<JobPrototype>(jobId))
+                    .Where(job => job.SetPreference)
+                    .OrderByDescending(job => job.Weight)
+                    .ThenBy(job => job.LocalizedName)
+                    .ToList();
 
                 foreach (var job in jobs)
                 {
@@ -626,6 +661,11 @@ namespace Content.Client.Preferences.UI
                     };
 
                 }
+            }
+
+            if (Profile is not null)
+            {
+                UpdateJobPriorities();
             }
         }
 
@@ -722,6 +762,7 @@ namespace Content.Client.Preferences.UI
 
             _requirements.Updated -= UpdateRoleRequirements;
             _preferencesManager.OnServerDataLoaded -= LoadServerData;
+            _requirements.Updated -= UpdateAntagList;
         }
 
         private void RebuildSpriteView()
@@ -821,6 +862,11 @@ namespace Content.Client.Preferences.UI
         private void SetTeleportAfkToCryoStorage(bool newTeleportAfkToCryoStorage)
         {
             Profile = Profile?.WithTeleportAfkToCryoStorage(newTeleportAfkToCryoStorage);
+        }
+
+        private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)
+        {
+            Profile = Profile?.WithSpawnPriorityPreference(newSpawnPriority);
             IsDirty = true;
         }
 
@@ -1001,6 +1047,16 @@ namespace Content.Client.Preferences.UI
             _backpackButton.SelectId((int) Profile.Backpack);
         }
 
+        private void UpdateSpawnPriorityControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            _spawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+        }
+
         private void UpdateHairPickers()
         {
             if (Profile == null)
@@ -1140,10 +1196,11 @@ namespace Content.Client.Preferences.UI
             UpdateSpecies();
             UpdateClothingControls();
             UpdateBackpackControls();
+            UpdateSpawnPriorityControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
-            UpdateAntagPreferences();
+            UpdateAntagList();
             UpdateTraitPreferences();
             UpdateMarkings();
             RebuildSpriteView();
@@ -1352,7 +1409,7 @@ namespace Content.Client.Preferences.UI
 
             public event Action<bool>? PreferenceChanged;
 
-            public AntagPreferenceSelector(AntagPrototype proto)
+            public AntagPreferenceSelector(AntagPrototype proto, HumanoidCharacterProfile? profile)
                 : base(proto)
             {
                 Options.OnItemSelected += args => PreferenceChanged?.Invoke(Preference);
@@ -1370,6 +1427,10 @@ namespace Content.Client.Preferences.UI
                 // another function checks Disabled after creating the selector so this has to be done now
                 var requirements = IoCManager.Resolve<JobRequirementsManager>();
                 if (proto.Requirements != null && !requirements.CheckRoleTime(proto.Requirements, out var reason))
+                {
+                    LockRequirements(reason);
+                }
+                else if (profile is not null && !requirements.IsAntagAllowed(proto, profile, out reason))
                 {
                     LockRequirements(reason);
                 }

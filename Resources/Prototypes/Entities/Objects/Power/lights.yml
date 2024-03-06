@@ -6,8 +6,7 @@
   - type: MeleeSound
     soundGroups:
       Brute:
-        path:
-          "/Audio/Effects/glass_hit.ogg"
+        collection: GlassSmash
   - type: Sprite
     sprite: Objects/Power/light_bulb.rsi
     layers:
@@ -67,6 +66,9 @@
     materialComposition:
       Glass: 25
   - type: SpaceGarbage
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
 
 - type: entity
   parent: BaseLightbulb
@@ -126,6 +128,19 @@
     lightSoftness: 1.1
 
 - type: entity
+  parent: LightBulb
+  name: old incandescent light bulb
+  id: LightBulbOld
+  description: An aging light bulb.
+  components:
+  - type: LightBulb
+    bulb: Bulb
+    color: "#FFD1A3" # 4000K color temp
+    lightEnergy: 0.3 # old incandescents just arent as bright
+    lightRadius: 6
+    lightSoftness: 1.1
+
+- type: entity
   suffix: Broken
   parent: BaseLightbulb
   name: incandescent light bulb
@@ -161,6 +176,19 @@
     lightRadius: 10
     lightSoftness: 1
     PowerUse: 25
+
+- type: entity
+  parent: LightTube
+  name: old fluorescent light tube
+  id: LightTubeOld
+  description: An aging light fixture.
+  components:
+  - type: LightBulb
+    color: "#FFDABB" # old fluorescents are yellower-4500K temp
+    lightEnergy: 0.5
+    lightRadius: 10
+    lightSoftness: 1
+    PowerUse: 10
 
 - type: entity
   suffix: Broken
@@ -221,7 +249,7 @@
   id: LightTubeCrystalCyan
   components:
   - type: LightBulb
-    color: "#47f8ff"
+    color: "#7df9ff" #SS220-Mapping-Light-Fix, Электрик
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -230,6 +258,10 @@
   - type: Construction
     graph: CyanLight
     node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalCyan
 
 - type: entity
   parent: LightTubeCrystalCyan
@@ -237,7 +269,7 @@
   id: LightTubeCrystalBlue
   components:
   - type: LightBulb
-    color: "#39a1ff"
+    color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -246,6 +278,10 @@
   - type: Construction
     graph: BlueLight
     node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalBlue
 
 - type: entity
   parent: LightTubeCrystalCyan
@@ -253,7 +289,7 @@
   id: LightTubeCrystalPink
   components:
   - type: LightBulb
-    color: "#ff66cc"
+    color: "#fe019a" #SS220-Mapping-Light-Fix, Неоновый розовый
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -262,6 +298,10 @@
   - type: Construction
     graph: PinkLight
     node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalPink
 
 - type: entity
   parent: LightTubeCrystalCyan
@@ -269,7 +309,7 @@
   id: LightTubeCrystalOrange
   components:
   - type: LightBulb
-    color: "#ff8227"
+    color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -278,6 +318,10 @@
   - type: Construction
     graph: OrangeLight
     node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalOrange
 
 - type: entity
   parent: LightTubeCrystalCyan
@@ -285,7 +329,7 @@
   id: LightTubeCrystalRed
   components:
   - type: LightBulb
-    color: "#fb4747"
+    color: "#ff073a" #SS220-Mapping-Light-Fix, Неоновый красный
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -294,6 +338,10 @@
   - type: Construction
     graph: RedLight
     node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalRed
 
 - type: entity
   parent: LightTubeCrystalCyan
@@ -301,7 +349,7 @@
   id: LightTubeCrystalGreen
   components:
   - type: LightBulb
-    color: "#52ff39"
+    color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
     lightEnergy: 3
     lightRadius: 8
     lightSoftness: 0.5
@@ -310,3 +358,49 @@
   - type: Construction
     graph: GreenLight
     node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalGreen
+
+#SS220-New-Crystals-start
+- type: entity
+  parent: LightTubeCrystalCyan
+  name: yellow crystal light tube
+  id: LightTubeCrystalYellow
+  components:
+  - type: LightBulb
+    color: "#ffea19" #Неоновый жёлтый
+    lightEnergy: 3
+    lightRadius: 8
+    lightSoftness: 0.5
+    BurningTemperature: 350
+    PowerUse: 60
+  - type: Construction
+    graph: YellowLight
+    node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalYellow
+
+- type: entity
+  parent: LightTubeCrystalCyan
+  name: purple crystal light tube
+  id: LightTubeCrystalPurple
+  components:
+  - type: LightBulb
+    color: "#bc13fe" #Неоновый фиолетовый
+    lightEnergy: 3
+    lightRadius: 8
+    lightSoftness: 0.5
+    BurningTemperature: 350
+    PowerUse: 60
+  - type: Construction
+    graph: PurpleLight
+    node: icon
+  - type: WelderRefinable
+    refineResult:
+    - SheetGlass1
+    - ShardCrystalPurple
+#SS220-New-Crystals-end

@@ -37,8 +37,8 @@
   - type: Tool
     qualities:
       - Prying
-  - type: TilePrying
-    advanced: true
+      - PlatingCutting #SS220-tools-tile-prying-fix
+  - type: ToolTileCompatible
   - type: Prying
   - type: UseDelay
     delay: 1

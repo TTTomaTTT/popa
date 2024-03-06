@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Linq;
 using Content.Server.Actions;
+using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking.Rules.Components;
@@ -21,9 +22,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Zombies;
-using Robust.Server.GameObjects;
 using Robust.Server.Player;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -51,6 +50,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
     public override void Initialize()
     {
@@ -276,11 +276,21 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
             if (player.AttachedEntity == null || !HasComp<HumanoidAppearanceComponent>(player.AttachedEntity) || HasComp<ZombieImmuneComponent>(player.AttachedEntity))
                 continue;
 
+            // SS220 No-Zombie-Roles begin
             // Role prevents being a zombie.
             if (!_jobs.CanBeZombie(player))
             {
                 continue;
             }
+            // SS220 No-Zombie-Roles end
+
+            if (_banManager.GetRoleBans(player.UserId) is { } roleBans && roleBans.Contains("InitialInfected"))
+            {
+                continue;
+            }
+
+            if (HasComp<InitialInfectedExemptComponent>(player.AttachedEntity))
+                continue; // used (for example) on ERT
 
             playerList.Add(player);
 
@@ -345,7 +355,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
             // I went all the way to ChatManager.cs and all i got was this lousy T-shirt
             // You got a free T-shirt!?!?
             _chatManager.ChatMessageToOne(Shared.Chat.ChatChannel.Server, message,
-               wrappedMessage, default, false, zombie.ConnectedClient, Color.Plum);
+               wrappedMessage, default, false, zombie.Channel, Color.Plum);
             _audio.PlayGlobal(component.InitialInfectedSound, ownedEntity);
         }
     }

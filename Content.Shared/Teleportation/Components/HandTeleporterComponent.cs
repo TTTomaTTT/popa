@@ -40,6 +40,12 @@ public sealed partial class HandTeleporterComponent : Component
     /// </summary>
     [DataField("portalCreationDelay")]
     public float PortalCreationDelay = 1.0f;
+    //SS220 teleport_grid_resrtictions start
+    public EntityUid? FirstPortalsGrid = null;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool GridRestricted = true;
+    //SS220 teleport_grid_resrtictions end
 }
 
 [Serializable, NetSerializable]

@@ -452,7 +452,7 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
-        - ReagentId: Toxin
+        - ReagentId: GastroToxin
           Quantity: 4
         - ReagentId: Fat
           Quantity: 4
@@ -668,6 +668,7 @@
     tags:
     - Raw
     - Meat
+    - MeatSlime #ss220 for bounties
   - type: Sprite
     state: slime
 
