@@ -13,7 +13,7 @@
   - type: UseDelay
     delay: 3
   - type: EmitSoundOnUse
-    sound: 
+    sound:
       collection: BaseWhistle
   - type: Whistle
     distance: 5
@@ -24,7 +24,7 @@
   description: Sound of it make you feel fear.
   components:
   - type: Sprite
-    sprite: Objects/Fun/whistle.rsi
+    sprite: SS220/Objects/Fun/whistle.rsi
     state: securityWhistle
   - type: Item
-    sprite: Objects/Fun/whistle.rsi
+    sprite: SS220/Objects/Fun/whistle.rsi

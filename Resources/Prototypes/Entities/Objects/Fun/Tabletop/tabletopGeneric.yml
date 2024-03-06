@@ -5,7 +5,7 @@
   components:
   - type: Sprite
     noRot: true
-    sprite: Objects/Fun/Tabletop/generic_pieces.rsi
+    sprite: SS220/Objects/Fun/Tabletop/generic_pieces.rsi
 
 - type: entity
   id: RedTabletopPiece

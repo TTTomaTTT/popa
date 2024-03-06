@@ -737,7 +737,7 @@
   description: A scaled-down toy AI core.
   components:
   - type: Sprite
-    state: AI
+    sprite: SS220/Objects/Fun/toys.rsi
 
 - type: entity
   parent: BaseFigurineCheapo
@@ -854,12 +854,12 @@
   description: Looks almost like the real thing! Ages 8 and up.
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
   - type: Item
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
     heldPrefix: capgun
   - type: Tag
     tags:
@@ -936,14 +936,14 @@
   description: Where dah courts at?
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
     state: basketball
   - type: EmitSoundOnCollide
     sound:
       path: /Audio/Effects/Footsteps/bounce.ogg
   - type: Item
     size: Normal
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
     heldPrefix: bask
   - type: TileFrictionModifier
     modifier: 0.5
@@ -1262,7 +1262,7 @@
   description: A practical joke device involving flatulence humour.
   components:
   - type: Sprite
-    sprite: Objects/Fun/whoopie.rsi
+    sprite: SS220/Objects/Fun/whoopie.rsi
     state: icon
     quickEquip: false
   - type: Tag
