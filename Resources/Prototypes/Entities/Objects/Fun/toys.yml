@@ -6,7 +6,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
   - type: Tag
     tags:
       - Payload
@@ -737,7 +737,7 @@
   description: A scaled-down toy AI core.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Fun/toys.rsi
+    state: AI
 
 - type: entity
   parent: BaseFigurineCheapo
@@ -912,7 +912,7 @@
   description: It says "Sternside Changs number 1 fan" on it.
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
     state: foamblade
   - type: MeleeWeapon
     attackRate: 1.5
@@ -923,7 +923,7 @@
         Blunt: 0
   - type: Item
     size: Small
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
     heldPrefix: foamblade
   - type: UseDelay
 
@@ -976,7 +976,7 @@
       path: /Audio/Effects/Footsteps/bounce.ogg
   - type: Item
     size: Normal
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Fun/toys.rsi
     heldPrefix: beachb
   - type: TileFrictionModifier
     modifier: 0.05
