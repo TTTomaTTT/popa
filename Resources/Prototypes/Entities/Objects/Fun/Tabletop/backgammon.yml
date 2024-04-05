@@ -5,7 +5,7 @@
   description: Old fashioned game of dice and pieces.
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/backgammon.rsi
+    sprite: SS220/Objects/Fun/Tabletop/backgammon.rsi
     state: board
   - type: TabletopGame
     boardName: tabletop-backgammon-board-name
@@ -21,5 +21,5 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/backgammon_tabletop.rsi
+    sprite: SS220/Objects/Fun/Tabletop/backgammon_tabletop.rsi
     state: backgammonBoard

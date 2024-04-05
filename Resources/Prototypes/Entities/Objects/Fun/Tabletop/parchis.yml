@@ -6,7 +6,7 @@
   description: Cross and circle board game famous for destroying countless friendships.
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/parchis.rsi
+    sprite: SS220/Objects/Fun/Tabletop/parchis.rsi
     state: board
   - type: TabletopGame
     boardName: tabletop-parchis-board-name
@@ -23,6 +23,6 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: Objects/Fun/Tabletop/parchis_tabletop.rsi
+    sprite: SS220/Objects/Fun/Tabletop/parchis_tabletop.rsi
     state: board
 
