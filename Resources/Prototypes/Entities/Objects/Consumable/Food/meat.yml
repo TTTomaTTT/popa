@@ -1294,8 +1294,8 @@
     - Cutlet
     - Meat
   - type: Sprite
-    state: salami-slice
-    color: red
+    sprite: SS220\Objects\Consumable\Food\tomato.rsi #SS220-Resprite
+    state: cutlet-tomato
   - type: StaticPrice
     price: 30
 
