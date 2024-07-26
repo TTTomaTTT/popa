@@ -173,3 +173,21 @@
       - minTemperature: 345
   - node: bacon
     entity: FoodMeatBaconCooked
+
+# tomato steak
+- type: constructionGraph
+  id: TomatoSteak
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: tomato steak
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: tomato steak
+    entity: FoodMeatTomatoCooked

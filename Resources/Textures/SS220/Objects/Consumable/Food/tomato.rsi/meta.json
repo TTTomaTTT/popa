@@ -9,6 +9,71 @@
   "states": [
     {
       "name": "tomato-cooked"
-    }
+    },
+    {
+      "name":  "cutlet-tomato"
+    },
+    {
+      "name":  "cutlet-tomato-cooked"
+    },
+    {
+      "name": "tomatobread"
+    },
+    {
+      "name":  "tomatobread-slice"
+    },
+    {
+      "name": "rotten-tomato",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+        "name": "tomatorger-alive",
+        "delays": [
+          [
+            3.0,
+            0.2,
+            0.1,
+            0.2,
+            0.3,
+            1.0,
+            0.2,
+            0.5,
+            0.5,
+            1.0,
+            0.5,
+            1.0,
+            0.5,
+            0.4,
+            0.3,
+            0.2,
+            2.0,
+            5.0
+          ]
+        ]
+      },
+      {
+        "name":  "tomatorger"
+      }
   ]
 }

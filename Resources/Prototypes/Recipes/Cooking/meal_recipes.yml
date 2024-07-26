@@ -322,6 +322,29 @@
     FoodBreadBun: 1
     MobMothroach: 1
 
+#SS220-Tomato-update begin
+- type: microwaveMealRecipe
+  id: RecipeTomatoburger
+  name: tomato burger recipe
+  result: FoodBurgerTomato
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeAliveTomatoburger
+  name: alive tomato burger recipe
+  result: FoodBurgerTomatoAlive
+  time: 15
+  reagents:
+   EZNutrient: 5
+   Cognizine: 1
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 2
+#SS220-Tomato-update end
+
 #Breads & Sandwiches
 
 - type: microwaveMealRecipe
@@ -418,6 +441,17 @@
     FoodDough: 1
     FoodMeatXenoCutlet: 2
     FoodCheeseSlice: 2
+
+#SS220-Tomato-update begin
+- type: microwaveMealRecipe
+  id: RecipeBreadTomato
+  name: tomatobread recipe
+  result: FoodBreadTomato
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodMeatTomato: 2
+#SS220-Tomato-update end
 
 #Slices Only
 

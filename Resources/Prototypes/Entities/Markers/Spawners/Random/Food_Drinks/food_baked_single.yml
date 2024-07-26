@@ -87,4 +87,7 @@
       - FoodBreadMeatXenoSlice
       - FoodPieXenoSlice
       - FoodBakedCannabisBrownie
+      #SS220
+      - FoodBreadTomato
+      - FoodBreadTomatoSlice
     rareChance: 0.05
