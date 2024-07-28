@@ -624,26 +624,6 @@
   - type: RotInto
     entity: FoodMeatTomatoRotten
     stage: 1
-
-- type: entity
-  name: rotten tomato
-  parent: FoodMeatBase
-  id: FoodMeatTomatoRotten
-  description: The average rating is less than 60%.
-  components:
-  - type: Tag
-    tags:
-    - Raw
-    - Meat
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/tomato.rsi
-    state: rotten-tomato
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: GastroToxin
-          Quantity: 4
 #SS220-Tomato-update end
 
 # SS220-Salami-update begin
@@ -1126,44 +1106,6 @@
         - ReagentId: Protein
           Quantity: 5
 
-#SS220-Tomato-update begin
-- type: entity
-  name: cooked killer tomato meat
-  parent: FoodMeatBase
-  id: FoodMeatTomatoCooked
-  description: A slice from a huge tomato.
-  components:
-  - type: FlavorProfile
-    flavors:
-    - meaty
-    - sweet
-    - terrible
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
-    - Steak
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/tomato.rsi
-    state: tomato-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 2.5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatTomatoCutletCooked
-  - type: StaticPrice
-    price: 150
-  - type: Construction
-    graph: TomatoSteak
-    node: tomato steak
-#SS220-Tomato-update end
-
 # Cutlets
 
 # Raw
@@ -1579,35 +1521,3 @@
           Quantity: 1
         - ReagentId: Protein
           Quantity: 1
-
-#SS220-Tomato-update begin
-- type: entity
-  name: cooked killer tomato cutlet
-  parent: FoodMeatBase
-  id: FoodMeatTomatoCutletCooked
-  description: A cooked cutlet from a slab of tomato.
-  components:
-  - type: FlavorProfile
-    flavors:
-    - meaty
-    - sweet
-    - terrible
-  - type: Tag
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/tomato.rsi
-    state: cutlet-tomato-cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 1
-        - ReagentId: Protein
-          Quantity: 0.5
-  - type: StaticPrice
-    price: 45
-  #SS220-Tomato-update end

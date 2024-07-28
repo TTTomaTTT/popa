@@ -176,3 +176,6 @@ ghost-role-information-artifact-name = Разумный артефакт
 ghost-role-information-artifact-description =
     Осуществляйте свои инопланетные прихоти.
     Принудительно активируйте свои узлы во благо или во зло.
+ghost-role-information-tomatoburger-name = Живой томатный бургер
+ghost-role-information-tomatoburger-description = Раньше вы были помидором-убийцей, а теперь бургер.
+ghost-role-information-syndicate-kobold-reinforcement-rules = После перерождения в бургер вы обрели разум, однако не можете кусаться как раньше и вас это не радует. Вы всё также желаете всем смерти, но высказываться об этом стоит аккуратнее, бургер не настолько грозный монстр.

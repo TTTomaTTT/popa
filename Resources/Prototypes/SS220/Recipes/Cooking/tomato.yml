@@ -1,0 +1,60 @@
+#Burger
+
+- type: microwaveMealRecipe
+  id: RecipeTomatoburger
+  name: tomato burger recipe
+  result: FoodBurgerTomato
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeAliveTomatoburger
+  name: alive tomato burger recipe
+  result: MobBurgerTomato
+  time: 15
+  reagents:
+   Left4Zed: 1
+   Cognizine: 1
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 2
+
+#Bread
+
+- type: microwaveMealRecipe
+  id: RecipeBreadTomato
+  name: tomatobread recipe
+  result: FoodBreadTomato
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodMeatTomato: 2
+
+#Salad
+
+- type: microwaveMealRecipe
+  id: RecipeCapreseSalad
+  name: caprese recipe
+  result: FoodSaladCaprese
+  time: 5
+  solids:
+    FoodPlate: 1
+    FoodCheeseSlice: 2
+    FoodMeatTomatoCutlet: 4
+
+#Soup
+
+- type: microwaveMealRecipe
+  id: RecipeKillerTomatoSoup
+  name: killer tomato soup recipe
+  result: FoodSoupKillerTomato
+  time: 10
+  reagents:
+    Water: 10
+    JuiceTomato: 10
+  solids:
+    FoodMeatTomatoCutlet: 2
+    FoodMeatTomato: 1
+    FoodBowlBig: 1

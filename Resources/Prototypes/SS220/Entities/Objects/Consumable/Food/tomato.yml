@@ -1,0 +1,292 @@
+#Meat
+- type: entity
+  name: rotten tomato
+  parent: FoodMeatBase
+  id: FoodMeatTomatoRotten
+  description: The average rating is less than 60%.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: rotten-tomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: GastroToxin
+          Quantity: 4
+
+- type: entity
+  name: cooked killer tomato meat
+  parent: FoodMeatBase
+  id: FoodMeatTomatoCooked
+  description: A delicious slice of a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - sweet
+    - terrible
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: tomato-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 2.5
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatTomatoCutletCooked
+  - type: StaticPrice
+    price: 150
+  - type: Construction
+    graph: TomatoSteak
+    node: tomato steak
+
+- type: entity
+  name: cooked killer tomato cutlet
+  parent: FoodMeatBase
+  id: FoodMeatTomatoCutletCooked
+  description: A cooked cutlet from a slab of tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - sweet
+    - terrible
+  - type: Tag
+    tags:
+    - Cooked
+    - Cutlet
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: cutlet-tomato-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Protein
+          Quantity: 0.5
+  - type: StaticPrice
+    price: 45
+
+#Burger
+
+- type: entity
+  name: tomato burger
+  parent: FoodBurgerBase
+  id: FoodBurgerTomato
+  description: A burger from a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bun
+      - meaty
+      - sweet
+      - terrible
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: tomatorger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 3
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: alive tomato burger
+  parent: FoodBurgerBase
+  id: MobBurgerTomato
+  description: A alive burger from a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bun
+      - meaty
+      - sweet
+      - terrible
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: tomatorger-alive
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Protein
+          Quantity: 3
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 15
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: GhostTakeoverAvailable
+  - type: FrontalLisp
+  - type: Speech
+    speechSounds: Baritone
+    speechVerb: Plant
+  - type: Grammar
+    attributes:
+      gender: epicene
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 0.05
+    baseSprintSpeed : 0.1
+  - type: Tag
+    tags:
+    - Meat
+    - VimPilot
+    - DoorBumpOpener
+  - type: GhostRole
+    name: ghost-role-information-tomatoburger-name
+    allowMovement: true
+    description: ghost-role-information-tomatoburger-description
+    rules: ghost-role-information-tomatoburger-reinforcement-rules
+  - type: CanEscapeInventory
+    baseResistTime: 2
+  - type: Puller
+    needsHands: false
+  - type: Examiner
+  - type: DoAfter
+  - type: CombatMode
+  - type: MeleeWeapon #SS220 Old-Tomato-Killer-Balance
+    hidden: true
+    angle: 0
+    soundHit:
+      collection: AlienClaw
+    damage:
+      types:
+        Radiation: 0.02
+
+#Bread
+
+- type: entity
+  name: tomatobread
+  parent: FoodBreadBase
+  id: FoodBreadTomato
+  description: A bread from a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+     - bread
+     - sweet
+     - terrible
+  - type: Food
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    layers:
+    - state: tomatobread
+  - type: SliceableFood
+    slice: FoodBreadTomatoSlice
+
+- type: entity
+  name: tomatobread slice
+  parent: FoodBreadSliceBase
+  id: FoodBreadTomatoSlice
+  description: A slice of tomatobread.
+  components:
+  - type: FlavorProfile
+    flavors:
+     - bread
+     - sweet
+     - terrible
+  - type: Food
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    layers:
+    - state: tomatobread-slice
+
+#Salad
+
+- type: entity
+  name: salad caprese
+  parent: FoodMealBase
+  id: FoodSaladCaprese
+  description: Evil tomato, devil cheese.
+  components:
+  - type: Food
+    trash: FoodPlate
+  - type: FlavorProfile
+    flavors:
+      - cheesy
+      - terrible
+      - meaty
+      - sweet
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: caprese
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Protein
+          Quantity: 5
+
+- type: entity
+  name: killer tomato soup
+  parent: FoodBowlBase
+  id: FoodSoupKillerTomato
+  description: Still alive.
+  components:
+  - type: Food
+    trash: FoodBowlBig
+  - type: FlavorProfile
+    flavors:
+      - terrible
+      - meaty
+      - tomato
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: killertomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Soup

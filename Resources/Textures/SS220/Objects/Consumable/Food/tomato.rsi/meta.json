@@ -74,6 +74,24 @@
       },
       {
         "name":  "tomatorger"
+      },
+      {
+        "name":  "caprese"
+      },
+      {
+        "name": "killertomato",
+        "delays": [
+          [
+            0.4,
+            0.2,
+            0.2,
+            0.2,
+            0.4,
+            0.2,
+            0.2,
+            0.2
+          ]
+        ]
       }
   ]
 }

@@ -1,0 +1,16 @@
+ent-FoodMeatTomatoRotten = тухлое мясо помидора-убийцы
+    .desc = Средняя свежесть не больше 30%.
+ent-FoodMeatTomatoCooked = жареное мясо помидора-убийцы
+    .desc = Аппетитный ломтик от огромного помидора.
+ent-FoodMeatTomatoCutletCooked = жареное мясо помидора-убийцы
+    .desc = Аппетитная котлета из куска помидора.
+ent-FoodBurgerTomato = томатный бургер
+    .desc = Бургер из огромного помидора.
+ent-FoodBreadTomato = томатный хлеб
+    .desc = Хлеб из огромного помидора.
+ent-FoodBreadTomatoSlice = томатный ломтик хлеба
+    .desc = Хлебный ломтик из огромного помидора.
+ent-FoodSaladCaprese = салат капрезе
+    .desc = Пару ломтиков Италии.
+ent-FoodSoupKillerTomato = Злой томатный суп
+    .desc = Всё ещё жив.
