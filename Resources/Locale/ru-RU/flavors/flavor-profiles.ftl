@@ -147,6 +147,7 @@ flavor-complex-memory-leek = как форк-бомба
 flavor-complex-bad-joke = как плохая шутка
 flavor-complex-gunpowder = как порох
 flavor-complex-validhunting = как валидхантинг
+flavor-complex-victory = как победа
 
 # Drink-specific flavors.
 

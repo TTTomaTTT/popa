@@ -1,0 +1,108 @@
+#Alive Burger
+
+- type: entity
+  name: crazy tomato burger
+  parent:
+  - BaseSimpleMob
+  - MobDamageable
+  - MobBloodstream
+  - MobFlammable
+  - MobCombat
+  - FoodBurgerBase
+  id: MobBurgerTomatoAngry
+  description: A alive burger from a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - terrible
+      - victory
+  - type: Item
+    size: Small
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: KillerTomatoCompound
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Misc/angrytomatoburger.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 15
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: Bloodstream
+    bloodReagent: JuiceTomato
+    bloodMaxVolume: 45 #SS220 Old-Tomato-Killer-Balance
+    chemicalMaxVolume: 25
+  - type: Damageable #SS220 Old-Tomato-Killer-Balance
+    damageContainer: Biological
+    damageModifierSet: TomatoKiller
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      55: Dead #SS220 Old-Tomato-Killer-Balance
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 1.5
+    baseSprintSpeed : 2.5
+  - type: Tag
+    tags:
+    - Meat
+    - VimPilot
+  - type: Puller
+    needsHands: false
+  - type: Examiner
+  - type: DoAfter
+  - type: CombatMode
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    soundHit:
+      collection: AlienClaw
+    attackRate: 1.5
+    range: 0.8
+    damage:
+      types:
+        Radiation: 1.5
+        Blunt: 5
+        Structural: 2
+    animation: WeaponArcBite
+  - type: Climbing
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Effects/Footsteps/slime1.ogg
+      params:
+        volume: 1
+  - type: StaticPrice
+    price: 150
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Protein
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 5
