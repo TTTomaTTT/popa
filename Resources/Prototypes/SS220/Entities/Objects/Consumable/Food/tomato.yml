@@ -165,8 +165,8 @@
     attributes:
       gender: epicene
   - type: MovementSpeedModifier
-    baseWalkSpeed : 0.05
-    baseSprintSpeed : 0.1
+    baseWalkSpeed : 0.1
+    baseSprintSpeed : 0.3
   - type: Tag
     tags:
     - Meat
@@ -176,7 +176,7 @@
     name: ghost-role-information-tomatoburger-name
     allowMovement: true
     description: ghost-role-information-tomatoburger-description
-    rules: ghost-role-information-tomatoburger-reinforcement-rules
+    rules: ghost-role-information-tomatoburger-rules
   - type: CanEscapeInventory
     baseResistTime: 2
   - type: Puller
@@ -191,7 +191,9 @@
       collection: AlienClaw
     damage:
       types:
-        Radiation: 0.02
+        Radiation: 0.2
+        Piercing: 1
+        Structural: 0.5
 
 #Bread
 
