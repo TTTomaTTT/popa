@@ -166,7 +166,7 @@
       gender: epicene
   - type: MovementSpeedModifier
     baseWalkSpeed : 0.1
-    baseSprintSpeed : 0.3
+    baseSprintSpeed : 0.15
   - type: Tag
     tags:
     - Meat
@@ -192,8 +192,8 @@
     damage:
       types:
         Radiation: 0.2
-        Piercing: 1
-        Structural: 0.5
+        Blunt: 1
+        Structural: 0.15
 
 #Bread
 
