@@ -20,6 +20,21 @@
           task: IdleCompound
 
 - type: htnCompound
+  id: BurgerRangedTargetAttackCompound
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: GunCombatCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound
+
+    - tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:UtilityOperator
+            proto: OrderedTargets
+
+- type: htnCompound
   id: MouseCompound
   branches:
     - tasks:

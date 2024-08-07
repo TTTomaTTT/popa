@@ -7,6 +7,8 @@
     - PetsNT
     - Zombie
     - Revolutionary
+    - PetsNTPassive
+    - TomatoBurger
 
 - type: npcFaction
   id: NanoTrasen
@@ -16,11 +18,14 @@
   - Xeno
   - Zombie
   - Revolutionary
+    - TomatoBurger
 
 - type: npcFaction
   id: Mouse
   hostile:
     - PetsNT
+    - PetsNTPassive
+    - Cats
 
 - type: npcFaction
   id: Passive
@@ -34,14 +39,28 @@
   - Xeno
 
 - type: npcFaction
+  id: Cats
+  hostile:
+  - Mouse
+
+- type: npcFaction
+  id: PetsNTPassive
+  hostile:
+  - SimpleHostile
+  - Zombie
+  - Xeno
+
+- type: npcFaction
   id: SimpleHostile
   hostile:
   - NanoTrasen
   - Syndicate
   - Passive
   - PetsNT
+  - PetsNTPassive
   - Zombie
   - Revolutionary
+  - TomatoBurger
 
 - type: npcFaction
   id: SimpleNeutral
@@ -53,7 +72,9 @@
   - SimpleHostile
   - Xeno
   - PetsNT
+  - PetsNTPassive
   - Zombie
+  - TomatoBurger
 
 - type: npcFaction
   id: Xeno
@@ -62,8 +83,10 @@
   - Syndicate
   - Passive
   - PetsNT
+  - PetsNTPassive
   - Zombie
   - Revolutionary
+  - TomatoBurger
 
 - type: npcFaction
   id: Zombie
@@ -73,8 +96,9 @@
   - SimpleHostile
   - Syndicate
   - Passive
-  - PetsNT
+  - PetsNTPassive
   - Revolutionary
+  - TomatoBurger
 
 # SS220 AI Mapping Update Begin
 
@@ -85,8 +109,10 @@
   - Syndicate
   - Passive
   - PetsNT
+  - PetsNTPassive
   - Zombie
   - Revolutionary
+  - TomatoBurger
 
 # SS220 AI Mapping Update End
 
@@ -97,6 +123,7 @@
   - Zombie
   - SimpleHostile
   - Dragon
+  - TomatoBurger
 
 # ss220 reaper passive start
 
@@ -104,3 +131,26 @@
   id: DarkReaperPassive
 
 # ss220 reaper passive end
+
+# ss220 tomato burger start
+- type: npcFaction
+  id: TomatoBurger
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - PetsNTPassive
+  - Zombie
+  - Revolutionary
+  - SimpleHostile
+  - Dragon
+  - DarkReaperPassive
+  - Xeno
+  - Mouse
+  - EbentIronSquad
+  - EbentUssp
+  - EbentNanoTrasen
+  - Cats
+  - BloodCult
+# ss220 tomato burger end

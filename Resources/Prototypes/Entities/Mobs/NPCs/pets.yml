@@ -7,6 +7,9 @@
   id: MobCorgiIan
   description: Favorite pet corgi.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -43,6 +46,9 @@
   id: MobCorgiIanOld
   description: Still the favorite pet corgi. Love his wheels.
   components:
+  - type: NpcFactionMember
+    factions:
+      - Passive
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -68,6 +74,9 @@
   id: MobCorgiLisa
   description: Ian's favorite corgi.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -91,6 +100,9 @@
   id: MobCorgiIanPup
   description: Favourite puppy corgi. Awww.
   components:
+  - type: NpcFactionMember
+    factions:
+      - Passive
   - type: Grammar
     attributes:
       proper: true
@@ -107,9 +119,6 @@
   id: MobCatRuntime
   description: Professional mouse hunter. Escape artist.
   components:
-  - type: NpcFactionMember
-    factions:
-      - PetsNT
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
@@ -128,9 +137,6 @@
   parent: MobCatCalico
   description: Ask nicely, and maybe they'll give you one of their spare lives.
   components:
-  - type: NpcFactionMember
-    factions:
-      - PetsNT
   - type: Grammar
     attributes:
       proper: true
@@ -146,6 +152,9 @@
   parent: MobCatCaracal
   description: He out here.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNT
   - type: Fixtures
     fixtures:
       fix1:
@@ -171,6 +180,9 @@
   id: MobBandito
   description: Just a silly little guy!
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Grammar
     attributes:
       proper: true
@@ -186,6 +198,12 @@
   id: MobBingus
   description: Bingus my beloved...
   components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+      - Cats
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/bingus.rsi
@@ -263,6 +281,9 @@
   id: MobMcGriff
   description: This dog can tell something smells around here, and that something is CRIME!
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/mcgriff.rsi
@@ -328,6 +349,9 @@
   id: MobPaperwork
   description: Took up a new job sorting books in the library after he got transferred from Space Station 13. He seems to be just as slow at this.
   components:
+  - type: NpcFactionMember
+    factions:
+      - Passive
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/paperwork.rsi
@@ -362,6 +386,9 @@
   id: MobWalter
   description: He likes chems and treats. Walter.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/walter.rsi
@@ -427,6 +454,9 @@
   id: MobPossumMorty
   description: The station's resident Didelphis virginiana. A sensitive but resilient kind of guy.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: InteractionPopup
     successChance: 1.0 # Hey, c'mon, this is Morty we're talking about here.
     interactSuccessString: petting-success-possum
@@ -451,6 +481,9 @@
   id: MobPossumMortyOld
   suffix: Old sprite
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/possum_old.rsi
@@ -470,6 +503,9 @@
   id: MobPossumPoppy
   description: It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Grammar
     attributes:
       proper: true
@@ -493,6 +529,9 @@
   id: MobRaccoonMorticia
   description: A powerful creature of the night. Her eyeshadow is always on point.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-raccoon
@@ -515,6 +554,9 @@
   id: MobAlexander
   description: Chef's finest colleague.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: petting-success-pig
@@ -537,6 +579,9 @@
   id: MobFoxRenault
   description: The captain's trustworthy fox.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNT
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: petting-success-soft-floofy
@@ -679,6 +724,9 @@
   id: MobKangarooWillow
   description: Willow the boxing kangaroo.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: InteractionPopup
     successChance: 0.8
     interactSuccessString: petting-success-kangaroo
@@ -709,6 +757,9 @@
   parent: MobAdultSlimes
   description: This masterpiece has gone through thousands of experiments. But it is the sweetest creature in the world. Smile Slime!
   components:
+  - type: NpcFactionMember
+    factions:
+      - Passive
   - type: Sprite
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -780,6 +831,9 @@
   id: MobMonkeyPunpun
   description: A prominent representative of monkeys with unlimited access to alcohol.
   components:
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: GhostRole
     prob: 1
     makeSentient: true
@@ -821,6 +875,9 @@
 #    name: ghost-role-information-tropico-name
 #    description: ghost-role-information-tropico-description
 #  - type: GhostTakeoverAvailable
+  - type: NpcFactionMember
+    factions:
+      - PetsNTPassive
   - type: Tag
     tags:
     - VimPilot

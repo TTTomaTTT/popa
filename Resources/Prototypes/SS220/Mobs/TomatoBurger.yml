@@ -81,7 +81,7 @@
     angle: 0
     soundHit:
       collection: AlienClaw
-    attackRate: 0.5
+    attackRate: 0.8
     damage:
       types:
         Radiation: 0.5
@@ -91,6 +91,11 @@
   - type: ActionGun
     action: ActionTomatoSpit
     gunProto: TomatoGun
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Effects/Footsteps/slime1.ogg
+      params:
+        volume: 1
 
 - type: entity
   id: ActionTomatoSpit

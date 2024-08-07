@@ -252,5 +252,10 @@ public sealed class HungerSystem : EntitySystem
             DoContinuousHungerEffects(uid, hunger);
         }
     }
+
+    public void ModifyHunger(EntityUid uid, float v, DamageableComponent damage)
+    {
+        throw new NotImplementedException();
+    }
 }
 

@@ -1,0 +1,44 @@
+- type: htnCompound
+  id: MeleeKaiserStreitmachtCompound
+  branches:
+  - preconditions:
+      - !type:HasOrdersPrecondition
+        orders: enum.KaiserHamburgOrderType.Follow
+    tasks:
+      - !type:HTNCompoundTask
+        task: FollowCompound
+  - preconditions:
+      - !type:HasOrdersPrecondition
+        orders: enum.KaiserHamburgOrderType.KillBurger
+    tasks:
+      - !type:HTNCompoundTask
+        task: RatServantTargetAttackCompound
+  - preconditions:
+      - !type:HasOrdersPrecondition
+        orders: enum.KaiserHamburgOrderType.Loose
+    tasks:
+      - !type:HTNCompoundTask
+        task: SimpleHostileCompound
+
+- type: htnCompound
+  id: RangeKaiserStreitmachtCompound
+  branches:
+  - preconditions:
+      - !type:HasOrdersPrecondition
+        orders: enum.KaiserHamburgOrderType.Follow
+    tasks:
+      - !type:HTNCompoundTask
+        task: FollowCompound
+  - preconditions:
+      - !type:HasOrdersPrecondition
+        orders: enum.KaiserHamburgOrderType.KillBurger
+    tasks:
+      - !type:HTNCompoundTask
+        task: BurgerRangedTargetAttackCompound
+  - preconditions:
+      - !type:HasOrdersPrecondition
+        orders: enum.KaiserHamburgOrderType.Loose
+    tasks:
+      - !type:HTNCompoundTask
+        task: SimpleRangedHostileCompound
+

@@ -1,0 +1,492 @@
+- type: entity
+  name: Kaiser Hamburg
+  id: MobKaiserHamburg
+  parent: [ SimpleMobBase, MobCombat ]
+  description: The Kaiser of all burgers.
+  components:
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 5
+    baseSprintSpeed : 5
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+  - type: NpcFactionMember
+    factions:
+    - TomatoBurger
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Alien/Burgers/kaiser.rsi
+    state: alive
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.6
+        density: 500
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      925: Critical
+      1000: Dead
+  - type: Bloodstream
+    bloodReagent: GastroToxin
+    bloodMaxVolume: 450
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    soundHit:
+      collection: AlienClaw
+    attackRate: 0.8
+    range: 2.3
+    damage:
+      types:
+        Piercing: 25
+        Stamina: 40
+        Structural: 20
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        reagents:
+        - ReagentId: GastroToxin
+          Quantity: 150
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 5
+  - type: Hunger
+    thresholds:
+      Overfed: 500
+      Okay: 350
+      Peckish: 200
+      Starving: 100
+      Dead: 0
+    baseDecayRate: -100
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Critical:
+        Base: critical
+      Dead:
+        Base: dead
+    makeSentient: true
+    name: ghost-role-information-rat-king-name
+    description: ghost-role-information-rat-king-description
+    rules: ghost-role-information-rat-king-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - FootstepSound
+  - type: NoSlip
+  - type: KaiserHamburg
+    hungerPerSchutzeArmyUse: 50
+    hungerPerBrigadefuhrerArmyUse: 150
+  - type: Speech
+    speechSounds: Bass
+    speechVerb: LargeMob
+  - type: Butcherable
+    spawned:
+    - id: ClothingHeadHatFancyCrown #how did that get there?
+      amount: 1
+  - type: MobPrice
+    price: 1500
+  - type: RandomMetadata
+    nameSegments:
+    - KaiserNameTitle
+    - KaiserNameFirst
+    - KaiserNameMiddle
+    - KaiserNameLast
+  - type: GuideHelp
+    guides:
+    - MinorAntagonists
+  - type: Grammar
+    attributes:
+      gender: epicene
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Effects/Footsteps/meatslap.ogg
+      params:
+        volume: 5
+  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
+    allowedStates:
+    - Alive
+    damageCap: 89
+    damage:
+      types:
+        Bloodloss: -0.5
+      groups:
+        Brute: -0.1
+        Piercing: -0.1
+
+- type: entity
+  id: ActionKaiserSchutzeRaiseArmy
+  name: Raise Army
+  description: Spend some hunger to summon an allied rat to help defend you.
+  components:
+  - type: InstantAction
+    useDelay: 4
+    icon:
+      sprite: Interface/Actions/actions_rat_king.rsi
+      state: ratKingArmy
+    event: !type:KaiserHamburgRaiseArmySchutzeActionEvent
+
+- type: entity
+  id: ActionKaiserBrigadefuhrerRaiseArmy
+  name: Raise Army
+  description: Spend some hunger to summon an allied rat to help defend you.
+  components:
+  - type: InstantAction
+    useDelay: 4
+    icon:
+      sprite: Interface/Actions/actions_rat_king.rsi
+      state: ratKingArmy
+    event: !type:KaiserHamburgRaiseArmyBrigadefuhrerActionEvent
+
+- type: entity
+  id: ActionKaiserHamburgOrderFollow
+  name: Follow
+  description: Command your army to follow you around.
+  components:
+  - type: InstantAction
+    useDelay: 1
+    icon:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      state: followOff
+    iconOn:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      state: follow
+    event:
+      !type:KaiserHamburgOrderActionEvent
+      type: Follow
+    priority: 6
+
+- type: entity
+  id: ActionKaiserHamburgOrderKillBurger
+  name: Kill burger!
+  description: Command your army to attack whoever you point at.
+  components:
+  - type: InstantAction
+    useDelay: 1
+    icon:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      state: attackOff
+    iconOn:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      state: attack
+    event:
+      !type:KaiserHamburgOrderActionEvent
+      type: KillBurger
+    priority: 7
+
+- type: entity
+  id: ActionKaiserHamburgOrderLoose
+  name: Loose
+  description: Command your army to act at their own will.
+  components:
+  - type: InstantAction
+    useDelay: 1
+    icon:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      state: looseOff
+    iconOn:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      state: loose
+    event:
+      !type:KaiserHamburgOrderActionEvent
+      type: Loose
+    priority: 8
+
+- type: entity
+  name: MobBurgerSchutze
+  id: MobBurgerSchutze
+  parent: [ SimpleMobBase, MobCombat ]
+  description: He's da mini rat. He don't make da roolz.
+  noSpawn: true #Must be configured to a King or the AI breaks.
+  components:
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.5
+    baseSprintSpeed : 2.5
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: MeleeKaiserStreitmachtCompound
+    blackboard:
+      IdleRange: !type:Single
+        1.5
+      FollowCloseRange: !type:Single
+        2.0
+      FollowRange: !type:Single
+        3.0
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+  - type: NpcFactionMember
+    factions:
+    - TomatoBurger
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: Mobs/Animals/rat.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: rat
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
+      state: eyes
+      shader: unshaded
+  - type: Bloodstream
+    bloodReagent: Ketchup
+    bloodMaxVolume: 150
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: rat-moving
+    noMovementLayers:
+      movement:
+        state: rat
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 30 #Bulky by mouse standards...
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Critical
+      30: Dead
+  - type: Stamina
+    critThreshold: 60
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 5
+        Piercing: 3
+  - type: Body
+    prototype: Rat
+    requiredLegs: 1 # TODO: More than 1 leg
+  - type: Hunger # probably should be prototyped
+    thresholds:
+      Overfed: 200
+      Okay: 150
+      Peckish: 100
+      Starving: 50
+      Dead: 0
+    baseDecayRate: 0.01666666666
+  - type: Thirst
+    thresholds:
+      OverHydrated: 600
+      Okay: 450
+      Thirsty: 300
+      Parched: 150
+      Dead: 0
+    baseDecayRate: 0.1
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: rat
+        BaseUnshaded: eyes
+      Critical:
+        Base: dead
+      Dead:
+        Base: splat
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatRat
+      amount: 1
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+    wilhelmProbability: 0.001
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - FootstepSound
+  - type: NoSlip
+  - type: MobPrice
+    price: 500 # rat wealth
+  - type: MobsterAccent
+    isBoss: false
+  - type: Speech
+    speechVerb: SmallMob
+  - type: GuideHelp
+    guides:
+    - MinorAntagonists
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning
+  - type: Reform
+    actionPrototype: BurgerEvolutionStage1Action
+    reformTime: 15
+    popupText: diona-reform-attempt
+    reformPrototype: MobDionaReformed
+
+- type: entity
+  name: MobBurgerBrigadefuhrer
+  id: MobBurgerBrigadefuhrer
+  parent: [ SimpleMobBase, MobCombat ]
+  description: He's da mini rat. He don't make da roolz.
+  noSpawn: true #Must be configured to a King or the AI breaks.
+  components:
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 1.5
+    baseSprintSpeed : 1.5
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: RangeKaiserStreitmachtCompound
+    blackboard:
+      IdleRange: !type:Single
+        2.5
+      FollowCloseRange: !type:Single
+        3.0
+      FollowRange: !type:Single
+        3.5
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+  - type: NpcFactionMember
+    factions:
+    - TomatoBurger
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: Mobs/Animals/rat.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: rat
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
+      state: eyes
+      shader: unshaded
+  - type: Bloodstream
+    bloodMaxVolume: 40 #SS220 RatBlood fix
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: rat-moving
+    noMovementLayers:
+      movement:
+        state: rat
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 30 #Bulky by mouse standards...
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      45: Critical
+      90: Dead
+  - type: Stamina
+    critThreshold: 30
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 0.75
+  - type: BasicEntityAmmoProvider
+    proto: BulletAcid
+    capacity: 1
+    count: 1
+  - type: Gun
+    fireRate: 0.75
+    useKey: false
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: Body
+    prototype: Rat
+    requiredLegs: 1 # TODO: More than 1 leg
+  - type: Hunger # probably should be prototyped
+    thresholds:
+      Overfed: 200
+      Okay: 150
+      Peckish: 100
+      Starving: 50
+      Dead: 0
+    baseDecayRate: 0.01666666666
+  - type: Thirst
+    thresholds:
+      OverHydrated: 600
+      Okay: 450
+      Thirsty: 300
+      Parched: 150
+      Dead: 0
+    baseDecayRate: 0.1
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: rat
+        BaseUnshaded: eyes
+      Critical:
+        Base: dead
+      Dead:
+        Base: splat
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatRat
+      amount: 1
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+    wilhelmProbability: 0.001
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - FootstepSound
+  - type: NoSlip
+  - type: MobPrice
+    price: 500 # rat wealth
+  - type: MobsterAccent
+    isBoss: false
+  - type: Speech
+    speechVerb: SmallMob
+  - type: GuideHelp
+    guides:
+    - MinorAntagonists
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning

@@ -21,10 +21,19 @@
     size: Small
   - type: NpcFactionMember
     factions:
-      - SimpleHostile
+      - TomatoBurger
   - type: HTN
     rootTask:
       task: KillerTomatoCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -45,9 +54,9 @@
           - MobLayer
   - type: Bloodstream
     bloodReagent: JuiceTomato
-    bloodMaxVolume: 45 #SS220 Old-Tomato-Killer-Balance
-    chemicalMaxVolume: 25
-  - type: Damageable #SS220 Old-Tomato-Killer-Balance
+    bloodMaxVolume: 105
+    chemicalMaxVolume: 35
+  - type: Damageable
     damageContainer: Biological
     damageModifierSet: TomatoKiller
   - type: DamageStateVisuals
@@ -59,14 +68,25 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      55: Dead #SS220 Old-Tomato-Killer-Balance
+      55: Dead
   - type: MovementSpeedModifier
-    baseWalkSpeed : 1.5
+    baseWalkSpeed : 2.5
     baseSprintSpeed : 2.5
   - type: Tag
     tags:
     - Meat
     - VimPilot
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      20: 2.8
+      30: 2.4
+      34: 1.6
+      38: 1.4
+      42: 0.8
+      45: 0.4
+      50: 0.2
+  - type: Stamina
+    critThreshold: 30
   - type: Puller
     needsHands: false
   - type: Examiner
@@ -77,12 +97,12 @@
     angle: 0
     soundHit:
       collection: AlienClaw
-    attackRate: 1.5
+    attackRate: 2
     range: 0.8
     damage:
       types:
         Radiation: 1.5
-        Blunt: 5
+        Blunt: 3
         Structural: 2
     animation: WeaponArcBite
   - type: Climbing
@@ -106,3 +126,7 @@
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 5
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning
+  - type: NonSpreaderZombie

@@ -2745,6 +2745,9 @@
   id: MobCat
   description: Feline pet, very funny.
   components:
+  - type: NpcFactionMember
+    factions:
+      - Cats
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi
@@ -2827,6 +2830,12 @@
   parent: MobCat
   description: Feline pet, very funny.
   components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+      - Cats
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -2925,6 +2934,9 @@
   parent: MobCat
   description: Hilarious.
   components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
   - type: Sprite
     sprite: Mobs/Pets/caracal.rsi
     layers:
@@ -2943,6 +2955,9 @@
   id: MobCatKitten
   description: Small and fluffy.
   components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
