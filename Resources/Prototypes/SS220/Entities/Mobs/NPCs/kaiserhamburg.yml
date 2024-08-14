@@ -22,8 +22,17 @@
     - TomatoBurger
   - type: Sprite
     drawdepth: Mobs
-    sprite: SS220/Mobs/Alien/Burgers/kaiser.rsi
-    state: alive
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      sprite: SS220/Mobs/Alien/Burgers/kaiser.rsi
+      state: alive
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: alive-moving
+    noMovementLayers:
+      movement:
+        state: alive
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -41,7 +50,6 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      925: Critical
       1000: Dead
   - type: Bloodstream
     bloodReagent: GastroToxin
@@ -63,10 +71,10 @@
       melee:
         reagents:
         - ReagentId: GastroToxin
-          Quantity: 150
+          Quantity: 500
   - type: MeleeChemicalInjector
     solution: melee
-    transferAmount: 5
+    transferAmount: 10
   - type: Hunger
     thresholds:
       Overfed: 500
@@ -79,8 +87,6 @@
     states:
       Alive:
         Base: alive
-      Critical:
-        Base: critical
       Dead:
         Base: dead
     makeSentient: true
@@ -101,6 +107,13 @@
   - type: Speech
     speechSounds: Bass
     speechVerb: LargeMob
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:GibBehavior { }
   - type: Butcherable
     spawned:
     - id: ClothingHeadHatFancyCrown #how did that get there?
