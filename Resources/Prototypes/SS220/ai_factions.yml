@@ -55,3 +55,28 @@
   - Revolutionary
 
 # ss220 spider queen end
+
+# ss220 tomato burger start
+
+- type: npcFaction
+  id: TomatoBurger
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - PetsNTPassive
+  - Zombie
+  - Revolutionary
+  - SimpleHostile
+  - Dragon
+  - DarkReaperPassive
+  - Xeno
+  - Mouse
+  - EbentIronSquad
+  - EbentUssp
+  - EbentNanoTrasen
+  - Cats
+  - BloodCult
+
+# ss220 tomato burger end

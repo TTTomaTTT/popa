@@ -1,0 +1,234 @@
+#Meat
+- type: entity
+  name: rotten tomato
+  parent: FoodMeatBase
+  id: FoodMeatTomatoRotten
+  description: The average rating is less than 60%.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: rotten-tomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: GastroToxin
+          Quantity: 4
+
+- type: entity
+  name: cooked killer tomato meat
+  parent: FoodMeatBase
+  id: FoodMeatTomatoCooked
+  description: A delicious slice of a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - sweet
+    - terrible
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: tomato-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 2.5
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatTomatoCutletCooked
+  - type: StaticPrice
+    price: 150
+  - type: Construction
+    graph: TomatoSteak
+    node: tomato steak
+  - type: FoodSequenceElement
+    sprite:
+      sprite: SS220/Objects/Consumable/Food/tomato.rsi # SS220 tomato food
+      state: tomato-cooked # SS220 tomato food
+    entries:
+      burger:
+        name: food-sequence-content-tomato
+      taco:
+        name: food-sequence-content-tomato
+
+- type: entity
+  name: cooked killer tomato cutlet
+  parent: FoodMeatBase
+  id: FoodMeatTomatoCutletCooked
+  description: A cooked cutlet from a slab of tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - sweet
+    - terrible
+  - type: Tag
+    tags:
+    - Cooked
+    - Cutlet
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: cutlet-tomato-cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Protein
+          Quantity: 0.5
+  - type: StaticPrice
+    price: 45
+  - type: FoodSequenceElement
+    sprite:
+      sprite: SS220/Objects/Consumable/Food/tomato.rsi # SS220 tomato food
+      state: cutlet-tomato-cooked # SS220 tomato food
+    entries:
+      burger:
+        name: food-sequence-content-tomato
+      taco:
+        name: food-sequence-content-tomato
+
+#Burger
+
+- type: entity
+  name: tomato burger
+  parent: FoodBurgerBase
+  id: FoodBurgerTomato
+  description: A burger from a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bun
+      - meaty
+      - sweet
+      - terrible
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: tomatorger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 3
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Meat
+
+#Bread
+
+- type: entity
+  name: tomatobread
+  parent: FoodBreadBase
+  id: FoodBreadTomato
+  description: A bread from a huge tomato.
+  components:
+  - type: FlavorProfile
+    flavors:
+     - bread
+     - sweet
+     - terrible
+  - type: Food
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    layers:
+    - state: tomatobread
+  - type: SliceableFood
+    slice: FoodBreadTomatoSlice
+
+- type: entity
+  name: tomatobread slice
+  parent: FoodBreadSliceBase
+  id: FoodBreadTomatoSlice
+  description: A slice of tomatobread.
+  components:
+  - type: FlavorProfile
+    flavors:
+     - bread
+     - sweet
+     - terrible
+  - type: Food
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    layers:
+    - state: tomatobread-slice
+
+#Salad
+
+- type: entity
+  name: salad caprese
+  parent: FoodMealBase
+  id: FoodSaladCaprese
+  components:
+  - type: Food
+    trash:
+    - FoodPlate
+  - type: FlavorProfile
+    flavors:
+      - cheesy
+      - terrible
+      - meaty
+      - sweet
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: caprese
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Protein
+          Quantity: 5
+
+- type: entity
+  name: killer tomato soup
+  parent: FoodBowlBase
+  id: FoodSoupKillerTomato
+  components:
+  - type: Food
+    trash:
+    - FoodBowlBig
+  - type: FlavorProfile
+    flavors:
+      - terrible
+      - meaty
+      - tomato
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/tomato.rsi
+    state: killertomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Soup
