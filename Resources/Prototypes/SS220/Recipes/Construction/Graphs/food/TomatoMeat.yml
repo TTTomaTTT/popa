@@ -10,7 +10,7 @@
       - !type:PlaySound
         sound: /Audio/Effects/sizzle.ogg
       steps:
-      - minTemperature: 300
+      - minTemperature: 320
   - node: tomato steak
     entity: FoodMeatTomatoCooked
 
@@ -25,6 +25,6 @@
       - !type:PlaySound
         sound: /Audio/Effects/sizzle.ogg
       steps:
-      - minTemperature: 300
+      - minTemperature: 320
   - node: tomato cutlet
     entity: FoodMeatTomatoCutletCooked

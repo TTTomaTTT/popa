@@ -823,6 +823,11 @@
     tags:
     - Raw
     - Meat
+  - type: Perishable
+    rotAfter: 500
+  - type: RotInto
+    entity: FoodMeatTomatoRotten
+    stage: 1
   # ss220 tomato food end
   - type: FoodSequenceElement
     sprite:
@@ -1852,6 +1857,12 @@
         name: food-sequence-content-tomato
       taco:
         name: food-sequence-content-tomato
+  # SS220 tomato food start
+  - type: Construction
+    graph: TomatoCutlet
+    node: start
+    defaultTarget: tomato cutlet
+  # SS220 tomato food end
 
 - type: entity
   name: salami slice

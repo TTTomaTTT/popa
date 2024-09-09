@@ -56,13 +56,18 @@
     node: tomato steak
   - type: FoodSequenceElement
     sprite:
-      sprite: SS220/Objects/Consumable/Food/tomato.rsi # SS220 tomato food
-      state: tomato-cooked # SS220 tomato food
+      sprite: SS220/Objects/Consumable/Food/tomato.rsi
+      state: tomato-cooked
     entries:
       burger:
         name: food-sequence-content-tomato
       taco:
         name: food-sequence-content-tomato
+      skewer:
+        name: food-sequence-content-tomato
+        sprite:
+          sprite: SS220/Objects/Consumable/Food/skewer.rsi
+          state: skewer-tomato-cooked
 
 - type: entity
   name: cooked killer tomato cutlet
@@ -95,13 +100,16 @@
     price: 45
   - type: FoodSequenceElement
     sprite:
-      sprite: SS220/Objects/Consumable/Food/tomato.rsi # SS220 tomato food
-      state: cutlet-tomato-cooked # SS220 tomato food
+      sprite: SS220/Objects/Consumable/Food/tomato.rsi
+      state: cutlet-tomato-cooked
     entries:
       burger:
         name: food-sequence-content-tomato
       taco:
         name: food-sequence-content-tomato
+  - type: Construction
+    graph: TomatoCutlet
+    node: tomato cutlet
 
 #Burger
 
