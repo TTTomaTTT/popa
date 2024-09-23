@@ -3,7 +3,7 @@
 - type: microwaveMealRecipe
   id: RecipeTomatoburger
   name: tomato burger recipe
-  result: MobBurgerTomatoAngry
+  result: MobBurgerTomato
   time: 10
   solids:
     FoodBreadBun: 1
@@ -28,6 +28,29 @@
   reagents:
    Left4Zed: 1
    Cognizine: 1
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCrazyTomatoburgerThee
+  name: crazy tomato burger mistake
+  result: MobBurgerTomatoAngry
+  time: 10
+  reagents:
+   Left4Zed: 1
+   Cognizine: 1
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 2
+
+- type: microwaveMealRecipe
+  id: RecipeCrazyTomatoburgerFour
+  name: crazy tomato burger mistake
+  result: MobBurgerTomatoAngry
+  time: 15
+  reagents:
+   Left4Zed: 1
   solids:
     FoodBreadBun: 1
     FoodMeatTomato: 1
@@ -60,7 +83,7 @@
 - type: microwaveMealRecipe
   id: RecipeCapreseSalad
   name: caprese recipe
-  result: FoodSaladCaprese
+  result: FoodKillerTomatoSaladCaprese
   time: 5
   solids:
     FoodPlate: 1

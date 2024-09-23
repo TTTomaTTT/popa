@@ -186,7 +186,7 @@
 - type: entity
   name: salad caprese
   parent: FoodMealBase
-  id: FoodSaladCaprese
+  id: FoodKillerTomatoSaladCaprese
   components:
   - type: Food
     trash:
