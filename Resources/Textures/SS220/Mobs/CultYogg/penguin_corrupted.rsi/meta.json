@@ -8,11 +8,18 @@
   "copyright": "Made by TTTomaTTT for SS220",
   "states": [
     {
-      "name": "dead"
+      "name": "penguin",
+      "directions": 4
     },
     {
-      "name": "pig",
+      "name": "penguin_dead"
+    },
+    {
+      "name": "penguin_baby",
       "directions": 4
+    },
+    {
+      "name": "penguin_baby_dead"
     }
   ]
 }
