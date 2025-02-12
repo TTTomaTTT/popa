@@ -1,0 +1,33 @@
+- type: constructionGraph
+  id: PottedPlant
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DeleteEntity {}
+      edges:
+        - to: PottedPlantWall
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+
+    - node: PottedPlantFlower
+      entity: PottedPlantFlower
+      edges:
+        - to: PottedPlantWall
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+
+- type: constructionGraph
+  id: PottedPlantBioluminscent
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DeleteEntity {}
+      edges:
+        - to: PottedPlantWallBioluminscent
+          completed:
+            - !type:SnapToGrid
+              southRotation: true

@@ -181,3 +181,10 @@
 #HOCebent
 - type: Tag
   id: CartridgeUnitary
+
+#PottedWallPlant
+- type: Tag
+  id: PlantWall
+
+- type: Tag
+  id: PlantWallBioluminscent

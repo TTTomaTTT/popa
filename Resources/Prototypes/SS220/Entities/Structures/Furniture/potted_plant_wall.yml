@@ -1,0 +1,120 @@
+- type: entity
+  id: PottedPlantWall
+  parent: TableBase
+  name: potted plant wall
+  description:
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/PottedWall/potted_wall.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/PottedWall/potted_wall.rsi
+    state: full
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.28,-0.37,0.28,0.40"
+        density: 70
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+  - type: Physics
+    bodyType: Static
+  - type: IconSmooth
+    key: pottedwalls
+    base: state_
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: PottedPlant
+    node: PottedPlantWall
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepGrass
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.35
+    sprintSpeedModifier: 0.65
+  - type: SecretStash
+    tryInsertItemSound: /Audio/Effects/plant_rustle.ogg
+    tryRemoveItemSound: /Audio/Effects/plant_rustle.ogg
+    hasVerbs: false
+  - type: SpriteFade
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+  - type: Tag
+    tags:
+      - PlantWall
+
+- type: entity
+  id: PottedPlantWallFlower
+  parent: PottedPlantWall
+  description:
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/PottedWall/potted_wall_flower.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/PottedWall/potted_wall_flower.rsi
+    state: full
+  - type: IconSmooth
+    key: pottedwalls
+    base: state_
+  - type: Construction
+    graph: PottedPlant
+    node: PottedPlantWallFlower
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.28,-0.37,0.28,0.40"
+        density: 70
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+
+- type: entity
+  id: PottedPlantWallBioluminscent
+  parent: PottedPlantWall
+  description:
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/PottedWall/potted_wall_bioluminscent.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/PottedWall/potted_wall_bioluminscent.rsi
+    state: full
+  - type: IconSmooth
+    key: state
+    base: state_
+  - type: PointLight
+    radius: 1.5
+    color: "#e6ba39"
+  - type: Construction
+    graph: PottedPlantBioluminscent
+    node: PottedPlantWallBioluminscent
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.28,-0.37,0.28,0.40"
+        density: 70
+        layer:
+        - TableLayer
