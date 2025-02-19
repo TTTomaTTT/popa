@@ -184,7 +184,7 @@
 
 #PottedWallPlant
 - type: Tag
-  id: PlantWall
+  id: Hedge
 
 - type: Tag
-  id: PlantWallBioluminscent
+  id: FlowerHedge
