@@ -1,0 +1,30 @@
+- type: constructionGraph
+  id: TomatoSteak
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: tomato steak
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 320
+  - node: tomato steak
+    entity: FoodMeatTomatoCooked
+
+- type: constructionGraph
+  id: TomatoCutlet
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: tomato cutlet
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 320
+  - node: tomato cutlet
+    entity: FoodMeatTomatoCutletCooked

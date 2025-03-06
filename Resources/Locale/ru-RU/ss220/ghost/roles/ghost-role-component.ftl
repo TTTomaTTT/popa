@@ -23,3 +23,7 @@ ghost-role-information-traveling-chef-rules = Действуют обычные 
 ghost-role-information-giant-fly-name = Веспия
 ghost-role-information-giant-fly-description = Вы гигантская боевая оса. Ваша задача - уничтожить всех кроме представителей вашего вида.
 ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими осами.
+
+ghost-role-information-tomatoburger-name = Живой бургер
+ghost-role-information-tomatoburger-description = Раньше вы были помидором-убийцей, а теперь бургер.
+ghost-role-information-tomatoburger-rules = Вы разумный бургер, ваш укус смешон, и вас это не радует. [bold]Как и томат-убийца, вы ненавидите всех, но высказываться об этом стоит аккуратнее, ведь бургер не настолько убийственный фастфуд.[/bold]

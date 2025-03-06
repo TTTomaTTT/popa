@@ -8,6 +8,7 @@
     - PetsNT
     - Zombie
     - Revolutionary
+    - TomatoBurger #SS220 TomatoBurger
     - SpiderQueen #ss220 spider queen
     - CultYogg #SS220 CultYogg
     - AllHostile
@@ -20,6 +21,7 @@
   - Xeno
   - Zombie
   - Revolutionary
+  - TomatoBurger #SS220 TomatoBurger
   - SpiderQueen #ss220 spider queen
   - Dragon
   - AllHostile
@@ -40,6 +42,7 @@
   - SimpleHostile
   - Zombie
   - Xeno
+  - TomatoBurger #SS220 TomatoBurger
   - SpiderQueen #ss220 spider queen
   - AllHostile
 
@@ -52,6 +55,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - TomatoBurger #SS220 TomatoBurger
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
@@ -68,6 +72,7 @@
   - Xeno
   - PetsNT
   - Zombie
+  - TomatoBurger #SS220 TomatoBurger
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - Dragon
@@ -83,6 +88,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - TomatoBurger #SS220 TomatoBurger
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
@@ -98,6 +104,7 @@
   - Passive
   - PetsNT
   - Revolutionary
+  - TomatoBurger #SS220 TomatoBurger
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
@@ -110,6 +117,7 @@
   - Zombie
   - SimpleHostile
   - Dragon
+  - TomatoBurger #SS220 TomatoBurger
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
@@ -136,6 +144,7 @@
   - SpiderHostile
   - DeathSquad
   - CultYogg
+  - TomatoBurger
   # Ebent:
   - EbentUssp
   - EbentNanoTrasen

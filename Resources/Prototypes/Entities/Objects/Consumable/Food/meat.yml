@@ -601,7 +601,7 @@
 
 - type: entity
   name: killer tomato meat
-  parent: FoodMeatBase
+  parent: FoodMeatRawBase #SS220 TomatoBurger
   id: FoodMeatTomato
   description: A slice from a huge tomato.
   components:
@@ -609,6 +609,21 @@
     state: tomato
   - type: SliceableFood
     count: 3
+  #SS220 TomatoBurger start
+  - type: Construction
+    graph: TomatoSteak
+    node: start
+    defaultTarget: tomato steak
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: Perishable
+    rotAfter: 500
+  - type: RotInto
+    entity: FoodMeatTomatoRotten
+    stage: 1
+  #SS220 TomatoBurger end
     slice: FoodMeatTomatoCutlet
   - type: StaticPrice
     price: 100
@@ -1491,9 +1506,24 @@
     tags:
     - Cutlet
     - Meat
+  #SS220 TomatoBurger start
   - type: Sprite
-    state: salami-slice
-    color: red
+    sprite: SS220/Objects/Consumable/Food/killertomato.rsi
+    state: cutlet-tomato
+  - type: FoodSequenceElement
+    sprite:
+      sprite: SS220/Objects/Consumable/Food/killertomato.rsi
+      state: cutlet-tomato
+    entries:
+      burger:
+        name: food-sequence-content-tomato
+      taco:
+        name: food-sequence-content-tomato
+  - type: Construction
+    graph: TomatoCutlet
+    node: start
+    defaultTarget: tomato cutlet
+  #SS220 TomatoBurger end
   - type: StaticPrice
     price: 30
 

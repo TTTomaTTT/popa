@@ -12,6 +12,7 @@
   - Zombie
   - Revolutionary
   - SpiderQueen
+  - TomatoBurger #SS220 TomatoBurger
   - CultYogg #SS220 CultYogg
   - AllHostile
 
@@ -38,6 +39,7 @@
   - Dragon
   - PetsNT
   - SimpleNeutral
+  - TomatoBurger #SS220 TomatoBurger
   - CultYogg #SS220 CultYogg
   - AllHostile
 
@@ -51,6 +53,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - TomatoBurger #SS220 TomatoBurger
   - CultYogg #SS220 CultYogg
   - AllHostile
 
@@ -70,6 +73,7 @@
   - Revolutionary
   - SpiderQueen
   - SimpleHostile
+  - TomatoBurger #SS220 TomatoBurger
   - CultYogg #SS220 CultYogg
   - AllHostile
 
@@ -87,4 +91,26 @@
   - Dragon
   - BloodCult
   - SpiderQueen
+  - TomatoBurger #SS220 TomatoBurger
+  - AllHostile
+
+#SS220 TomatoBurger
+- type: npcFaction
+  id: TomatoBurger
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - SimpleHostile
+  - Dragon
+  - Xeno
+  - Mouse
+  - EbentIronSquad
+  - EbentUssp
+  - EbentNanoTrasen
+  - BloodCult
+  - CultYogg
   - AllHostile
