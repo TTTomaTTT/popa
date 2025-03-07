@@ -609,6 +609,7 @@
     state: tomato
   - type: SliceableFood
     count: 3
+    slice: FoodMeatTomatoCutlet
   #SS220 TomatoBurger start
   - type: Construction
     graph: TomatoSteak
@@ -624,7 +625,6 @@
     entity: FoodMeatTomatoRotten
     stage: 1
   #SS220 TomatoBurger end
-    slice: FoodMeatTomatoCutlet
   - type: StaticPrice
     price: 100
 
@@ -1511,14 +1511,9 @@
     sprite: SS220/Objects/Consumable/Food/killertomato.rsi
     state: cutlet-tomato
   - type: FoodSequenceElement
-    sprite:
-      sprite: SS220/Objects/Consumable/Food/killertomato.rsi
-      state: cutlet-tomato
     entries:
-      burger:
-        name: food-sequence-content-tomato
-      taco:
-        name: food-sequence-content-tomato
+      Taco: MeatKillerTomatoCutletCooked
+      Burger: MeatKillerTomatoCutletCooked
   - type: Construction
     graph: TomatoCutlet
     node: start

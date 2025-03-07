@@ -9,7 +9,7 @@
   - type: Sprite
     layers:
     - state: green
-    - state: alive
+    - state: icon-split
       sprite: SS220/Mobs/Misc/TomatoBurger/tomatoburger.rsi
   - type: ConditionalSpawner
     prototypes:
@@ -63,6 +63,19 @@
           - MobMask
         layer:
           - MobLayer
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: TomatoKiller
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
   - type: GhostTakeoverAvailable
   - type: FrontalLisp
   - type: Speech

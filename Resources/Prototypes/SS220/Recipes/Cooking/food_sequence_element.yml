@@ -1,0 +1,49 @@
+# KillerTomato
+
+- type: foodSequenceElement
+  id: KillerTomato
+  name: food-sequence-content-tomato
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/tomato.rsi
+    state: produce
+  tags:
+  - Meat
+
+- type: foodSequenceElement
+  id: KillerTomatoCooked
+  name: food-sequence-content-tomato
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/killertomato.rsi
+    state: tomato-cooked
+  tags:
+  - Cooked
+  - Meat
+
+- type: foodSequenceElement
+  id: KillerTomatoCookedSkewer
+  name: food-sequence-content-tomato
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/skewer.rsi
+    state: skewer-tomato-cooked
+  tags:
+  - Cooked
+  - Meat
+
+- type: foodSequenceElement
+  id: KillerTomatoCutlet
+  name: food-sequence-content-tomato
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/killertomato.rsi
+    state: cutlet-tomato
+  tags:
+  - Meat
+
+- type: foodSequenceElement
+  id: KillerTomatoCutletCooked
+  name: food-sequence-content-tomato
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/killertomato.rsi
+    state: cutlet-tomato-cooked
+  tags:
+  - Cooked
+  - Meat

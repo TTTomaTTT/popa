@@ -5,6 +5,9 @@
   id: FoodMeatTomatoRotten
   description: The average rating is less than 60%.
   components:
+  - type: FlavorProfile
+    flavors:
+    - terrible
   - type: Tag
     tags:
     - Raw
@@ -55,19 +58,10 @@
     graph: TomatoSteak
     node: tomato steak
   - type: FoodSequenceElement
-    sprite:
-      sprite: SS220/Objects/Consumable/Food/killertomato.rsi
-      state: tomato-cooked
     entries:
-      burger:
-        name: food-sequence-content-tomato
-      taco:
-        name: food-sequence-content-tomato
-      skewer:
-        name: food-sequence-content-tomato
-        sprite:
-          sprite: SS220/Objects/Consumable/Food/skewer.rsi
-          state: skewer-tomato-cooked
+      Taco: KillerTomatoCooked
+      Burger: KillerTomatoCooked
+      Skewer: KillerTomatoCookedSkewer
 
 - type: entity
   name: cooked killer tomato cutlet
@@ -99,14 +93,9 @@
   - type: StaticPrice
     price: 45
   - type: FoodSequenceElement
-    sprite:
-      sprite: SS220/Objects/Consumable/Food/killertomato.rsi
-      state: cutlet-tomato-cooked
     entries:
-      burger:
-        name: food-sequence-content-tomato
-      taco:
-        name: food-sequence-content-tomato
+      Taco: KillerTomatoCutletCooked
+      Burger: KillerTomatoCutletCooked
   - type: Construction
     graph: TomatoCutlet
     node: tomato cutlet

@@ -4,7 +4,6 @@
   name: Spawner Crazy tomato burger
   id: SpawnMobBurgerTomatoAngry
   parent: MarkerBase
-  suffix: Роль
   components:
   - type: Sprite
     layers:
@@ -89,7 +88,6 @@
   - type: Tag
     tags:
     - Meat
-    - VimPilot
   - type: SlowOnDamage
     speedModifierThresholds:
       20: 2.8
@@ -161,13 +159,21 @@
       - meaty
       - sweet
       - terrible
+  - type: Item
+    size: Small
+  - type: NpcFactionMember
+    factions:
+      - TomatoBurger
+  - type: HTN
+    rootTask:
+      task: InnateRangedCombatCompound
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-    sprite: SS220/Mobs/Misc/TomatoBurger/skittishtomatoburger.rsi
     layers:
-  - map: ["enum.DamageStateVisualLayers.Base", "movement"]
-        state: alive
+     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+       sprite: SS220/Mobs/Misc/TomatoBurger/skittishtomatoburger.rsi
+       state: alive
   - type: SpriteMovement
     movementLayers:
       movement:
