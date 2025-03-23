@@ -313,3 +313,12 @@
   - type: IconSmooth
     key: separate
     base: state_
+
+- type: entity
+  id: HedgeSnowSeparate
+  parent: HedgeSnow
+  suffix: "separate"
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
