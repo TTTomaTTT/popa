@@ -2,7 +2,7 @@
   id: ScarAboveEyebrowLeft
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -12,7 +12,7 @@
   id: ScarAboveEyebrowRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -22,7 +22,7 @@
   id: ScarAcrossNose
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -32,7 +32,7 @@
   id: ScarAcrossNoseMirrored
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -42,7 +42,7 @@
   id: ScarCheekLeft
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -52,7 +52,7 @@
   id: ScarCheekRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -62,7 +62,7 @@
   id: ScarHalfFaceLeft
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -72,7 +72,7 @@
   id: ScarHalfFaceRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -82,7 +82,7 @@
   id: ScarSideEyeLeft
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -92,7 +92,7 @@
   id: ScarSideEyeRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   followSkinColor: true
   sprites:
   - sprite: SS220/Mobs/Customization/scars.rsi
@@ -102,7 +102,7 @@
   id: ScarRibLeft
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   sexRestriction: [Male]
   followSkinColor: true
   sprites:
@@ -113,7 +113,7 @@
   id: ScarRibRight
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human, Dwarf, SlimePerson]
   sexRestriction: [Male]
   followSkinColor: true
   sprites:
