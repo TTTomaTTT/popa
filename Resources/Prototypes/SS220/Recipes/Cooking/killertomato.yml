@@ -3,7 +3,7 @@
 - type: microwaveMealRecipe
   id: RecipeTomatoburger
   name: tomato burger recipe
-  result: MobBurgerTomato
+  result: FoodBurgerTomato
   time: 10
   solids:
     FoodBreadBun: 1
@@ -11,7 +11,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCrazyTomatoburgerOne
-  name: crazy tomato burger mistake
+  name: tomato burger mistake
   result: MobBurgerTomatoSkittish
   time: 15
   reagents:
@@ -22,7 +22,30 @@
 
 - type: microwaveMealRecipe
   id: RecipeCrazyTomatoburgerTwo
-  name: crazy tomato burger mistake
+  name: tomato burger mistake
+  result: MobBurgerTomatoSkittish
+  time: 10
+  reagents:
+   Left4Zed: 1
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCrazyTomatoburgerThee
+  name: tomato burger mistake
+  result: MobBurgerTomatoSkittish
+  time: 10
+  reagents:
+   Left4Zed: 1
+   Cognizine: 1
+  solids:
+    FoodBreadBun: 1
+    FoodMeatTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCrazyTomatoburgerFour
+  name: tomato burger mistake
   result: MobBurgerTomatoAngry
   time: 15
   reagents:
@@ -33,8 +56,8 @@
     FoodMeatTomato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCrazyTomatoburgerThee
-  name: crazy tomato burger mistake
+  id: RecipeCrazyTomatoburgerFive
+  name: tomato burger mistake
   result: MobBurgerTomatoAngry
   time: 10
   reagents:
@@ -45,8 +68,8 @@
     FoodMeatTomato: 2
 
 - type: microwaveMealRecipe
-  id: RecipeCrazyTomatoburgerFour
-  name: crazy tomato burger mistake
+  id: RecipeCrazyTomatoburgerSix
+  name: tomato burger mistake
   result: MobBurgerTomatoAngry
   time: 15
   reagents:
@@ -88,7 +111,7 @@
   solids:
     FoodPlate: 1
     FoodCheeseSlice: 2
-    FoodMeatTomatoCutlet: 4
+    FoodMeatTomatoCutlet: 3
 
 #Soup
 

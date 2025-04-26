@@ -103,7 +103,6 @@
     needsHands: false
   - type: Examiner
   - type: DoAfter
-  - type: CombatMode
   - type: MeleeWeapon
     hidden: true
     angle: 0
@@ -150,6 +149,7 @@
   - MobDamageable
   - MobBloodstream
   - MobFlammable
+  - MobCombat
   - FoodBurgerBase
   id: MobBurgerTomatoSkittish
   components:
@@ -166,7 +166,26 @@
       - TomatoBurger
   - type: HTN
     rootTask:
-      task: InnateRangedCombatCompound
+      task: XenoCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    soundHit:
+      collection: AlienClaw
+    attackRate: 0.5
+    range: 0.5
+    damage:
+      types:
+        Stamina: 10
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -211,10 +230,9 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      25: Dead
+      15: Dead
   - type: CanEscapeInventory
     baseResistTime: 0.8
-  - type: Climbing
   - type: NameIdentifier
     group: GenericNumber
   - type: FootstepModifier
@@ -238,4 +256,13 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
-  - type: NonSpreaderZombie
+  - type: TriggerOnMobstateChange
+    mobState:
+    - Dead
+  - type: ExplodeOnTrigger
+    delay: 3
+  - type: Explosive
+    explosionType: Radioactive
+    maxIntensity: 8
+    intensitySlope: 8
+    totalIntensity: 2
