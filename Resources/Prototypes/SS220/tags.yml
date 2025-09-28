@@ -343,3 +343,11 @@
 - type: Tag
   id: Legalposter
 # ss220 Posters update end
+
+#ss220 hedge start
+- type: Tag
+  id: Hedge
+
+- type: Tag
+  id: FlowerHedge
+#ss220 hedge start

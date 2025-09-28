@@ -321,3 +321,5 @@ Resources/MapImages
 
 # Direnv stuff
 .direnv/
+/*.lnk
+/*.bat
