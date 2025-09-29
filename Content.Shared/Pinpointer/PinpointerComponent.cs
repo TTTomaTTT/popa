@@ -1,4 +1,7 @@
+using Content.Shared.SS220.Pinpointer;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Pinpointer;
@@ -62,6 +65,52 @@ public sealed partial class PinpointerComponent : Component
 
     [ViewVariables]
     public bool HasTarget => DistanceToTarget != Distance.Unknown;
+
+    //ss220 add pinpointer ui start
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public HashSet<TrackedItem> Sensors = [];//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public HashSet<TrackedItem> TrackedItems = [];//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public HashSet<TrackedItem> Targets = [];//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public PinpointerMode Mode = PinpointerMode.Crew;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public EntityUid? TrackedByDnaEntity;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public string? DnaToTrack;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(2f);
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public TimeSpan NextUpdate;
+
+    /// <summary>
+    /// The target component that will be searched for
+    /// Not the same variable as "Component" because it is used by different systems
+    /// </summary>
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public string? TargetsComponent;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+    //ss220 add pinpointer ui end
 }
 
 [Serializable, NetSerializable]

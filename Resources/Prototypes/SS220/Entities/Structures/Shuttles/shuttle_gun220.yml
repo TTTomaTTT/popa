@@ -201,7 +201,9 @@
     radius: 1.5
     color: orange
     energy: 0.3
-
+  - type: Projectile
+    shuttleNavInfo:
+      enabled: true
 
 - type: entity
   id: CartridgeNURS
@@ -244,14 +246,17 @@
     layers:
     - state: declone
       shader: unshaded
+  - type: StaminaDamageOnCollide
+    damage: 15
   - type: Projectile
     damage:
       types:
         Blunt: 35
         Piercing: 35
         Structural: 95
-        Stamina: 15
-
+    shuttleNavInfo:
+      enabled: true
+      radius: 0.4
 
 
 - type: entity
@@ -318,13 +323,18 @@
     reflective: None
   - type: TimedDespawn
     lifetime: 4
+  - type: StaminaDamageOnCollide
+    damage: 50
+    ignoreResistance: true
   - type: Projectile
     damage:
       types:
         Piercing: 20
         Structural: 30
-        Stamina: 50
     ignoreResistances: true
+    shuttleNavInfo:
+      enabled: true
+      radius: 0.4
 
 
 - type: Tag

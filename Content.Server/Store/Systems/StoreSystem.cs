@@ -10,8 +10,11 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
+using Robust.Shared.Timing;
+using Content.Shared.Mind;
 using Content.Shared.DoAfter;
 using Content.Shared.SS220.Store;
+using Content.Server.StoreDiscount.Systems;
 
 namespace Content.Server.Store.Systems;
 
@@ -23,7 +26,9 @@ public sealed partial class StoreSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
+    [Dependency] private readonly StoreDiscountSystem _discount = default!; //SS220-nukeops-discount
 
     public override void Initialize()
     {
@@ -48,6 +53,7 @@ public sealed partial class StoreSystem : EntitySystem
     {
         RefreshAllListings(component);
         component.StartingMap = Transform(uid).MapUid;
+        _discount.TryAddDiscounts(uid, component); //SS220-nukeops-discount
     }
 
     private void OnStartup(EntityUid uid, StoreComponent component, ComponentStartup args)
@@ -73,10 +79,13 @@ public sealed partial class StoreSystem : EntitySystem
         if (!component.OwnerOnly)
             return;
 
-        component.AccountOwner ??= args.User;
+        if (!_mind.TryGetMind(args.User, out var mind, out _))
+            return;
+
+        component.AccountOwner ??= mind;
         DebugTools.Assert(component.AccountOwner != null);
 
-        if (component.AccountOwner == args.User)
+        if (component.AccountOwner == mind)
             return;
 
         _popup.PopupEntity(Loc.GetString("store-not-account-owner", ("store", uid)), uid, args.User);
@@ -144,6 +153,14 @@ public sealed partial class StoreSystem : EntitySystem
 
     private void OnImplantActivate(EntityUid uid, StoreComponent component, OpenUplinkImplantEvent args)
     {
+        //ss220 fix uplink implant start (#2766)
+        if (component.AccountOwner == null)
+        {
+            _mind.TryGetMind(args.Performer, out var mind, out _);
+            component.AccountOwner = mind;
+        }
+        //ss220 fix uplink implant end (#2766)
+
         ToggleUi(args.Performer, uid, component);
     }
 

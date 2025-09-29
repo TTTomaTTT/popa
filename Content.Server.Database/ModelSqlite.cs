@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -66,6 +66,14 @@ namespace Content.Server.Database
                 .HasColumnType("TEXT")
                 .HasConversion(ipMaskConverter);
 
+            // SS220 Species bans begin
+            modelBuilder
+                .Entity<ServerSpeciesBan>()
+                .Property(e => e.Address)
+                .HasColumnType("TEXT")
+                .HasConversion(ipMaskConverter);
+            // SS220 Species bans end
+
             var jsonStringConverter = new ValueConverter<JsonDocument, string>(
                 v => JsonDocumentToString(v),
                 v => StringToJsonDocument(v));
@@ -81,6 +89,11 @@ namespace Content.Server.Database
             modelBuilder.Entity<Profile>()
                 .Property(log => log.Markings)
                 .HasConversion(jsonByteArrayConverter);
+
+            // EF core can make this automatically unique on sqlite but not psql.
+            modelBuilder.Entity<IPIntelCache>()
+                .HasIndex(p => p.Address)
+                .IsUnique();
         }
 
         public override int CountAdminLogs()

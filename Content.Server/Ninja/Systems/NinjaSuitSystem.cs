@@ -7,6 +7,7 @@ using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell.Components;
+using Content.Shared.Projectiles;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Ninja.Systems;
@@ -21,6 +22,7 @@ public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
     [Dependency] private readonly SpaceNinjaSystem _ninja = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedProjectileSystem _projectile = default!; // SS220-fix-katana-not-being-able-to-call-if-in-entity
 
     // How much the cell score should be increased per 1 AutoRechargeRate.
     private const int AutoRechargeValue = 100;
@@ -74,7 +76,7 @@ public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
         var user = Transform(uid).ParentUid;
 
         // can only upgrade power cell, not swap to recharge instantly otherwise ninja could just swap batteries with flashlights in maints for easy power
-        if (GetCellScore(inserting.Owner, inserting) <= GetCellScore(battery.Owner, battery))
+        if (GetCellScore(args.EntityUid, inserting) <= GetCellScore(batteryUid.Value, battery))
         {
             args.Cancel();
             Popup.PopupEntity(Loc.GetString("ninja-cell-downgrade"), user, user);
@@ -136,6 +138,11 @@ public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
 
         if (CheckDisabled(ent, user))
             return;
+
+        // SS220-fix-katana-not-being-able-to-call-if-in-entity-begin
+        if (TryComp<EmbeddableProjectileComponent>(katana, out var embeddable))
+            _projectile.EmbedDetach(katana, embeddable);
+        // SS220-fix-katana-not-being-able-to-call-if-in-entity-end
 
         // TODO: teleporting into belt slot
         var message = _hands.TryPickupAnyHand(user, katana)

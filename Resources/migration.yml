@@ -46,7 +46,7 @@ lanternextrabright: LanternFlash
 
 # 2023-08-04
 BoxMagazineLightRifleHighVelocity: BoxMagazineLightRifle
-BoxMagazineMagnumSubMachineGunHighVelocity: BoxMagazineMagnumSubMachineGun
+BoxMagazineMagnumSubMachineGunHighVelocity: null
 BoxMagazinePistolCaselessRifleHighVelocity: BoxMagazinePistolCaselessRifle
 BoxMagazinePistolHighCapacityHighVelocity: BoxMagazinePistolHighCapacity
 BoxMagazinePistolHighVelocity: BoxMagazinePistol
@@ -68,9 +68,9 @@ MagazineBoxMagnumHighVelocity: MagazineBoxMagnum
 MagazineBoxPistolHighVelocity: MagazineBoxPistol
 MagazineBoxRifleHighVelocity: MagazineBoxRifle
 MagazineCaselessRifleHighVelocity: MagazineCaselessRifle
-MagazineCaselessRifleShortHighVelocity: MagazineCaselessRifleShort
+MagazineCaselessRifleShortHighVelocity: null
 MagazineLightRifleHighVelocity: MagazineLightRifle
-MagazineMagnumSubMachineGunHighVelocity: MagazineMagnumSubMachineGun
+MagazineMagnumSubMachineGunHighVelocity: null
 MagazinePistolCaselessRifleHighVelocity: MagazinePistolCaselessRifle
 MagazinePistolHighCapacityHighVelocity: MagazinePistolHighCapacity
 MagazinePistolHighVelocity: MagazinePistol
@@ -106,9 +106,6 @@ SignPsych: SignPsychology
 # 2023-12-06 - SS220
 SignNtFlag: NTFlag
 
-# 2023-12-10 - SS220
-VendingMachineSmartFridge: StorageSmartFridge
-
 # 2023-12-10 / 2024-07-20 - SS220 Spawners returned in game
 # SpawnPointSeniorResearcher: null
 # SpawnPointSeniorOfficer: null
@@ -120,7 +117,7 @@ VendingMachineSmartFridge: StorageSmartFridge
 ClothingOuterHardsuitMedic: ClothingOuterHardsuitSyndieMedic
 
 # 2023-12-13
-#VendingMachineSmartFridge: SmartFridge
+VendingMachineSmartFridge: SmartFridge
 
 # 2023-12-18
 ReagentContainerMilk: DrinkMilkCarton
@@ -168,15 +165,14 @@ SalvagePartsT4Spawner: SalvageLootSpawner
 SalvagePartsT3Spawner: SalvageLootSpawner
 SalvagePartsT3T4Spawner: SalvageLootSpawner
 SalvagePartsT2Spawner: SalvageLootSpawner
-AdvancedCapacitorStockPart: CapacitorStockPart
-SuperCapacitorStockPart: CapacitorStockPart
-QuadraticCapacitorStockPart: CapacitorStockPart
-NanoManipulatorStockPart: MicroManipulatorStockPart
+#SuperCapacitorStockPart: CapacitorStockPart
+#QuadraticCapacitorStockPart: CapacitorStockPart
+#NanoManipulatorStockPart: MicroManipulatorStockPart
 PicoManipulatorStockPart: MicroManipulatorStockPart
 FemtoManipulatorStockPart: MicroManipulatorStockPart
-AdvancedMatterBinStockPart: MatterBinStockPart
-SuperMatterBinStockPart: MatterBinStockPart
-BluespaceMatterBinStockPart: MatterBinStockPart
+#AdvancedMatterBinStockPart: MatterBinStockPart
+#SuperMatterBinStockPart: MatterBinStockPart
+#BluespaceMatterBinStockPart: MatterBinStockPart
 AnsibleSubspaceStockPart: null
 FilterSubspaceStockPart: null
 AmplifierSubspaceStockPart: null
@@ -216,37 +212,34 @@ SpyCrewMonitorEmpty: null
 SyndiCrewMonitor: null
 SyndiCrewMonitorEmpty: null
 
-# SS220 Readd-Vehicles begin (commented out upstream)
-# SpawnVehicleWheelchair: null
-# SpawnVehicleWheelchairFolded: null
-# VehicleWheelchair: null
-# VehicleWheelchairFolded: null
-# VehicleSecwayStealObjective: null
-# VehicleKeyJanicart: null
-# VehicleKeySecway: null
-# VehicleKeyATV: null
-# VehicleKeySkeleton: null
-# VehicleKeySyndicateSegway: null
-# VehicleKeySkeletonMotorcycle: null
-# VehicleSecway: null
-# VehicleATV: null
-# VehicleSyndicateSegway: null
-# VehicleSkeletonMotorcycle: null
-# VehicleUnicycle: null
-# VehicleUnicycleFolded: null
-# ActionVehicleHorn: null
-# CrateFunATV: null
-# CrateFunSyndicateSegway: null
-# MobTaxiBot: null
-# SpawnVehicleMotobike: null
-# SpawnVehicleATV: null
-# SpawnVehicleSecway: null
-# SpawnVehicleJanicart: null
-# VehicleJanicart: null
-# VehicleJanicartDestroyed: null
-# SS220 Readd-Vehicles end
-
+SpawnVehicleWheelchair: null
+SpawnVehicleWheelchairFolded: null
+VehicleWheelchair: null
+VehicleWheelchairFolded: null
+VehicleSecwayStealObjective: null
+VehicleKeyJanicart: null
+VehicleKeySecway: null
+VehicleKeyATV: null
+VehicleKeySkeleton: null
+VehicleKeySyndicateSegway: null
+VehicleKeySkeletonMotorcycle: null
+VehicleSecway: null
+VehicleATV: null
+VehicleSyndicateSegway: null
+VehicleSkeletonMotorcycle: null
+VehicleUnicycle: null
+VehicleUnicycleFolded: null
+ActionVehicleHorn: null
+CrateFunATV: null
+CrateFunSyndicateSegway: null
+MobTaxiBot: null
 # MobSupplyBot: null
+SpawnVehicleMotobike: null
+SpawnVehicleATV: null
+SpawnVehicleSecway: null
+SpawnVehicleJanicart: null
+VehicleJanicart: null
+VehicleJanicartDestroyed: null
 
 # 2024-02-01
 YellowOxygenTank: OxygenTank
@@ -336,6 +329,7 @@ BodyBag_Container: BodyBag
 BodyBag_Folded: BodyBagFolded
 
 # 2024-04-26
+# SS220 Bring rubber back begin
 # BaseBulletRubber: null
 # BulletPistolRubber: BulletPistol
 # BulletMagnumRubber: BulletMagnum
@@ -374,8 +368,8 @@ BodyBag_Folded: BodyBagFolded
 # BoxMagazineCaselessRifleRubber: BoxMagazinePistolCaselessRifle
 # BoxMagazineMagnumSubMachineGunRubber: BoxMagazineMagnumSubMachineGun
 # WeaponPistolMk58Nonlethal: WeaponPistolMk58
+# SS220 Bring rubber back end
 WeaponPistolN1984Nonlethal: WeaponPistolN1984
-WeaponSubMachineGunVectorRubber: WeaponSubMachineGunVector
 WeaponSubMachineGunDrozdRubber: WeaponSubMachineGunDrozd
 WeaponRifleLecterRubber: WeaponRifleLecter
 
@@ -561,3 +555,270 @@ CrateCrewMonitoringBoards: CrateCrewMonitoring
 
 # 2024-11-25
 CrateSlimepersonLifeSupport: CrateNitrogenInternals
+
+# 2024-12-01
+DungeonMasterCircuitBoard: GameMasterCircuitBoard
+
+# 2024-12-12
+FloraRockSolid01: FloraRockSolid
+FloraRockSolid02: FloraRockSolid
+FloraRockSolid03: FloraRockSolid
+FloraStalagmite1: FloraStalagmite
+FloraStalagmite2: FloraStalagmite
+FloraStalagmite3: FloraStalagmite
+FloraStalagmite4: FloraStalagmite
+FloraStalagmite5: FloraStalagmite
+FloraStalagmite6: FloraStalagmite
+FloraGreyStalagmite1: FloraGreyStalagmite
+FloraGreyStalagmite2: FloraGreyStalagmite
+FloraGreyStalagmite3: FloraGreyStalagmite
+FloraGreyStalagmite4: FloraGreyStalagmite
+FloraGreyStalagmite5: FloraGreyStalagmite
+FloraGreyStalagmite6: FloraGreyStalagmite
+FloraTree01: FloraTree
+FloraTree02: FloraTree
+FloraTree03: FloraTree
+FloraTree04: FloraTree
+FloraTree05: FloraTree
+FloraTree06: FloraTree
+FloraTreeSnow01: FloraTreeSnow
+FloraTreeSnow02: FloraTreeSnow
+FloraTreeSnow03: FloraTreeSnow
+FloraTreeSnow04: FloraTreeSnow
+FloraTreeSnow05: FloraTreeSnow
+FloraTreeSnow06: FloraTreeSnow
+FloraTreeLarge01: FloraTreeLarge
+FloraTreeLarge02: FloraTreeLarge
+FloraTreeLarge03: FloraTreeLarge
+FloraTreeLarge04: FloraTreeLarge
+FloraTreeLarge05: FloraTreeLarge
+FloraTreeLarge06: FloraTreeLarge
+FloraTreeConifer01: FloraTreeConifer
+FloraTreeConifer02: FloraTreeConifer
+FloraTreeConifer03: FloraTreeConifer
+ShadowTree01: ShadowTree
+ShadowTree02: ShadowTree
+ShadowTree03: ShadowTree
+ShadowTree04: ShadowTree
+ShadowTree05: ShadowTree
+ShadowTree06: ShadowTree
+LightTree01: LightTree
+LightTree02: LightTree
+LightTree03: LightTree
+LightTree04: LightTree
+LightTree05: LightTree
+LightTree06: LightTree
+
+# 2024-12-28
+DrinkIrishCarBomb: DrinkIrishSlammer
+
+# 2025-01-06
+BorgModuleRadiationDetection: null
+BorgModuleGPS: null
+BorgModuleLightReplacer: BorgModuleCustodial
+BorgModuleAdvancedTreatment: null
+ClothingMaskSexyClown: ClothingMaskBlushingClown
+ClothingMaskSexyMime: ClothingMaskBlushingMime
+
+#2025-01-20 - SS220 Space Law Raplace
+BookSpaceLaw: BookSpaceLaws
+
+# 2025-01-27
+FoodCondimentPacketFrostoil: FoodCondimentPacketColdsauce
+
+# 2025-02-05
+WeaponSubMachineGunVector: null
+WeaponSubMachineGunVectorRubber: null
+
+#2025-02-11 - SS220 Christmas present, before season festival requiring not implemented into presents
+PresentBase: null
+PresentRandom: null
+PresentRandomUnsafe: null
+PresentRandomInsange: null
+PresentRandomCash: null
+PresentRandomCoal: null
+
+# 2025-02-11
+WallShuttleInterior: WallShuttle
+
+# 2025-02-18
+PosterContrabandLustyExomorph: PosterContrabandRealExomorph
+PosterContrabandBustyBackdoorExoBabes6: PosterContrabandRouny
+
+# 2025-02-20
+MagazineBoxAntiMaterielBig: null
+MagazineBoxCaselessRifle10x24: null
+MagazineBoxCaselessRifleBig: null
+MagazinePistolHighCapacityRubber: null
+
+# 2025-03-18
+EpinephrineChemistryBottle: ChemistryBottleEpinephrine
+RobustHarvestChemistryBottle: ChemistryBottleRobustHarvest
+EZNutrientChemistryBottle: ChemistryBottleEZNutrient
+Left4ZedChemistryBottle: ChemistryBottleLeft4Zed
+UnstableMutagenChemistryBottle: ChemistryBottleUnstableMutagen
+PotassiumChemistryBottle: ChemistryBottlePotassium
+NocturineChemistryBottle: ChemistryBottleNocturine
+NitrogenChemistryBottle: ChemistryBottleNitrogen
+EphedrineChemistryBottle: ChemistryBottleEphedrine
+PhosphorusChemistryBottle: ChemistryBottlePhosphorus
+OmnizineChemistryBottle: ChemistryBottleOmnizine
+HydrogenChemistryBottle: ChemistryBottleHydrogen
+CognizineChemistryBottle: ChemistryBottleCognizine
+EthanolChemistryBottle: ChemistryBottleEthanol
+PaxChemistryBottle: ChemistryBottlePax
+MuteToxinChemistryBottle: ChemistryBottleMuteToxin
+LeadChemistryBottle: ChemistryBottleLead
+ToxinChemistryBottle: ChemistryBottleToxin
+
+# 2025-03-29
+ClothingBackpackDuffelSyndicateRaidBundle: ClothingBackpackSyndicateRaidBundle
+
+# 2025-04-14
+MailRobustToolsSpam: MailSpamLetter
+MailNanotrasenSpam: MailSpamLetter
+MailSyndicateSpam: MailSpamLetter
+MailAlternativeDimensionSpam: MailSpamLetter
+MailNarsieCultSpam: MailSpamLetter
+MailRageCageSpam: MailSpamLetter
+MailVoyageAdvertisementSpam: MailSpamLetter
+MailScienceSpiderClanSpam: MailSpamLetter
+MailAllAccessSpam: MailSpamLetter
+MailCentcommRetributionSpam: MailSpamLetter
+MailEvilLizardSpam: MailSpamLetter
+MailParentsNeedMoneySpam: MailSpamLetter
+
+# 2025-04-15
+SimpleXenoArtifact: ComplexXenoArtifact
+MediumXenoArtifact: ComplexXenoArtifact
+SimpleXenoArtifactItem: ComplexXenoArtifactItem
+MediumXenoArtifactItem: ComplexXenoArtifactItem
+VariedXenoArtifactItem: ComplexXenoArtifactItem
+
+# 2025-04-24
+DrinkEggnog: DrinkEggnogGlass #SS220 Eggnog
+#SS220 delete duplicates corvax drinks begin
+DrinkDaiquiriGlass: DrinkDaiquiri
+DrinkEspressoMartiniGlass: DrinkEspressoMartini
+DrinkMoscowMuleGlass: DrinkMoscowMule
+#SS220 delete duplicates corvax drinks end
+WristwatchGold: ClothingWristWatchGold # SS220 wristwatch
+SupermatterGrenade: SingularityGrenade # SS220 fix
+
+# 2025-04-19
+ClothingOuterHardsuitSyndicate: ClothingOuterEVASuitSyndicate
+AirlockMaintCommonLocked: AirlockMaintLocked
+AirlockMaintIntLocked: AirlockMaintLocked
+
+# 2025-04-26
+ComputerCargoShuttle: ComputerShuttleCargo
+CargoShuttleComputerCircuitboard: CargoShuttleConsoleCircuitboard
+
+# 2025-05-13 SS220 mapped old borg modules
+BorgModuleDefibrillator : BorgModuleRescue
+# 2025-05-02
+CigPackMixedNasty: CigPackMixed
+CigPackMixedMedical: CigPackMixed
+CigaretteIpecac: CigaretteNutriment
+CigarettePax: CigaretteSaline
+CigaretteTHC: CigaretteRobustHarvest
+CigaretteMuteToxin: CigaretteSodiumPolyacrylate
+CigaretteSpaceDrugs: CigaretteLipolicide
+CigaretteMilk: CigaretteHaloperidol
+CigaretteBread: CigaretteBbqSauce
+
+# 2025-05-09
+ClothingOuterHardsuitBasic: ClothingOuterHardsuitEVA
+ClothingHeadHelmetHardsuitBasic: null
+SuitStorageBasic: SuitStorageEVA
+
+# 2025-05-18
+ClothingNeckCloakMiner: ClothingNeckCloakSalvagerSupreme # SS220-migrate-cloak
+
+# 2025-05-22
+MatterBinStockPart: MicroManipulatorStockPart
+CapacitorStockPart: MicroManipulatorStockPart
+
+# 2025-05-26 Turrets
+WeaponEnergyTurretStation: WeaponEnergyTurretSecurity
+WeaponEnergyTurretStationControlPanel: WeaponEnergyTurretSecurityControlPanel
+WeaponEnergyTurretStationMachineCircuitboard: WeaponEnergyTurretSecurityMachineCircuitboard
+
+# 2025-05-30
+SpawnHonkBot: SpawnMobHonkBot
+
+# 2025-07-04 - SS220 remove vehicles
+VehicleParamedicATV: null
+VehicleKeyParamedicATV: null
+CrateParamedicATV: null
+SpawnVehicleParamedicATV: null
+SpawnVehicleSyndicateSegway: null
+# 2025-06-01
+CrateFoodPizzaLarge: CrateFoodPizza
+CrateFoodSoftdrinksLarge: CrateFoodSoftdrinks
+
+# 2025-06-06
+MagazineLightRifleMaxim: null
+MagazineLightRiflePkBox: null
+MagazineCaselessRifle10x24: null
+BaseMagazineCaselessRifleShort: null
+MagazineCaselessRifleShort: null
+MagazineCaselessRifleShortPractice: null
+# BaseMagazineMagnumSubMachineGun: null # SS220-we-still-use-it
+MagazineMagnumSubMachineGunEmpty: null
+# MagazineMagnumSubMachineGun: null # SS220-we-still-use-it
+MagazineMagnumSubMachineGunPractice: null
+MagazineMagnumSubMachineGunUranium: null
+MagazineMagnumSubMachineGunPiercing: null
+BoxMagazineMagnumSubMachineGun: null
+BoxMagazineMagnumSubMachineGunPractice: null
+
+# 2025-06-09
+BarSignAlignTile: BarSign
+BarSignComboCafeAlignTile: BarSignComboCafe
+BarSignEmergencyRumPartyAlignTile: BarSignEmergencyRumParty
+BarSignLV426AlignTile: BarSignLV426
+BarSignMaidCafeAlignTile: BarSignMaidCafe
+BarSignMalteseFalconAlignTile: BarSignMalteseFalcon
+BarSignOfficerBeerskyAlignTile: BarSignOfficerBeersky
+BarSignRobustaCafeAlignTile: BarSignRobustaCafe
+BarSignTheAleNathAlignTile: BarSignTheAleNath
+BarSignTheBirdCageAlignTile: BarSignTheBirdCage
+BarSignTheCoderbusAlignTile: BarSignTheCoderbus
+BarSignTheDrunkCarpAlignTile: BarSignTheDrunkCarp
+BarSignEngineChangeAlignTile: BarSignEngineChange
+BarSignTheHarmbatonAlignTile: BarSignTheHarmbaton
+BarSignTheLightbulbAlignTile: BarSignTheLightbulb
+BarSignTheLooseGooseAlignTile: BarSignTheLooseGoose
+BarSignTheNetAlignTile: BarSignTheNet
+BarSignTheOuterSpessAlignTile: BarSignTheOuterSpess
+BarSignTheSinguloAlignTile: BarSignTheSingulo
+BarSignTheSunAlignTile: BarSignTheSun
+BarSignWiggleRoomAlignTile: BarSignWiggleRoom
+BarSignZocaloAlignTile: BarSignZocalo
+BarSignEmprahAlignTile: BarSignEmprah
+BarSignSpacebucksAlignTile: BarSignSpacebucks
+BarSignMaltroachAlignTile: BarSignMaltroach
+BarSignWhiskeyEchoesAlignTile: BarSignWhiskeyEchoes
+
+# 2025-06-21
+ClothingNeckHeadphones: ClothingMultipleHeadphones
+
+# 2025-07-28 - SS220 forcefield refactor
+forcefieldGenerator220: ForcefieldGeneratorParabola
+
+# 14-08-2025 - SS220 move to off smart fridge
+StorageSmartFridge: SmartFridge
+# 2025-08-01
+FoodDonutJellySlugcat: FoodDonutJellyScurret
+
+# 17-08-2025 - SS220 remove of lingering stacks
+CableMVStackLingering10: null
+FloorTileItemSteelLingering0: null
+PartRodMetalLingering0: null
+SheetGlassLingering0: null
+SheetSteelLingering0: null
+
+# 19-09-2025 - SS220 Fix cyrillic "C"
+BoxFolderСaptain: BoxFolderCaptain
+DrinkBerryСompote: DrinkBerryCompote

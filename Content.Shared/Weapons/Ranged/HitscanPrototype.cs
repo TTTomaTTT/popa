@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Content.Shared.Physics;
+using Content.Shared.SS220.Shuttles.UI;
 using Content.Shared.Weapons.Reflect;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -7,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Weapons.Ranged;
 
-[Prototype("hitscan")]
+[Prototype]
 public sealed partial class HitscanPrototype : IPrototype, IShootable
 {
     [ViewVariables]
@@ -59,6 +60,11 @@ public sealed partial class HitscanPrototype : IPrototype, IShootable
     [DataField]
     public HitscanSpread? HitscanSpread;
     //SS220 Add hitscan spread end
+
+    // SS220 Add hitscan on shuttle nav begin
+    [DataField("shuttleNavInfo")]
+    public ShuttleNavHitscanInfo ShuttleNavHitscanInfo = new();
+    // SS220 Add hitscan on shuttle nav end
 }
 
 //SS220 Add hitscan spread begin

@@ -13,6 +13,7 @@
   icon: "JobIconClown"
   supervisors: job-supervisors-hop
   access:
+  - Service # ss220 fix
   - Theatre
   - Maintenance
   special:
@@ -26,11 +27,19 @@
           Piercing: 4
         groups:
           Burn: 3
+      catchingFailDamage:
+        types:
+          Blunt: 1
     - type: SleepEmitSound
       snore: /Audio/Voice/Misc/silly_snore.ogg
       interval: 10
   - !type:AddImplantSpecial
     implants: [ SadTromboneImplant ]
+  # SS220-Add-Languages begin
+  - !type:AddLanguageSpecial
+    languages:
+    - Clownish
+  # SS220-Add-Languages end
 
 - type: startingGear
   id: ClownGear
@@ -44,3 +53,13 @@
     back:
     - RubberStampClown
     - CrayonRainbow
+
+- type: chameleonOutfit
+  id: ClownChameleonOutfit
+  job: Clown
+  equipment:
+    head: ClothingHeadHatXmasCrown
+    eyes: ClothingEyesGlassesCheapSunglasses
+    neck: ClothingHeadHatFlowerWreath
+    outerClothing: ClothingOuterClownPriest
+    gloves: ClothingHandsGlovesColorYellowBudget

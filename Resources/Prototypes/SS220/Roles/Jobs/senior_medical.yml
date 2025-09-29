@@ -20,10 +20,25 @@
   - Medical
   - Maintenance
   - Chemistry
-
+  #SS220 LimitationRevive - start
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 - type: startingGear
   id: SeniorPhysicianGear
   equipment:
     id: SeniorPhysicianPDA
     ears: ClothingHeadsetMedical
     belt: ClothingBeltMedicalFilled
+
+- type: chameleonOutfit
+  id: SeniorPhysicianChameleonOutfit
+  job: SeniorPhysician
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex

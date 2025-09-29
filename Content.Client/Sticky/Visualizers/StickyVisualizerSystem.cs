@@ -22,6 +22,7 @@ public sealed class StickyVisualizerSystem : VisualizerSystem<StickyVisualizerCo
             return;
 
         ent.Comp.OriginalDrawDepth = sprite.DrawDepth;
+        ent.Comp.OriginalNoRotation = sprite.NoRotation; // SS220 rotate ent face to the user
     }
 
     protected override void OnAppearanceChange(EntityUid uid, StickyVisualizerComponent comp, ref AppearanceChangeEvent args)
@@ -33,6 +34,11 @@ public sealed class StickyVisualizerSystem : VisualizerSystem<StickyVisualizerCo
             return;
 
         var drawDepth = isStuck ? comp.StuckDrawDepth : comp.OriginalDrawDepth;
-        args.Sprite.DrawDepth = drawDepth;
+        SpriteSystem.SetDrawDepth((uid, args.Sprite), drawDepth);
+
+        // SS220 rotate ent face to the user begin
+        var noRotation = isStuck ? comp.StuckNoRotation : comp.OriginalNoRotation;
+        args.Sprite.NoRotation = noRotation;
+        // SS220 rotate ent face to the user end
     }
 }

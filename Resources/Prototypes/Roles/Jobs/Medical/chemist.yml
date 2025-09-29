@@ -14,6 +14,12 @@
   - Medical
   - Chemistry
   - Maintenance
+  #SS220 LimitationRevive - start
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ChemistGear
@@ -26,3 +32,13 @@
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: ChemistChameleonOutfit
+  job: Chemist
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLabChem
+    gloves: ClothingHandsGlovesLatex

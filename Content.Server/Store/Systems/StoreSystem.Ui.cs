@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
-using Content.Server.PDA.Ringer;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
 using Content.Shared.Actions;
@@ -9,6 +8,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
+using Content.Shared.PDA.Ringer;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
@@ -146,7 +146,7 @@ public sealed partial class StoreSystem
         //condition checking because why not
         if (listing.Conditions != null)
         {
-            var args = new ListingConditionArgs(component.AccountOwner ?? buyer, uid, listing, EntityManager);
+            var args = new ListingConditionArgs(component.AccountOwner ?? GetBuyerMind(buyer), uid, listing, EntityManager);
             var conditionsMet = listing.Conditions.All(condition => condition.Condition(args));
 
             if (!conditionsMet)
@@ -164,7 +164,7 @@ public sealed partial class StoreSystem
         }
 
         if (!IsOnStartingMap(uid, component))
-            component.RefundAllowed = false;
+            DisableRefund(uid, component);
 
         //subtract the cash
         foreach (var (currency, amount) in cost)
@@ -248,13 +248,16 @@ public sealed partial class StoreSystem
                 HandleRefundComp(uid, component, upgradeActionId.Value);
         }
 
-        if (listing.ProductEvent != null)
+        // ss220 tweak product event start
+        if (listing.ProductEvent is { } ev)
         {
-            if (!listing.RaiseProductEventOnUser)
-                RaiseLocalEvent(listing.ProductEvent);
-            else
-                RaiseLocalEvent(buyer, listing.ProductEvent);
+            ev.Listing = listing;
+            ev.Purchaser = buyer;
+            ev.StoreUid = uid;
+
+            RaiseLocalEvent(!listing.RaiseProductEventOnUser ? uid : buyer, (object) ev, broadcast: true);
         }
+        // ss220 tweak product event end
 
         if (listing.DisableRefund)
         {
@@ -271,6 +274,7 @@ public sealed partial class StoreSystem
 
         var buyFinished = new StoreBuyFinishedEvent
         {
+            User = buyer, // ss220 tweak product event start
             PurchasedItem = listing,
             StoreUid = uid
         };
@@ -332,7 +336,7 @@ public sealed partial class StoreSystem
 
         if (!IsOnStartingMap(uid, component))
         {
-            component.RefundAllowed = false;
+            DisableRefund(uid, component);
             UpdateUserInterface(buyer, uid, component);
         }
 
@@ -350,12 +354,9 @@ public sealed partial class StoreSystem
 
             component.BoughtEntities.RemoveAt(i);
 
-            if (_actions.TryGetActionData(purchase, out var actionComponent, logError: false))
-            {
-                _actionContainer.RemoveAction(purchase, actionComponent);
-            }
+            _actionContainer.RemoveAction(purchase, logMissing: false);
 
-            EntityManager.DeleteEntity(purchase);
+            Del(purchase);
         }
 
         component.BoughtEntities.Clear();
@@ -376,6 +377,7 @@ public sealed partial class StoreSystem
         component.BoughtEntities.Add(purchase);
         var refundComp = EnsureComp<StoreRefundComponent>(purchase);
         refundComp.StoreEntity = uid;
+        refundComp.BoughtTime = _timing.CurTime;
     }
 
     private bool IsOnStartingMap(EntityUid store, StoreComponent component)
@@ -403,6 +405,7 @@ public sealed partial class StoreSystem
 /// <param name="PurchasedItem">ListingItem that was purchased.</param>
 [ByRefEvent]
 public readonly record struct StoreBuyFinishedEvent(
+    EntityUid User, // ss220 tweak product event
     EntityUid StoreUid,
     ListingDataWithCostModifiers PurchasedItem
 );

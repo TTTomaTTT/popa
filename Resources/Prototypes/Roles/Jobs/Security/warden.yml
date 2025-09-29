@@ -11,6 +11,7 @@
       inverted: true
       species:
       - Felinid #SS220-jobbans end
+  weight: 5
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
@@ -43,3 +44,17 @@
     - MagazinePistolRubber
     - FlashlightSeclite
     - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End
+
+- type: chameleonOutfit
+  id: WardenChameleonOutfit
+  job: Warden
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatWarden
+    mask: ClothingMaskGasSecurity
+    outerClothing: ClothingOuterCoatWarden
+    jumpsuit: ClothingUniformJumpsuitWarden
+    neck: Dinkystar
+    belt: ClothingBeltSecurity
+    gloves: ClothingHandsGlovesCombat
+    shoes: ClothingShoesBootsJack

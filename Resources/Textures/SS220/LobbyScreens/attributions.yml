@@ -43,7 +43,12 @@
   license: "CC-BY-3.0"
   copyright: "Created by NORKA for SS220"
   source: "https://github.com/SerbiaStrong-220"
-  
+
+- files: ["SyndiLand.png"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Doner2119 for SS220"
+  source: "https://github.com/SerbiaStrong-220"
+
 - files: ["Card-showdown.png"]
   license: "CC-BY-3.0"
   copyright: "Created by Gabka for SS220"
@@ -58,3 +63,24 @@
   license: "CC-BY-3.0"
   copyright: "Created by MadSkaven for SS220"
   source: "https://github.com/SerbiaStrong-220"
+
+- files: ["YouNoYou.png"]
+  license: "CC-BY-3.0"
+  copyright: "Created by MefedronEnjoyer for SS220"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["KuoryCap.png"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: Created by "masleena#3572 on discord"
+  source: "https://t.me/kuory_tg"
+
+- files: ["camping.png"]
+  license: "CC-BY-3.0"
+  copyright: "Created by btb_mitw for SS220"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["BTB-Artl.png"]
+  license: "CC-BY-3.0"
+  copyright: "Created by btb_mitw for SS220"
+  source: "https://github.com/SerbiaStrong-220"
+

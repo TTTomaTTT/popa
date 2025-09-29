@@ -7,6 +7,7 @@
     ClothingBackpackSatchel: 3
     ClothingBackpackSatchelLeather: 2
     ClothingRandomSpawner: 8
+    ClothingUniformRandomShorts: 4
     ClothingHeadHatBeret: 4
     ClothingHeadBandBlack: 2
     ClothingHeadBandBlue: 2
@@ -58,6 +59,7 @@
     # DO NOT ADD MORE, USE UNIFORM DYING
     ClothingShoesColorBlack: 8
     ClothingShoesColorBrown: 4
+    ClothingShoesColorDarkBrown: 2 #SS220-Brown Shoed
     ClothingShoesColorWhite: 3
     ClothingShoesColorBlue: 2
     ClothingShoesColorYellow: 2
@@ -78,6 +80,8 @@
     ClothingHeadHatCorpsoft: 2
     ClothingHeadFishCap: 2
     ClothingHeadRastaHat: 2
+    #ClothingHeadHatNewYearsCap: 5 #SS220 New years cap \ Убрать после нового года
+    ClothingHeadPropellerHat: 2
     ClothingBeltStorageWaistbag: 3
     ClothingEyesGlasses: 6
     ClothingHandsGlovesColorBlack: 4
@@ -96,4 +100,15 @@
     ClothingMaskNeckGaiter: 2
     ClothingUniformJumpsuitTacticool: 1
     ClothingUniformJumpskirtTacticool: 1
+    ToyFigurinePassenger: 1
+    ToyFigurineGreytider: 1
+    ClothingBackpackSatchelSmugglerUnanchored: 1
+    ClothingHeadHatSolidHeadband: 2
+    # SS220 VASH THE STAMPEDE KIT START
+    ClothingOuterScarletTyphoon: 1
+    ClothingUniformWastelandSuit: 1
+    ClothingHandsStormgloves: 1
+    ClothingShoesWandererBoots: 1
+    # SS220 VASH THE STAMPEDE KIT END
   # DO NOT ADD MORE, USE UNIFORM DYING
+

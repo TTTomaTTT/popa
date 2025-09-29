@@ -7,15 +7,25 @@
       !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: TacSec
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: JobSecurityOfficer
+      !type:DepartmentTimeRequirement
+      department: Security
       time: 360000 # 100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: SecuritySecVaas
@@ -25,6 +35,11 @@
       !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 180000 #50hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Glasses
 - type: loadout
@@ -108,6 +123,14 @@
     proto: TacSec
   equipment:
     mask: ClothingMaskNeckGaiter
+
+- type: loadout
+  id: SecTacGasMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    mask: SecurityTacticalGasMask
 
 # Neck
 - type: loadout

@@ -33,7 +33,11 @@
 - type: lobbyBackground
   id: Sevastopol
   background: /Textures/SS220/LobbyScreens/Sevastopol.png
-  
+
+- type: lobbyBackground
+  id: SyndiLand
+  background: /Textures/SS220/LobbyScreens/SyndiLand.png
+
 - type: lobbyBackground
   id: CardShowdown
   background: /Textures/SS220/LobbyScreens/Card-showdown.png
@@ -45,3 +49,19 @@
 - type: lobbyBackground
   id: GloryToNanoTrasen
   background: /Textures/SS220/LobbyScreens/GloryToNanoTrasen.png
+
+- type: lobbyBackground
+  id: YouNoYou
+  background: /Textures/SS220/LobbyScreens/YouNoYou.png
+
+- type: lobbyBackground
+  id: KuoryCap
+  background: /Textures/SS220/LobbyScreens/KuoryCap.png
+
+- type: lobbyBackground
+  id: camping
+  background: /Textures/SS220/LobbyScreens/camping.png
+
+- type: lobbyBackground
+  id: BTB-Art
+  background: /Textures/SS220/LobbyScreens/BTB-Art.png

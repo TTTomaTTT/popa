@@ -5,11 +5,15 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
+  # ss220 add station map to loadout start
+  - HandheldStationMap
+  # ss220 add station map to loadout end
   - FlowerWreath
   - Hairflower
   - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
+  - ThreeCandles
   - Lighter
   - CigPackGreen
   - CigPackRed
@@ -18,17 +22,29 @@
   - CigarCase
   - CigarGold
   - ClothingNeckLGBTPin
+  - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
+  - ClothingNeckAroacePin
   - ClothingNeckBisexualPin
   - ClothingNeckGayPin
   - ClothingNeckIntersexPin
   - ClothingNeckLesbianPin
   - ClothingNeckNonBinaryPin
   - ClothingNeckPansexualPin
+  - ClothingNeckPluralPin
+  - ClothingNeckOmnisexualPin
+  - ClothingNeckGenderqueerPin
+  - ClothingNeckGenderfluidPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  - OffsetCane
+  - OffsetCaneWood
+  - OffsetCaneClown
+  - OffsetCaneMime
+  - OffsetCaneNT
+  - Cane
   - TowelColorBlack
   - TowelColorWhite
   # SS220 Too many towels begin
@@ -94,6 +110,7 @@
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
 
+# nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
   id: GroupEVATank
   name: loadout-group-EVA-tank
@@ -101,6 +118,14 @@
   loadouts:
   - LoadoutSpeciesEVANitrogen
   - LoadoutSpeciesEVAOxygen
+
+# vox get a nitrogen tank, other species get nothing
+- type: loadoutGroup
+  id: GroupEVATankVox
+  name: loadout-group-vox-tank
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
   id: GroupPocketTankDouble
@@ -234,6 +259,8 @@
   - PassengerJumpskirtTurtleneck
   - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
   - RainbowJumpsuit
+  - RainbowJumpskirt
+  - PassengerJumpsuitBlueYellow14 #SS-220 Yellow Jumpsuit with 220 on it
 
 - type: loadoutGroup
   id: PassengerFace
@@ -436,6 +463,17 @@
   loadouts:
   - ChaplainNeck
   - ChaplainNeckCloak #ss220-dress-cloak-tweak
+
+- type: loadoutGroup
+  id: ChaplainBible
+  name: loadout-group-chaplain-bible
+  minLimit: 1
+  loadouts:
+  - Bible
+  - BibleDruid
+  - BibleNanoTrasen
+  - BibleSatanic
+  - BibleTanakh
 
 - type: loadoutGroup
   id: JanitorHead
@@ -666,6 +704,7 @@
   loadouts:
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
+  - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -907,6 +946,7 @@
 - type: loadoutGroup
   id: StationEngineerHead
   name: loadout-group-station-engineer-head
+  minLimit: 0
   loadouts:
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
@@ -1190,6 +1230,7 @@
   - WinterHoSUnarmored #ss220 sec loadout update
   - Outer1984 #SS220-Two Floppa Iteration
   - CyberVestSecurity #SS220-Two Floppa Iteration
+  - HeadofSecurityBomber #SS220 HoSNEWBomber
 
 - type: loadoutGroup
   id: WardenHead
@@ -1253,8 +1294,8 @@
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - JumpsuitSecBlue #ss220 sec loadout update
   - JumpsuitTacSec #ss220 tacsec update
-  - SeniorOfficerJumpsuit
-  - SeniorOfficerJumpskirt
+  # - SeniorOfficerJumpsuit #SS220 delete-instructor-uniform-officer's
+  # - SeniorOfficerJumpskirt #SS220 delete-instructor-uniform-officer's
   - TrooperUniform
   - JumpsuitSecVaas #ss220 security loadout
 
@@ -1328,7 +1369,6 @@
 - type: loadoutGroup
   id: DetectiveOuterClothing
   name: loadout-group-detective-outerclothing
-  minLimit: 0
   loadouts:
   - DetectiveArmorVest
   - DetectiveCoat
@@ -1373,6 +1413,7 @@
   loadouts:
   - ChiefMedicalOfficerBeret
   - CMOMedicalHeadMirror
+  - CapCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1382,6 +1423,8 @@
   - ChiefMedicalOfficerJumpskirt
   - ChiefMedicalOfficerTurtleneckJumpsuit
   - ChiefMedicalOfficerTurtleneckJumpskirt
+  - CMOCorpJumpsuit #SS220-CMOCorporate
+  - CMOCorpJumpskirt #SS220-CMOCorporate
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
@@ -1399,6 +1442,7 @@
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
+  - ParadeCloakCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes
@@ -1406,6 +1450,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
+  - CMOCorpShoes #ss220 new cmo
 
 - type: loadoutGroup
   id: MedicalDoctorHead
@@ -1435,6 +1480,7 @@
   - MedicalDoctorJumpsuitTurtleneckAlt
   - MedicalDoctorJumpskirtTurtleneck
   - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - MedicalDoctorJumpsuitResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorOuterClothing
@@ -1459,7 +1505,9 @@
   name: loadout-group-medical-doctor-shoes
   loadouts:
   - WhiteShoes
+  - MedicalBlackShoes #ss220 add shoes for med
   - MedicalWinterBoots
+  - MedicalDoctorShoesResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorPDA
@@ -1529,6 +1577,7 @@
   minLimit: 0
   loadouts:
   - ParamedicHead
+  - ParamedInterdyneSoft #ss220-ParamedInterdyne
 
 - type: loadoutGroup
   id: ParamedicJumpsuit
@@ -1539,6 +1588,7 @@
   - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - ParamedicFeldsher #SS220-ParamedFashion
+  - ParamedInterdyneJumpsuit #ss220-ParamedInterdyne
 
 - type: loadoutGroup
   id: ParamedicOuterClothing
@@ -1554,7 +1604,20 @@
   name: loadout-group-paramedic-shoes
   loadouts:
   - BlueShoes
+  - WhiteShoes
   - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: MedicalEyewear
+  name: loadout-group-medical-glasses
+  minLimit: 0
+  loadouts:
+  - MedicalHud
+  - MedicalEyePatchHud
+  - CyberMedVisor #SS220 II floppa iteration
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
 
 - type: loadoutGroup
   id: SurvivalMedical

@@ -1,8 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
+using Content.Server.Administration.Logs;
 using Content.Shared.Chat;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.UpdateChannels;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -15,6 +20,7 @@ namespace Content.Server.SS220.Telepathy;
 /// </summary>
 public sealed class TelepathySystem : EntitySystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -22,7 +28,7 @@ public sealed class TelepathySystem : EntitySystem
     /// <summary>
     /// Key is a "fake" protoId. It wont indexed.
     /// </summary>
-    private SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
+    private readonly SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
     private readonly Color _baseDynamicChannelColor = Color.Lime;
 
     /// <inheritdoc/>
@@ -31,27 +37,47 @@ public sealed class TelepathySystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStart);
 
+        SubscribeLocalEvent<TelepathyComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<TelepathyComponent, ComponentRemove>(OnComponentRemove);
+
         SubscribeLocalEvent<TelepathyComponent, TelepathySendEvent>(OnTelepathySend);
-        SubscribeLocalEvent<TelepathyComponent, TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
+        SubscribeLocalEvent<TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
     }
 
     private void OnRoundStart(RoundStartedEvent args)
     {
-        foreach (var channel in _dynamicChannels)
+        foreach (var channel in _dynamicChannels.Keys.ToList())
         {
-            FreeUniqueTelepathyChannel(channel.Key);
+            FreeUniqueTelepathyChannel(channel);
         }
     }
 
-    private void OnTelepathyAnnouncementSend(Entity<TelepathyComponent> ent, ref TelepathyAnnouncementSendEvent args)
+    private void OnComponentInit(Entity<TelepathyComponent> ent, ref ComponentInit args)
+    {
+        if (TryComp<ActorComponent>(ent.Owner, out var actor))
+            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
+    }
+
+    private void OnComponentRemove(Entity<TelepathyComponent> ent, ref ComponentRemove args)
+    {
+        if (TryComp<ActorComponent>(ent.Owner, out var actor))
+            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
+    }
+
+    private void OnTelepathyAnnouncementSend(TelepathyAnnouncementSendEvent args)
     {
         SendMessageToEveryoneWithRightChannel(args.TelepathyChannel, args.Message, null);
     }
 
     private void OnTelepathySend(Entity<TelepathyComponent> ent, ref TelepathySendEvent args)
     {
-        if (ent.Comp.TelepathyChannelPrototype is { } telepathyChannel)
-            SendMessageToEveryoneWithRightChannel(telepathyChannel, args.Message, ent);
+        if (ent.Comp.TelepathyChannelPrototype is not { } telepathyChannel)
+            return;
+
+        if (!CanSendTelepathy(ent))
+            return;
+
+        SendMessageToEveryoneWithRightChannel(telepathyChannel, args.Message, ent);
     }
 
     /// <summary>
@@ -68,7 +94,7 @@ public sealed class TelepathySystem : EntitySystem
     /// </summary>
     public void FreeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> protoId, bool delete = true)
     {
-        if (_dynamicChannels.TryGetValue(protoId, out var _))
+        if (!_dynamicChannels.TryGetValue(protoId, out _)) // SS220 removing-telepathy-from-a-slave fix
         {
             Log.Error($"Tried to free unregistered channel, passed id was {protoId}");
             return;
@@ -106,21 +132,39 @@ public sealed class TelepathySystem : EntitySystem
     private void SendMessageToEveryoneWithRightChannel(ProtoId<TelepathyChannelPrototype> rightTelepathyChannel, string message, EntityUid? senderUid)
     {
         ChannelParameters? channelParameters = null;
+
         if (_dynamicChannels.TryGetValue(rightTelepathyChannel, out var dynamicParameters))
             channelParameters = dynamicParameters;
+
         if (_prototype.TryIndex(rightTelepathyChannel, out var prototype))
             channelParameters = prototype.ChannelParameters;
+
         if (channelParameters == null)
         {
             Log.Error($"Tried to send message with incorrect {nameof(TelepathyChannelPrototype)} proto id. id was: {rightTelepathyChannel}");
             return;
         }
 
+        List<EntityUid> telephatyTtsRecievers = [];
+
         var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
         {
             if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
+            {
                 SendMessageToChat(receiverUid, message, senderUid, channelParameters);
+                telephatyTtsRecievers.Add(receiverUid);
+            }
+        }
+
+        if (senderUid != null)
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Telepathy message were send from {ToPrettyString(senderUid):user}: {message}, telepathy channel: {rightTelepathyChannel.Id}");
+        else
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Announce telepathy message: {message}, were send in telepathy channel: {rightTelepathyChannel.Id}");
+
+        if (senderUid != null && HasComp<TTSComponent>(senderUid))
+        {
+            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers], prototype));
         }
     }
 
@@ -136,8 +180,10 @@ public sealed class TelepathySystem : EntitySystem
             netSource,
             null
         );
-        if (TryComp(receiverUid, out ActorComponent? actor))
-            _netMan.ServerSendMessage(new MsgChatMessage() { Message = message }, actor.PlayerSession.Channel);
+        if (!TryComp(receiverUid, out ActorComponent? actor))
+            return;
+
+        _netMan.ServerSendMessage(new MsgChatMessage() { Message = message }, actor.PlayerSession.Channel);
     }
 
     private string GetWrappedTelepathyMessage(string messageString, EntityUid? senderUid, ChannelParameters telepathyChannelParameters)
@@ -146,7 +192,9 @@ public sealed class TelepathySystem : EntitySystem
         {
             return Loc.GetString(
                 "chat-manager-send-telepathy-announce",
-                ("announce", FormattedMessage.EscapeText(messageString))
+                ("announce", FormattedMessage.EscapeText(messageString)),
+                 ("channel", $"\\[{Loc.GetString(telepathyChannelParameters.Name)}\\]"),
+                ("color", telepathyChannelParameters.Color)
             );
         }
 
@@ -165,5 +213,12 @@ public sealed class TelepathySystem : EntitySystem
         RaiseLocalEvent(senderUid.Value, nameEv);
         var name = Name(nameEv.Sender);
         return name;
+    }
+
+    private bool CanSendTelepathy(EntityUid sender)
+    {
+        var args = new TelepathySendAttemptEvent(sender, false);
+        RaiseLocalEvent(sender, ref args);
+        return !args.Cancelled;
     }
 }

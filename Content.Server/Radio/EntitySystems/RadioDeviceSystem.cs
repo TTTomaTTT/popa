@@ -2,21 +2,19 @@ using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Popups;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Radio.Components;
-using Content.Server.Speech;
-using Content.Server.Speech.Components;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Radio;
 using Content.Shared.SS220.Radio;
+using Content.Shared.Speech;
+using Content.Shared.Speech.Components;
 using Content.Shared.Chat;
 using Content.Shared.Radio.Components;
 using Content.Shared.SS220.Radio.Components;
 using Robust.Shared.Prototypes;
-using Content.Shared.Chat;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 
@@ -204,8 +202,21 @@ public sealed class RadioDeviceSystem : EntitySystem
             return; // no feedback loops please.
 
         var channel = _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel)!;
-        if (_recentlySent.Add((args.Message, args.Source, channel)))
-            _radio.SendRadioMessage(args.Source, args.Message, channel, uid);
+
+        // SS220 languages begin
+        string message;
+        if (args.LanguageMessage is { } languageMessage)
+            message = languageMessage.GetMessageWithLanguageKeys();
+        else
+            message = args.Message;
+        // SS220 languages end
+
+        if (_recentlySent.Add((message, args.Source, channel)))
+            _radio.SendRadioMessage(args.Source, message, channel, uid);
+
+        //if (_recentlySent.Add((args.Message, args.Source, channel)))
+        //    _radio.SendRadioMessage(args.Source, message, channel, uid);
+        // SS220 languages end
     }
 
     private void OnAttemptListen(EntityUid uid, RadioMicrophoneComponent component, ListenAttemptEvent args)
@@ -229,8 +240,17 @@ public sealed class RadioDeviceSystem : EntitySystem
             ("speaker", Name(uid)),
             ("originalName", nameEv.VoiceName));
 
+        // SS220 languages begin
+        string message;
+        if (args.LanguageMessage is { } languageMessage)
+            message = languageMessage.GetMessageWithLanguageKeys();
+        else
+            message = args.Message;
+
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+        //_chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+        _chat.TrySendInGameICMessage(uid, message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+        // SS220 languages end
     }
 
     private void OnIntercomEncryptionChannelsChanged(Entity<IntercomComponent> ent, ref EncryptionChannelsChangedEvent args)

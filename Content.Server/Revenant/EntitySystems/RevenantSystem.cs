@@ -23,6 +23,9 @@ using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Server.Projectiles;
+using Content.Shared.Projectiles;
+using Content.Shared.Mindshield.Components;
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -45,9 +48,10 @@ public sealed partial class RevenantSystem : EntitySystem
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
+    [Dependency] private readonly ProjectileSystem _projectile = default!; // SS220 fix
+    [Dependency] private readonly TurfSystem _turf = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string RevenantShopId = "ActionRevenantShop";
+    private static readonly EntProtoId RevenantShopId = "ActionRevenantShop";
 
     public override void Initialize()
     {
@@ -63,7 +67,14 @@ public sealed partial class RevenantSystem : EntitySystem
         SubscribeLocalEvent<RevenantComponent, StatusEffectEndedEvent>(OnStatusEnded);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
 
+        SubscribeLocalEvent<RevenantComponent, GetVisMaskEvent>(OnRevenantGetVis);
+
         InitializeAbilities();
+    }
+
+    private void OnRevenantGetVis(Entity<RevenantComponent> ent, ref GetVisMaskEvent args)
+    {
+        args.VisibilityMask |= (int)VisibilityFlags.Ghost;
     }
 
     private void OnStartup(EntityUid uid, RevenantComponent component, ComponentStartup args)
@@ -84,10 +95,7 @@ public sealed partial class RevenantSystem : EntitySystem
         }
 
         //ghost vision
-        if (TryComp(uid, out EyeComponent? eye))
-        {
-            _eye.SetVisibilityMask(uid, eye.VisibilityMask | (int) (VisibilityFlags.Ghost), eye);
-        }
+        _eye.RefreshVisibilityMask(uid);
     }
 
     private void OnMapInit(EntityUid uid, RevenantComponent component, MapInitEvent args)
@@ -123,6 +131,12 @@ public sealed partial class RevenantSystem : EntitySystem
 
         var essenceDamage = args.DamageDelta.GetTotal().Float() * component.DamageToEssenceCoefficient * -1;
         ChangeEssenceAmount(uid, essenceDamage, component);
+        // SS220 revenant-stuns-damage-dealer-begin
+        if (component.StunTime is null || args.Origin is null || HasComp<MindShieldComponent>(args.Origin))
+            return;
+
+        _stun.TryUpdateParalyzeDuration(args.Origin.Value, component.StunTime.Value);
+        // SS220 revenant-stuns-damage-dealer-end
     }
 
     public bool ChangeEssenceAmount(EntityUid uid, FixedPoint2 amount, RevenantComponent? component = null, bool allowDeath = true, bool regenCap = false)
@@ -160,7 +174,7 @@ public sealed partial class RevenantSystem : EntitySystem
             return false;
         }
 
-        var tileref = Transform(uid).Coordinates.GetTileRef();
+        var tileref = _turf.GetTileRef(Transform(uid).Coordinates);
         if (tileref != null)
         {
             if(_physics.GetEntitiesIntersectingBody(uid, (int) CollisionGroup.Impassable).Count > 0)
@@ -173,7 +187,7 @@ public sealed partial class RevenantSystem : EntitySystem
         ChangeEssenceAmount(uid, -abilityCost, component, false);
 
         _statusEffects.TryAddStatusEffect<CorporealComponent>(uid, "Corporeal", TimeSpan.FromSeconds(debuffs.Y), false);
-        _stun.TryStun(uid, TimeSpan.FromSeconds(debuffs.X), false);
+        _stun.TryAddStunDuration(uid, TimeSpan.FromSeconds(debuffs.X));
 
         return true;
     }
@@ -199,6 +213,11 @@ public sealed partial class RevenantSystem : EntitySystem
             {
                 _visibility.AddLayer((uid, vis), (int) VisibilityFlags.Ghost, false);
                 _visibility.RemoveLayer((uid, vis), (int) VisibilityFlags.Normal, false);
+
+                // SS220 fix begin
+                if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
+                    _projectile.DetachAllEmbedded((uid, embeddedContainer));
+                // SS220 fix end
             }
             _visibility.RefreshVisibility(uid, vis);
         }

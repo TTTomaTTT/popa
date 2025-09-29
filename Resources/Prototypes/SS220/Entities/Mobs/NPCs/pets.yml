@@ -4,6 +4,22 @@
   id: MobSecDogRoxi
   description: Не стоит шутить с ней - в списке её наград есть медаль за отвагу.
   components:
+  - type: Language
+    availableLanguages:
+    - id: Doggish
+      canSpeak: True
+    - id: Galactic
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   - type: GhostRole
     makeSentient: true
     allowSpeech: true

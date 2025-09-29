@@ -17,6 +17,7 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nuke;
 using Content.Shared.NukeOps;
+using Content.Shared.Roles.Components;
 using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
@@ -25,9 +26,13 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.StationEvents.Components;
 using System.Linq;
+using Content.Server.AlertLevel;
+using Content.Shared.Station.Components;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
-using Content.Server.Maps;
+using Content.Server.Station.Systems;
+using Content.Shared.Fax.Components;
+using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -41,12 +46,12 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly AlertLevelSystem _alertLevel = default!; //ss220 nukeops autogamma
+    [Dependency] private readonly StationSystem _station = default!; //ss220 nukeops autogamma
+    [Dependency] private readonly GameTicker _gameTicker = default!; //ss220 nukeops autogamma
 
-    [ValidatePrototypeId<CurrencyPrototype>]
-    private const string TelecrystalCurrencyPrototype = "Telecrystal";
-
-    [ValidatePrototypeId<TagPrototype>]
-    private const string NukeOpsUplinkTagPrototype = "NukeOpsUplink";
+    private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
+    private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
 
     [ValidatePrototypeId<TagPrototype>]
     private const string LoneOpsUplinkTagPrototype = "LoneOpsUplink"; //SS220 Lone-Ops-War
@@ -68,6 +73,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         SubscribeLocalEvent<ConsoleFTLAttemptEvent>(OnShuttleFTLAttempt);
         SubscribeLocalEvent<WarDeclaredEvent>(OnWarDeclared);
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
+        SubscribeLocalEvent<FaxSendAttemptEvent>(OnFaxSendAttemptEvent); //ss220 autogamma update
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
@@ -111,7 +117,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
         args.AddLine(Loc.GetString("nukeops-list-start"));
 
-        var antags =_antag.GetAntagIdentifiers(uid);
+        var antags = _antag.GetAntagIdentifiers(uid);
 
         foreach (var (_, sessionData, name) in antags)
         {
@@ -129,7 +135,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 if (ev.OwningStation == GetOutpost(uid))
                 {
                     nukeops.WinConditions.Add(WinCondition.NukeExplodedOnNukieOutpost);
-                    SetWinType((uid, nukeops), WinType.CrewMajor);
+                    SetWinType((uid, nukeops), WinType.CrewMajor, GameTicker.IsGameRuleActive("Nukeops")); // End the round ONLY if the actual gamemode is NukeOps.
+                    if (!GameTicker.IsGameRuleActive("Nukeops")) // End the rule if the LoneOp shuttle got nuked, because that particular LoneOp clearly failed, and should not be considered a Syndie victory even if a future LoneOp wins.
+                        GameTicker.EndGameRule(uid);
                     continue;
                 }
 
@@ -159,7 +167,27 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 nukeops.WinConditions.Add(WinCondition.NukeExplodedOnIncorrectLocation);
             }
 
-            _roundEndSystem.EndRound();
+            if (GameTicker.IsGameRuleActive("Nukeops")) // If it's Nukeops then end the round on any detonation
+            {
+                _roundEndSystem.EndRound();
+            }
+            else
+            { // It's a LoneOp. Only end the round if the station was destroyed
+                var handled = false;
+                foreach (var cond in nukeops.WinConditions)
+                {
+                    if (cond.ToString().ToLower() == "NukeExplodedOnCorrectStation") // If this is true, then the nuke destroyed the station! It's likely everyone is very dead so keeping the round going is pointless.
+                    {
+                        _roundEndSystem.EndRound(); // end the round!
+                        handled = true;
+                        break;
+                    }
+                }
+                if (!handled) // The round didn't end, so end the rule so it doesn't get overridden by future LoneOps.
+                {
+                    GameTicker.EndGameRule(uid);
+                }
+            }
         }
     }
 
@@ -284,6 +312,38 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         }
     }
 
+    //ss220 autogamma update
+    private void OnFaxSendAttemptEvent(FaxSendAttemptEvent ev)
+    {
+        var faxQuery = EntityQueryEnumerator<FaxMachineComponent, DeviceNetworkComponent>();
+        while (faxQuery.MoveNext(out var uid, out _, out var deviceNetwork))
+        {
+            //we still want to to communicate by fax within the map
+            if (ev.DestinationFaxAddress == deviceNetwork.Address &&
+             Transform(uid).MapUid == Transform(ev.FaxEnt).MapUid)
+                return;
+        }
+
+        var nukeQuery = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>();
+        while (nukeQuery.MoveNext(out _, out _, out var nukeops))
+        {
+            if (nukeops is { WarDeclaredTime: not null })
+            {
+                var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
+                if (warTime < nukeops.WarFaxDisabled)
+                {
+
+                    var nukeShuttle = Transform(ev.FaxEnt).GridUid;
+                    if (!HasComp<NukeOpsShuttleComponent>(nukeShuttle)) // spam to captain from nukeops shuttle muhaha
+                        ev.Cancel();
+
+                    return;
+                }
+            }
+        }
+    }
+    //ss220 autogamma update
+
     private void OnShuttleFTLAttempt(ref ConsoleFTLAttemptEvent ev)
     {
         var query = QueryActiveRules();
@@ -319,7 +379,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             {
                 // Nukies must wait some time after declaration of war to get on the station
                 var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
-                if (warTime < nukeops.WarNukieArriveDelay)
+                if (warTime < nukeops.WarEvacShuttleDisabled)
                 {
                     ev.Cancelled = true;
                     ev.Reason = Loc.GetString("war-ops-shuttle-call-unavailable");
@@ -350,6 +410,19 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 ev.DeclaratorEntity.Comp.ShuttleDisabledTime = timeRemain;
 
                 DistributeExtraTc((uid, nukeops));
+
+                //ss220 nukeops autogamma
+                foreach (var station in _station.GetStations())
+                {
+                    _alertLevel.SetLevel(station, "gamma", true, true, true);
+                }
+                var shedulerQuery = EntityQueryEnumerator<GameRuleComponent, BasicStationEventSchedulerComponent>();
+                while (shedulerQuery.MoveNext(out var ent, out var gameRuleComp, out _))
+                {
+                    _gameTicker.EndGameRule(ent, gameRuleComp); // shutdown all inappropriate events during the war
+                    //I don't know how to do it any other way, maybe I'm just dumb ^_^
+                }
+                //ss220 nukeops autogamma
             }
         }
     }
@@ -385,7 +458,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             if (!(_tag.HasTag(uid, NukeOpsUplinkTagPrototype) || _tag.HasTag(uid, LoneOpsUplinkTagPrototype)))
                 continue;
 
-            EntityUid? outpost = null;
+            EntityUid? outpost;
             if ((outpost = GetOutpost(nukieRule.Owner)) is null)
                 if ((outpost = GetShuttle(nukieRule.Owner)) is null)
                     continue;
@@ -421,9 +494,8 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     {
         var nukeops = ent.Comp;
 
-        if (nukeops.RoundEndBehavior == RoundEndBehavior.Nothing || nukeops.WinType == WinType.CrewMajor || nukeops.WinType == WinType.OpsMajor)
+        if (nukeops.WinType == WinType.CrewMajor || nukeops.WinType == WinType.OpsMajor) // Skip this if the round's victor has already been decided.
             return;
-
 
         // If there are any nuclear bombs that are active, immediately return. We're not over yet.
         foreach (var nuke in EntityQuery<NukeComponent>())
@@ -472,11 +544,16 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             : WinCondition.AllNukiesDead);
 
         SetWinType(ent, WinType.CrewMajor, false);
+
+        if (nukeops.RoundEndBehavior == RoundEndBehavior.Nothing) // It's still worth checking if operatives have all died, even if the round-end behaviour is nothing.
+            return; // Shouldn't actually try to end the round in the case of nothing though.
+
         _roundEndSystem.DoRoundEndBehavior(nukeops.RoundEndBehavior,
-            nukeops.EvacShuttleTime,
-            nukeops.RoundEndTextSender,
-            nukeops.RoundEndTextShuttleCall,
-            nukeops.RoundEndTextAnnouncement);
+        nukeops.EvacShuttleTime,
+        nukeops.RoundEndTextSender,
+        nukeops.RoundEndTextShuttleCall,
+        nukeops.RoundEndTextAnnouncement);
+
 
         // prevent it called multiple times
         nukeops.RoundEndBehavior = RoundEndBehavior.Nothing;

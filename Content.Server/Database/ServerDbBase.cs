@@ -8,7 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server.SS220.Database;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -65,7 +67,11 @@ namespace Content.Server.Database
                 profiles[profile.Slot] = ConvertProfiles(profile);
             }
 
-            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor));
+            var constructionFavorites = new List<ProtoId<ConstructionPrototype>>(prefs.ConstructionFavorites.Count);
+            foreach (var favorite in prefs.ConstructionFavorites)
+                constructionFavorites.Add(new ProtoId<ConstructionPrototype>(favorite));
+
+            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites);
         }
 
         public async Task SaveSelectedCharacterIndexAsync(NetUserId userId, int index)
@@ -143,7 +149,8 @@ namespace Content.Server.Database
             {
                 UserId = userId.UserId,
                 SelectedCharacterSlot = 0,
-                AdminOOCColor = Color.Red.ToHex()
+                AdminOOCColor = Color.Red.ToHex(),
+                ConstructionFavorites = [],
             };
 
             prefs.Profiles.Add(profile);
@@ -152,7 +159,7 @@ namespace Content.Server.Database
 
             await db.DbContext.SaveChangesAsync();
 
-            return new PlayerPreferences(new[] {new KeyValuePair<int, ICharacterProfile>(0, defaultProfile)}, 0, Color.FromHex(prefs.AdminOOCColor));
+            return new PlayerPreferences(new[] { new KeyValuePair<int, ICharacterProfile>(0, defaultProfile) }, 0, Color.FromHex(prefs.AdminOOCColor), []);
         }
 
         public async Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot)
@@ -176,6 +183,19 @@ namespace Content.Server.Database
 
             await db.DbContext.SaveChangesAsync();
 
+        }
+
+        public async Task SaveConstructionFavoritesAsync(NetUserId userId, List<ProtoId<ConstructionPrototype>> constructionFavorites)
+        {
+            await using var db = await GetDb();
+            var prefs = await db.DbContext.Preference.SingleAsync(p => p.UserId == userId.UserId);
+
+            var favorites = new List<string>(constructionFavorites.Count);
+            foreach (var favorite in constructionFavorites)
+                favorites.Add(favorite.Id);
+            prefs.ConstructionFavorites = favorites;
+
+            await db.DbContext.SaveChangesAsync();
         }
 
         private static async Task SetSelectedCharacterSlotAsync(NetUserId userId, int newSlot, ServerDbContext db)
@@ -228,6 +248,7 @@ namespace Content.Server.Database
             {
                 var loadout = new RoleLoadout(role.RoleName)
                 {
+                    EntityName = role.EntityName,
                 };
 
                 foreach (var group in role.Groups)
@@ -327,6 +348,7 @@ namespace Content.Server.Database
                 var dz = new ProfileRoleLoadout()
                 {
                     RoleName = role,
+                    EntityName = loadouts.EntityName ?? string.Empty,
                 };
 
                 foreach (var (group, groupLoadouts) in loadouts.SelectedLoadouts)
@@ -546,6 +568,63 @@ namespace Content.Server.Database
         }
         #endregion
 
+        // SS220 species ban begin
+        #region Species bans
+        /*
+         * SPECIES BANS
+         */
+        /// <summary>
+        ///     Looks up a species ban by id.
+        ///     This will return a pardoned species ban as well.
+        /// </summary>
+        /// <param name="id">The species ban id to look for.</param>
+        /// <returns>The species ban with the given id or null if none exist.</returns>
+        public abstract Task<ServerSpeciesBanDef?> GetServerSpeciesBanAsync(int id);
+
+        /// <summary>
+        ///     Looks up an user's species ban history.
+        ///     This will return pardoned species bans based on the <paramref name="includeUnbanned"/> bool.
+        ///     Requires one of <paramref name="address"/>, <paramref name="userId"/> or <paramref name="hwId"/> to not be null.
+        /// </summary>
+        /// <param name="address">The IP address of the user.</param>
+        /// <param name="userId">The NetUserId of the user.</param>
+        /// <param name="hwId">The Hardware Id of the user.</param>
+        /// <param name="modernHWIds">The modern HWIDs of the user.</param>
+        /// <param name="includeUnbanned">Whether expired and pardoned bans are included.</param>
+        /// <returns>The user's species ban history.</returns>
+        public abstract Task<List<ServerSpeciesBanDef>> GetServerSpeciesBansAsync(IPAddress? address,
+            NetUserId? userId,
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
+            bool includeUnbanned);
+
+        public abstract Task<ServerSpeciesBanDef> AddServerSpeciesBanAsync(ServerSpeciesBanDef serverSpeciesBan);
+        public abstract Task AddServerSpeciesUnbanAsync(ServerSpeciesUnbanDef serverSpeciesUnban);
+
+        public async Task EditServerSpeciesBan(int id, string reason, NoteSeverity severity, DateTimeOffset? expiration, Guid editedBy, DateTimeOffset editedAt)
+        {
+            await using var db = await GetDb();
+            var speciesBanDetails = await db.DbContext.SpeciesBan
+                .Where(b => b.Id == id)
+                .Select(b => new { b.BanTime, b.PlayerUserId })
+                .SingleOrDefaultAsync();
+
+            if (speciesBanDetails == default)
+                return;
+
+            await db.DbContext.SpeciesBan
+                .Where(b => b.BanTime == speciesBanDetails.BanTime && b.PlayerUserId == speciesBanDetails.PlayerUserId)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(b => b.Severity, severity)
+                    .SetProperty(b => b.Reason, reason)
+                    .SetProperty(b => b.ExpirationTime, expiration.HasValue ? expiration.Value.UtcDateTime : null)
+                    .SetProperty(b => b.LastEditedById, editedBy)
+                    .SetProperty(b => b.LastEditedAt, editedAt.UtcDateTime)
+                );
+        }
+        #endregion
+        // SS220 species ban end
+
         #region Playtime
         public async Task<List<PlayTime>> GetPlayTimes(Guid player, CancellationToken cancel)
         {
@@ -759,6 +838,20 @@ namespace Content.Server.Database
             existing.Flags = admin.Flags;
             existing.Title = admin.Title;
             existing.AdminRankId = admin.AdminRankId;
+            existing.Deadminned = admin.Deadminned;
+            existing.Suspended = admin.Suspended;
+
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        public async Task UpdateAdminDeadminnedAsync(NetUserId userId, bool deadminned, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+
+            var adminRecord = db.DbContext.Admin.Where(a => a.UserId == userId);
+            await adminRecord.ExecuteUpdateAsync(
+                set => set.SetProperty(p => p.Deadminned, deadminned),
+                cancellationToken: cancel);
 
             await db.DbContext.SaveChangesAsync(cancel);
         }
@@ -1106,7 +1199,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .SingleOrDefaultAsync());
         }
 
-        public async Task SetLastReadRules(NetUserId player, DateTimeOffset date)
+        public async Task SetLastReadRules(NetUserId player, DateTimeOffset? date)
         {
             await using var db = await GetDb();
 
@@ -1116,7 +1209,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 return;
             }
 
-            dbPlayer.LastReadRules = date.UtcDateTime;
+            dbPlayer.LastReadRules = date?.UtcDateTime;
             await db.DbContext.SaveChangesAsync();
         }
 
@@ -1365,6 +1458,48 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 ban.Unban?.UnbanTime);
         }
 
+        // SS220 Species bans begin
+        public async Task<ServerSpeciesBanNoteRecord?> GetServerSpeciesBanAsNoteAsync(int id)
+        {
+            await using var db = await GetDb();
+
+            var ban = await db.DbContext.SpeciesBan
+                .Include(ban => ban.Unban)
+                .Include(ban => ban.Round)
+                .ThenInclude(r => r!.Server)
+                .Include(ban => ban.CreatedBy)
+                .Include(ban => ban.LastEditedBy)
+                .Include(ban => ban.Unban)
+                .SingleOrDefaultAsync(b => b.Id == id);
+
+            if (ban is null)
+                return null;
+
+            var player = await db.DbContext.Player.SingleOrDefaultAsync(p => p.UserId == ban.PlayerUserId);
+            var unbanningAdmin =
+                ban.Unban is null
+                ? null
+                : await db.DbContext.Player.SingleOrDefaultAsync(b => b.UserId == ban.Unban.UnbanningAdmin);
+
+            return new ServerSpeciesBanNoteRecord(
+                ban.Id,
+                MakeRoundRecord(ban.Round),
+                MakePlayerRecord(player),
+                ban.PlaytimeAtNote,
+                ban.Reason,
+                ban.Severity,
+                MakePlayerRecord(ban.CreatedBy),
+                ban.BanTime,
+                MakePlayerRecord(ban.LastEditedBy),
+                ban.LastEditedAt,
+                ban.ExpirationTime,
+                ban.Hidden,
+                [ban.SpeciesId],
+                MakePlayerRecord(unbanningAdmin),
+                ban.Unban?.UnbanTime);
+        }
+        // SS220 Species bans end
+
         public async Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player)
         {
             await using var db = await GetDb();
@@ -1385,6 +1520,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             notes.AddRange(await GetMessagesImpl(db, player));
             notes.AddRange(await GetServerBansAsNotesForUser(db, player));
             notes.AddRange(await GetGroupedServerRoleBansAsNotesForUser(db, player));
+            notes.AddRange(await GetGroupedServerSpeciesBansAsNotesForUser(db, player)); // SS220 Species bans
             return notes;
         }
         public async Task EditAdminNote(int id, string message, NoteSeverity severity, bool secret, Guid editedBy, DateTimeOffset editedAt, DateTimeOffset? expiryTime)
@@ -1493,6 +1629,21 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
+        // SS220 Species bans begin
+        public async Task HideServerSpeciesBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt)
+        {
+            await using var db = await GetDb();
+
+            var speciesBan = await db.DbContext.SpeciesBan.Where(roleBan => roleBan.Id == id).SingleAsync();
+
+            speciesBan.Hidden = true;
+            speciesBan.LastEditedById = deletedBy;
+            speciesBan.LastEditedAt = deletedAt.UtcDateTime;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+        // SS220 Species bans end
+
         public async Task<List<IAdminRemarksRecord>> GetVisibleAdminRemarks(Guid player)
         {
             await using var db = await GetDb();
@@ -1512,6 +1663,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             notesCol.AddRange(await GetMessagesImpl(db, player));
             notesCol.AddRange(await GetServerBansAsNotesForUser(db, player));
             notesCol.AddRange(await GetGroupedServerRoleBansAsNotesForUser(db, player));
+            notesCol.AddRange(await GetGroupedServerSpeciesBansAsNotesForUser(db, player)); // SS220 Species bans
             return notesCol;
         }
 
@@ -1669,23 +1821,57 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return bans;
         }
 
-        #endregion
-
-        #region Discord_SS220
-
-        public async Task<DiscordPlayer?> GetAccountDiscordLink(Guid playerId)
+        // SS220 Species bans begin
+        protected async Task<List<ServerSpeciesBanNoteRecord>> GetGroupedServerSpeciesBansAsNotesForUser(DbGuard db, Guid user)
         {
-            await using var db = await GetDb();
+            // Server side query
+            var bansQuery = await db.DbContext.SpeciesBan
+                .Where(ban => ban.PlayerUserId == user && !ban.Hidden)
+                .Include(ban => ban.Unban)
+                .Include(ban => ban.Round)
+                .ThenInclude(r => r!.Server)
+                .Include(ban => ban.CreatedBy)
+                .Include(ban => ban.LastEditedBy)
+                .Include(ban => ban.Unban)
+                .ToArrayAsync();
 
-            return await db.DbContext.DiscordPlayers.AsNoTracking().FirstOrDefaultAsync(p => p.SS14Id == playerId);
-        }
+            // Client side query, as EF can't do groups yet
+            var bansEnumerable = bansQuery
+                    .GroupBy(ban => new { ban.BanTime, CreatedBy = ban.CreatedBy, ban.Reason, Unbanned = ban.Unban == null })
+                    .Select(banGroup => banGroup)
+                    .ToArray();
 
-        public async Task InsertDiscord(DiscordPlayer discordPlayer)
-        {
-            await using var db = await GetDb();
-            db.DbContext.DiscordPlayers.Add(discordPlayer);
-            await db.DbContext.SaveChangesAsync();
+            List<ServerSpeciesBanNoteRecord> bans = [];
+            var player = await db.DbContext.Player.SingleOrDefaultAsync(p => p.UserId == user);
+            foreach (var banGroup in bansEnumerable)
+            {
+                var firstBan = banGroup.First();
+                Player? unbanningAdmin = null;
+
+                if (firstBan.Unban?.UnbanningAdmin is not null)
+                    unbanningAdmin = await db.DbContext.Player.SingleOrDefaultAsync(p => p.UserId == firstBan.Unban.UnbanningAdmin.Value);
+
+                bans.Add(new ServerSpeciesBanNoteRecord(
+                    firstBan.Id,
+                    MakeRoundRecord(firstBan.Round),
+                    MakePlayerRecord(player),
+                    firstBan.PlaytimeAtNote,
+                    firstBan.Reason,
+                    firstBan.Severity,
+                    MakePlayerRecord(firstBan.CreatedBy),
+                    NormalizeDatabaseTime(firstBan.BanTime),
+                    MakePlayerRecord(firstBan.LastEditedBy),
+                    NormalizeDatabaseTime(firstBan.LastEditedAt),
+                    NormalizeDatabaseTime(firstBan.ExpirationTime),
+                    firstBan.Hidden,
+                    [.. banGroup.Select(ban => ban.SpeciesId)],
+                    MakePlayerRecord(unbanningAdmin),
+                    NormalizeDatabaseTime(firstBan.Unban?.UnbanTime)));
+            }
+
+            return bans;
         }
+        // SS220 Species bans end
 
         #endregion
 
@@ -1747,6 +1933,75 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
 
         #endregion
+
+        # region IPIntel
+
+        public async Task<bool> UpsertIPIntelCache(DateTime time, IPAddress ip, float score)
+        {
+            while (true)
+            {
+                try
+                {
+                    await using var db = await GetDb();
+
+                    var existing = await db.DbContext.IPIntelCache
+                        .Where(w => ip.Equals(w.Address))
+                        .SingleOrDefaultAsync();
+
+                    if (existing == null)
+                    {
+                        var newCache = new IPIntelCache
+                        {
+                            Time = time,
+                            Address = ip,
+                            Score = score,
+                        };
+                        db.DbContext.IPIntelCache.Add(newCache);
+                    }
+                    else
+                    {
+                        existing.Time = time;
+                        existing.Score = score;
+                    }
+
+                    await Task.Delay(5000);
+
+                    await db.DbContext.SaveChangesAsync();
+                    return true;
+                }
+                catch (DbUpdateException)
+                {
+                    _opsLog.Warning("IPIntel UPSERT failed with a db exception... retrying.");
+                }
+            }
+        }
+
+        public async Task<IPIntelCache?> GetIPIntelCache(IPAddress ip)
+        {
+            await using var db = await GetDb();
+
+            return await db.DbContext.IPIntelCache
+                .SingleOrDefaultAsync(w => ip.Equals(w.Address));
+        }
+
+        public async Task<bool> CleanIPIntelCache(TimeSpan range)
+        {
+            await using var db = await GetDb();
+
+            // Calculating this here cause otherwise sqlite whines.
+            var cutoffTime = DateTime.UtcNow.Subtract(range);
+
+            await db.DbContext.IPIntelCache
+                .Where(w => w.Time <= cutoffTime)
+                .ExecuteDeleteAsync();
+
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        #endregion
+
+        public abstract Task SendNotification(DatabaseNotification notification);
 
         // SQLite returns DateTime as Kind=Unspecified, Npgsql actually knows for sure it's Kind=Utc.
         // Normalize DateTimes here so they're always Utc. Thanks.

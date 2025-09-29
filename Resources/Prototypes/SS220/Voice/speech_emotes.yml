@@ -56,7 +56,7 @@
   - завывает
   - завывает.
   - завывает!
-  - завывает? 
+  - завывает?
 
 - type: emote
   id: Growl
@@ -119,7 +119,7 @@
   - гавкает
   - гавкает.
   - гавкает!
-  - гавкает? 
+  - гавкает?
 
 ## spo9k vocal emotes start
 - type: emote
@@ -186,3 +186,22 @@
     - мурчит!
 
   ## spo9k vocal emotes end
+
+- type: emote
+  id: Mrow
+  name: chat-emote-name-mrow
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-mrow]
+  chatTriggers:
+    - раздражённо мяукает
+    - раздраженно мяукает
+    - раздраженный мяу
+    - раздражённый мяу
+    - недовольно мяукает
+    - недовольный мяу

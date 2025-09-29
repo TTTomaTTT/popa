@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHandsButcherable
+  parent: [ClothingHandsButcherable, BaseChameleon]
   id: ClothingHandsChameleon # doesn't protect from electricity or heat
   name: black gloves
   description: Regular black gloves that do not keep you from frying.
@@ -17,18 +17,13 @@
     - type: Fiber
       fiberMaterial: fibers-chameleon
     - type: FingerprintMask
-    - type: UserInterface
-      interfaces:
-        enum.ChameleonUiKey.Key:
-          type: ChameleonBoundUserInterface
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: corvax-hidden-desc-Chameleon-research
         jobRequired:
           - ResearchAssistant
@@ -36,7 +31,7 @@
           - Scientist
           - Borg
 # Corvax-HiddenDesc-End
- 
+
 - type: entity
   parent: ClothingHandsChameleon
   id: ClothingHandsChameleonThief
@@ -49,23 +44,19 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-ThievingGloves-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-Chameleon-thief
-      whitelistMind:
-        components:
-          - ThiefRole
+      whitelistMindRoles:
+      - ThiefRole
     - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMind:
-        components:
-          - ThiefRole
+      whitelistMindRoles:
+      - ThiefRole
     - label: corvax-hidden-desc-Chameleon-research
       jobRequired:
         - ResearchAssistant

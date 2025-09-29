@@ -1,20 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Weapons.Melee.Components;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.CombatMode;
-using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Weapons.Melee.Systems;
 
 public sealed class SharedDisarmOnAttackSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -24,23 +17,17 @@ public sealed class SharedDisarmOnAttackSystem : EntitySystem
 
     private void OnAttackEvent(Entity<DisarmOnAttackComponent> ent, ref WeaponAttackEvent args)
     {
-        bool chance = false; ;
-
-        switch (args.Type)
+        var chance = args.Type switch
         {
-            case AttackType.HEAVY:
-                chance = _random.Prob(ent.Comp.HeavyAttackChance);
-                break;
+            AttackType.HEAVY => ent.Comp.HeavyAttackChance,
+            AttackType.LIGHT => ent.Comp.Chance,
+            _ => 0,
+        };
 
-            case AttackType.LIGHT:
-                chance = _random.Prob(ent.Comp.Chance);
-                break;
-        }
-
-        if (!chance)
+        if (chance <= 0)
             return;
 
-        var ev = new DisarmedEvent { Target = args.Target, Source = args.User };
-        RaiseLocalEvent(args.Target, ev);
+        var ev = new DisarmedEvent(args.Target, args.User, chance);
+        RaiseLocalEvent(args.Target, ref ev);
     }
 }

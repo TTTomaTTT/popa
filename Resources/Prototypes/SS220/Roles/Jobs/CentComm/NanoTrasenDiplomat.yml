@@ -48,8 +48,12 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandGSN
+  - CentralCommandBSO
   - CentralCommandCBURN
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentCommNanoTrasenDiplomatGear

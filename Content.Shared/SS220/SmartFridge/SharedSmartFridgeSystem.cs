@@ -43,6 +43,7 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
 
         return inventory;
     }
+
     private bool TryAddItem(EntityUid entityUid, Dictionary<string, VendingMachineInventoryEntry> sortedInventory)
     {
         if (!_entity.TryGetComponent<MetaDataComponent>(entityUid, out var metadata))
@@ -56,10 +57,9 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
             return true;
         }
 
-
-        sortedInventory.Add(metadata.EntityName,
-            new VendingMachineInventoryEntry(InventoryType.Regular, metadata.EntityName, 1, GetNetEntity(entityUid))
-        );
+        var newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, metadata.EntityName, 1);
+        newEntry.EntityUids.Add(GetNetEntity(entityUid));
+        sortedInventory.Add(metadata.EntityName, newEntry);
 
         return true;
     }
@@ -71,12 +71,12 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
 
         if (!Exists(entity))
         {
-            if (TryComp<ActorComponent>(player, out var actor))
-            {
-                var session = actor.PlayerSession;
-                Log.Error($"Player {session} interacted with non-existent item {args.InteractedItemUID} stored in {ToPrettyString(uid)}");
-            }
+            if (!TryComp<ActorComponent>(player, out var actor))
+                return;
 
+            var session = actor.PlayerSession;
+
+            Log.Error($"Player {session} interacted with non-existent item {args.InteractedItemUID} stored in {ToPrettyString(uid)}");
             return;
         }
 
@@ -88,7 +88,7 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
             return;
 
         // If the user's active hand is empty, try pick up the item.
-        if (hands.ActiveHandEntity == null)
+        if (_sharedHandsSystem.GetActiveItem(player) == null)
         {
             if (_sharedHandsSystem.TryPickupAnyHand(player, entity, handsComp: hands)
                 && storageComp.StorageRemoveSound != null)

@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
+﻿using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
@@ -12,6 +13,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
+//SS220 RatKing Tweaks and Changes start
+using Content.Shared.Popups;
+using Content.Shared.SS220.RatKing;
+//SS220 RatKing Tweaks and Changes end
 
 namespace Content.Shared.RatKing;
 
@@ -24,6 +29,7 @@ public abstract class SharedRatKingSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 RatKing tweaks and changes
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -37,6 +43,7 @@ public abstract class SharedRatKingSystem : EntitySystem
 
         SubscribeLocalEvent<RatKingRummageableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
         SubscribeLocalEvent<RatKingRummageableComponent, RatKingRummageDoAfterEvent>(OnDoAfterComplete);
+        SubscribeLocalEvent<RatKingComponent, RatKingRummageActionEvent>(OnRummageAction); //SS220 RatKing Tweaks and Changes
     }
 
     private void OnStartup(EntityUid uid, RatKingComponent component, ComponentStartup args)
@@ -50,6 +57,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         _action.AddAction(uid, ref component.ActionOrderFollowEntity, component.ActionOrderFollow, component: comp);
         _action.AddAction(uid, ref component.ActionOrderCheeseEmEntity, component.ActionOrderCheeseEm, component: comp);
         _action.AddAction(uid, ref component.ActionOrderLooseEntity, component.ActionOrderLoose, component: comp);
+        _action.AddAction(uid, ref component.ActionRummageEntity, component.ActionRummage, component: comp); //SS220 RatKing Tweaks and Changes
 
         UpdateActions(uid, component);
     }
@@ -65,12 +73,14 @@ public abstract class SharedRatKingSystem : EntitySystem
         if (!TryComp(uid, out ActionsComponent? comp))
             return;
 
-        _action.RemoveAction(uid, component.ActionRaiseArmyEntity, comp);
-        _action.RemoveAction(uid, component.ActionDomainEntity, comp);
-        _action.RemoveAction(uid, component.ActionOrderStayEntity, comp);
-        _action.RemoveAction(uid, component.ActionOrderFollowEntity, comp);
-        _action.RemoveAction(uid, component.ActionOrderCheeseEmEntity, comp);
-        _action.RemoveAction(uid, component.ActionOrderLooseEntity, comp);
+        var actions = new Entity<ActionsComponent?>(uid, comp);
+        _action.RemoveAction(actions, component.ActionRaiseArmyEntity);
+        _action.RemoveAction(actions, component.ActionDomainEntity);
+        _action.RemoveAction(actions, component.ActionOrderStayEntity);
+        _action.RemoveAction(actions, component.ActionOrderFollowEntity);
+        _action.RemoveAction(actions, component.ActionOrderCheeseEmEntity);
+        _action.RemoveAction(actions, component.ActionOrderLooseEntity);
+        _action.RemoveAction(actions, component.ActionRummageEntity); //SS220 RatKing Tweaks and Changes
     }
 
     private void OnOrderAction(EntityUid uid, RatKingComponent component, RatKingOrderActionEvent args)
@@ -142,6 +152,35 @@ public abstract class SharedRatKingSystem : EntitySystem
             }
         });
     }
+
+    //SS220 RatKing Tweaks and Changes start
+    private void OnRummageAction(Entity<RatKingComponent> entity, ref RatKingRummageActionEvent args)
+    {
+        if (args.Handled || !TryComp<RatKingRummageableComponent>(args.Target, out var rumComp))
+        {
+            _popup.PopupPredicted(Loc.GetString("ratking-rummage-failure"), args.Target, entity, PopupType.Small);
+            return;
+        }
+
+        if (rumComp.Looted)
+        {
+            _popup.PopupPredicted(Loc.GetString("ratking-rummage-looted-failure"), args.Target, entity, PopupType.Small);
+            return;
+        }
+
+        var doAfter = new DoAfterArgs(EntityManager, entity, rumComp.RummageDuration,
+            new RatKingRummageDoAfterEvent(), args.Target, args.Target)
+        {
+            BlockDuplicate = true,
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            DistanceThreshold = 2f
+        };
+        _popup.PopupPredicted(Loc.GetString("ratking-rummage-success"), args.Target, entity, PopupType.Small);
+        _doAfter.TryStartDoAfter(doAfter);
+        args.Handled = true;
+    }
+    //SS220 RatKing Tweaks and Changes end
 
     private void OnDoAfterComplete(EntityUid uid, RatKingRummageableComponent component, RatKingRummageDoAfterEvent args)
     {

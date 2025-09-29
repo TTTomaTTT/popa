@@ -60,10 +60,17 @@
   id: MagistrateGear
   equipment:
     shoes: ClothingShoesBootsLaceup
-    eyes: ClothingEyesGlassesCommand
     id: MagistratePDA
   inhand:
     - BriefcaseMagistrateFilled
   storage:
     back:
     - Flash
+
+- type: chameleonOutfit
+  id: MagistrateChameleonOutfit
+  job: Magistrate
+  hasMindShield: true
+  equipment:
+    mask: ClothingMaskBreath
+    gloves: ClothingHandsGlovesColorWhite

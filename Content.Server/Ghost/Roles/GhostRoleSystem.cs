@@ -6,7 +6,6 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
 using Content.Shared.Ghost.Roles.Raffles;
 using Content.Server.Ghost.Roles.UI;
-using Content.Server.Mind.Commands;
 using Content.Shared.Chat;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -38,7 +37,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Collections;
 using Content.Shared.SS220.DarkReaper;
 using Content.Shared.Ghost.Roles.Components;
-using Content.Shared.Roles.Jobs;
 
 namespace Content.Server.Ghost.Roles;
 
@@ -62,6 +60,8 @@ public sealed class GhostRoleSystem : EntitySystem
 
     private uint _nextRoleIdentifier;
     private bool _needsUpdateGhostRoleCount = true;
+
+    private readonly ProtoId<JobPrototype> _ghostRoleProtoId = "GhostRole"; // ss220-add-ghost-roles-ban
 
     private readonly Dictionary<uint, Entity<GhostRoleComponent>> _ghostRoles = new();
     private readonly Dictionary<uint, Entity<GhostRoleRaffleComponent>> _ghostRoleRaffles = new();
@@ -134,7 +134,7 @@ public sealed class GhostRoleSystem : EntitySystem
     public void OpenEui(ICommonSession session)
     {
         if (session.AttachedEntity is not { Valid: true } attached ||
-            !EntityManager.HasComponent<GhostComponent>(attached))
+            !HasComp<GhostComponent>(attached))
             return;
 
         if (_openUis.ContainsKey(session))
@@ -347,7 +347,7 @@ public sealed class GhostRoleSystem : EntitySystem
 
     private bool IsGhostRolesBanned(NetUserId userId)
     {
-        if (_banManager.GetJobBans(userId) is { } bans && bans.Contains("GhostRole"))
+        if (_banManager.GetJobBans(userId) is { } bans && bans.Contains(_ghostRoleProtoId))
         {
             if (!_playerManager.TryGetSessionById(userId, out var session))
             {
@@ -372,12 +372,6 @@ public sealed class GhostRoleSystem : EntitySystem
             return;
 
         _ghostRoles[role.Comp.Identifier = GetNextRoleIdentifier()] = role;
-        //SS220 Log-for-null-meta-excep begin
-        if (TryComp(role.Owner, out MetaDataComponent? metaData)
-                                        && metaData.EntityPrototype != null)
-            Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, proto id: {metaData.EntityPrototype}");
-        else Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, with null Meta");
-        //SS220 Log-for-null-meta-excep end
         UpdateAllEui();
     }
 
@@ -388,13 +382,6 @@ public sealed class GhostRoleSystem : EntitySystem
             return;
 
         _ghostRoles.Remove(comp.Identifier);
-        //SS220 Log-for-null-meta-excep begin
-        if (TryComp(role.Owner, out MetaDataComponent? metaData)
-                                        && metaData.EntityPrototype != null)
-            Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, proto id: {metaData.EntityPrototype}");
-        else
-            Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, with null Meta");
-        //SS220 Log-for-null-meta-excep end
         if (TryComp(role.Owner, out GhostRoleRaffleComponent? raffle))
         {
             // if a raffle is still running, get rid of it
@@ -580,16 +567,18 @@ public sealed class GhostRoleSystem : EntitySystem
 
         DebugTools.AssertNotNull(player.ContentData());
 
+        // After taking a ghost role, the player cannot return to the original body, so wipe the player's current mind
+        // unless it is a visiting mind
+        if(_mindSystem.TryGetMind(player.UserId, out _, out var mind) && !mind.IsVisitingEntity)
+            _mindSystem.WipeMind(player);
+
         var newMind = _mindSystem.CreateMind(player.UserId,
-            EntityManager.GetComponent<MetaDataComponent>(mob).EntityName);
-
-        _roleSystem.MindAddRole(newMind, "MindRoleGhostMarker");
-
-        if(_roleSystem.MindHasRole<GhostRoleMarkerRoleComponent>(newMind!, out var markerRole))
-            markerRole.Value.Comp2.Name = role.RoleName;
+            Comp<MetaDataComponent>(mob).EntityName);
 
         _mindSystem.SetUserId(newMind, player.UserId);
         _mindSystem.TransferTo(newMind, mob);
+
+        _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp);
     }
 
     /// <summary>
@@ -771,7 +760,7 @@ public sealed class GhostRoleSystem : EntitySystem
         RaiseLocalEvent(mob, spawnedEvent);
 
         if (ghostRole.MakeSentient)
-            MakeSentientCommand.MakeSentient(mob, EntityManager, ghostRole.AllowMovement, ghostRole.AllowSpeech);
+            _mindSystem.MakeSentient(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech);
 
         EnsureComp<MindContainerComponent>(mob);
 
@@ -836,7 +825,7 @@ public sealed class GhostRoleSystem : EntitySystem
         }
 
         if (ghostRole.MakeSentient)
-            MakeSentientCommand.MakeSentient(uid, EntityManager, ghostRole.AllowMovement, ghostRole.AllowSpeech);
+            _mindSystem.MakeSentient(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech);
 
         GhostRoleInternalCreateMindAndTransfer(args.Player, uid, uid, ghostRole);
         UnregisterGhostRole((uid, ghostRole));

@@ -54,22 +54,34 @@ public sealed partial class SubdermalImplantComponent : Component
     //I really need to pass user's uid...
     public EntityUid? user;
     //SS220-mindslave end
+
+    /// <summary>
+    /// If set, this ProtoId is used when attempting to draw the implant instead.
+    /// Useful if the implant is a child to another implant and you don't want to differentiate between them when drawing.
+    /// </summary>
+    [DataField]
+    public EntProtoId? DrawableProtoIdOverride;
 }
 
+// SS220 Chemical implants begin
 public sealed partial class UseChemicalImplantEvent : InstantActionEvent
 {
-
 }
+// SS220 Chemical implants end
+
+// SS220 lazy-of-making-new-file-begin
+public sealed partial class UseAdrenalImplantEvent : InstantActionEvent
+{
+}
+public sealed partial class UseDnaCopyImplantEvent : InstantActionEvent
+{
+}
+// SS220 lazy-of-making-new-file-end
 
 /// <summary>
 /// Used for opening the storage implant via action.
 /// </summary>
 public sealed partial class OpenStorageImplantEvent : InstantActionEvent
-{
-
-}
-
-public sealed partial class UseFreedomImplantEvent : InstantActionEvent
 {
 
 }
@@ -86,16 +98,6 @@ public sealed partial class ActivateImplantEvent : InstantActionEvent
 /// Used for opening the uplink implant via action.
 /// </summary>
 public sealed partial class OpenUplinkImplantEvent : InstantActionEvent
-{
-
-}
-
-public sealed partial class UseScramImplantEvent : InstantActionEvent
-{
-
-}
-
-public sealed partial class UseDnaScramblerImplantEvent : InstantActionEvent
 {
 
 }

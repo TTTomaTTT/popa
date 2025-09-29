@@ -36,6 +36,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: CMOGear
@@ -46,3 +47,15 @@
   storage:
     back:
     - Flash
+
+- type: chameleonOutfit
+  id: ChiefMedicalOfficerChameleonOutfit
+  job: ChiefMedicalOfficer
+# hasMindShield: false #ss220 ChameleonOutfit fix
+  equipment:
+    head: ClothingHeadHatBeretCmo
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingCloakCmo
+    outerClothing: ClothingOuterCoatLabCmo
+    gloves: ClothingHandsGlovesNitrile

@@ -4,6 +4,24 @@
   description: job-description-hop
   playTimeTracker: JobHeadOfPersonnel
   requirements:
+    #SS220 requirements begin
+    # off
+    # - !type:DepartmentTimeRequirement
+    #   department: Engineering
+    #   time: 9000 # 2.5 hours
+    # - !type:DepartmentTimeRequirement
+    #   department: Medical
+    #   time: 9000 # 2.5 hours
+    # - !type:DepartmentTimeRequirement
+    #   department: Science
+    #   time: 9000 # 2.5 hrs
+    # - !type:DepartmentTimeRequirement
+    #   department: Security
+    #   time: 9000 # 2.5 hrs
+    # - !type:DepartmentTimeRequirement
+    #   department: Command
+    #   time: 9000 # 2.5 hours
+    # off
     - !type:OverallPlaytimeRequirement
       time: 180000 # SS220-RoleTime
     - !type:DepartmentTimeRequirement
@@ -15,6 +33,7 @@
       inverted: true
       species:
       - Felinid #SS220-jobbans end
+    #SS220 requirements end
   weight: 20
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
@@ -43,14 +62,16 @@
   - Salvage
   - Security
   - Brig
-#  - Lawyer #SS220-Law Department
+  - Lawyer #SS220-Law Department
   - Cargo
   - Atmospherics
   - Medical
+  - Paramedic #SS220 PaNfixes
   special:
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: HoPGear
@@ -60,6 +81,19 @@
     gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
     belt: BoxFolderClipboard
+    eyes: ClothingEyesHudCommand
   storage:
     back:
     - Flash
+
+- type: chameleonOutfit
+  id: HeadOfPersonnelChameleonOutfit
+  job: HeadOfPersonnel
+# hasMindShield: false #ss220 ChameleonOutfit fix
+  equipment:
+    head: ClothingHeadHatHopcap
+    eyes: ClothingEyesHudCommand
+    mask: ClothingMaskNeckGaiterRed
+    neck: ClothingNeckCloakHop
+    outerClothing: ClothingOuterWinterHoP
+

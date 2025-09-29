@@ -1,9 +1,9 @@
-﻿- type: decal
+- type: decal
   id: FullTileOverlayGreyscale
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: fulltile_overlay
 
 - type: decal
@@ -11,7 +11,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_box
 
 - type: decal
@@ -19,7 +19,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_corner_ne
 
 - type: decal
@@ -27,7 +27,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_corner_nw
 
 - type: decal
@@ -35,7 +35,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_corner_se
 
 - type: decal
@@ -43,7 +43,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_corner_sw
 
 - type: decal
@@ -51,7 +51,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_end_e
 
 - type: decal
@@ -59,7 +59,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_end_n
 
 - type: decal
@@ -67,7 +67,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_end_s
 
 - type: decal
@@ -75,7 +75,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_end_w
 
 - type: decal
@@ -83,7 +83,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_line_e
 
 - type: decal
@@ -91,7 +91,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_line_n
 
 - type: decal
@@ -99,7 +99,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_line_s
 
 - type: decal
@@ -107,7 +107,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: brick_line_w
 
 - type: decal
@@ -115,7 +115,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: halftile_overlay
 
 - type: decal
@@ -123,7 +123,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: halftile_overlay_90
 
 - type: decal
@@ -131,7 +131,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: halftile_overlay_180
 
 - type: decal
@@ -139,7 +139,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: halftile_overlay_270
 
 - type: decal
@@ -147,7 +147,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: quartertile_overlay
 
 - type: decal
@@ -155,7 +155,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: quartertile_overlay_90
 
 - type: decal
@@ -163,7 +163,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: quartertile_overlay_180
 
 - type: decal
@@ -171,7 +171,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: quartertile_overlay_270
 
 - type: decal
@@ -179,7 +179,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: threequartertile_overlay
 
 - type: decal
@@ -187,7 +187,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: threequartertile_overlay_90
 
 - type: decal
@@ -195,7 +195,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: threequartertile_overlay_180
 
 - type: decal
@@ -203,7 +203,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: threequartertile_overlay_270
 
 - type: decal
@@ -211,7 +211,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: mono
 
 - type: decal
@@ -219,7 +219,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: checkerNESW
 
 - type: decal
@@ -227,7 +227,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: checkerNWSE
 
 - type: decal
@@ -235,7 +235,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: diagonal
 
 - type: decal
@@ -243,7 +243,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: diagonal_checker_a
 
 - type: decal
@@ -251,15 +251,31 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: diagonal_checker_b
+# SS220 Fix Rombs Decals begin
+- type: decal
+  id: DiagonalCheckerCOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: diagonal_checker_c
 
+- type: decal
+  id: DiagonalCheckerDOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: diagonal_checker_d
+# SS220 Fix Rombs Decals end
 - type: decal
   id: HerringboneOverlay
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: herringbone
 
 - type: decal
@@ -267,7 +283,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile
 
 - type: decal
@@ -275,7 +291,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_checker_a
 
 - type: decal
@@ -283,7 +299,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_checker_b
 
 - type: decal
@@ -291,7 +307,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_diagonal
 
 - type: decal
@@ -299,7 +315,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_diagonal_a
 
 - type: decal
@@ -307,15 +323,31 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_diagonal_b
+# SS220 Fix Rombs Decals begin
+- type: decal
+  id: MiniTileDiagonalCheckerCOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: minitile_diagonal_c
 
+- type: decal
+  id: MiniTileDiagonalCheckerDOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: minitile_diagonal_d
+# SS220 Fix Rombs Decals end
 - type: decal
   id: MiniTileBoxOverlay
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_box
 
 - type: decal
@@ -323,7 +355,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_corner_ne
 
 - type: decal
@@ -331,7 +363,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_corner_nw
 
 - type: decal
@@ -339,7 +371,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_corner_se
 
 - type: decal
@@ -347,7 +379,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_corner_sw
 
 - type: decal
@@ -355,7 +387,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_end_e
 
 - type: decal
@@ -363,7 +395,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_end_n
 
 - type: decal
@@ -371,7 +403,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_end_s
 
 - type: decal
@@ -379,7 +411,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_end_w
 
 - type: decal
@@ -387,7 +419,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_inner_ne
 
 - type: decal
@@ -395,7 +427,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_inner_nw
 
 - type: decal
@@ -403,7 +435,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_inner_se
 
 - type: decal
@@ -411,7 +443,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_inner_sw
 
 - type: decal
@@ -419,7 +451,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_line_e
 
 - type: decal
@@ -427,7 +459,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_line_n
 
 - type: decal
@@ -435,7 +467,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_line_s
 
 - type: decal
@@ -443,7 +475,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_line_w
 
 - type: decal
@@ -451,7 +483,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: offset
 
 - type: decal
@@ -459,7 +491,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: offset_checker_a
 
 - type: decal
@@ -467,7 +499,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: offset_checker_b
 
 - type: decal
@@ -475,7 +507,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: pavement
 
 - type: decal
@@ -483,7 +515,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: pavement_checker_a
 
 - type: decal
@@ -491,7 +523,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: pavement_checker_b
 
 - type: decal
@@ -499,7 +531,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: pavement_vertical
 
 - type: decal
@@ -507,7 +539,7 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: pavement_vertical_checker_a
 
 - type: decal
@@ -515,5 +547,5 @@
   tags: ["station", "overlay"]
   defaultCustomColor: true
   sprite:
-    sprite: Decals/Overlays/greyscale.rsi
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: pavement_vertical_checker_b
