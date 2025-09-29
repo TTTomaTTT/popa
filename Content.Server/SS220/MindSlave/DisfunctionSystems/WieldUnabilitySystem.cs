@@ -4,7 +4,7 @@ using Content.Server.Popups;
 using Content.Server.SS220.MindSlave.DisfunctionComponents;
 using Content.Shared.Wieldable;
 
-namespace Content.Server.SS220.MindSlave.DisfunctionSystem;
+namespace Content.Server.SS220.MindSlave.DisfunctionSystems;
 
 public sealed class WieldUnabilitySystem : EntitySystem
 {
@@ -14,10 +14,10 @@ public sealed class WieldUnabilitySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<WieldUnabilityComponent, BeforeWieldEvent>(OnWieldAttempt);
+        SubscribeLocalEvent<WieldUnabilityComponent, WieldAttemptEvent>(OnWieldAttempt);
     }
 
-    private void OnWieldAttempt(Entity<WieldUnabilityComponent> entity, ref BeforeWieldEvent args)
+    private void OnWieldAttempt(Entity<WieldUnabilityComponent> entity, ref WieldAttemptEvent args)
     {
         if (args.Cancelled)
             return;

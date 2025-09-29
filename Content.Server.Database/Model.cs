@@ -38,14 +38,18 @@ namespace Content.Server.Database
         public DbSet<ServerBanHit> ServerBanHit { get; set; } = default!;
         public DbSet<ServerRoleBan> RoleBan { get; set; } = default!;
         public DbSet<ServerRoleUnban> RoleUnban { get; set; } = default!;
+        // SS220 species ban begin
+        public DbSet<ServerSpeciesBan> SpeciesBan { get; set; } = default!;
+        public DbSet<ServerSpeciesUnban> SpeciesUnban { get; set; } = default!;
+        // SS220 species ban end
         public DbSet<PlayTime> PlayTime { get; set; } = default!;
         public DbSet<UploadedResourceLog> UploadedResourceLog { get; set; } = default!;
         public DbSet<AdminNote> AdminNotes { get; set; } = null!;
         public DbSet<AdminWatchlist> AdminWatchlists { get; set; } = null!;
         public DbSet<AdminMessage> AdminMessages { get; set; } = null!;
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
-        public DbSet<DiscordPlayer> DiscordPlayers { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
+        public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -181,6 +185,24 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<ServerRoleBan>().ToTable(t =>
                 t.HasCheckConstraint("HaveEitherAddressOrUserIdOrHWId", "address IS NOT NULL OR player_user_id IS NOT NULL OR hwid IS NOT NULL"));
+
+            // SS220 Species bans begin
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasIndex(p => p.PlayerUserId);
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasIndex(p => p.Address);
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasIndex(p => p.PlayerUserId);
+
+            modelBuilder.Entity<ServerSpeciesUnban>()
+                .HasIndex(p => p.BanId)
+                .IsUnique();
+
+            modelBuilder.Entity<ServerSpeciesBan>().ToTable(t =>
+                t.HasCheckConstraint("HaveEitherAddressOrUserIdOrHWId", "address IS NOT NULL OR player_user_id IS NOT NULL OR hwid IS NOT NULL"));
+            // SS220 Species bans end
 
             modelBuilder.Entity<Player>()
                 .HasIndex(p => p.UserId)
@@ -324,14 +346,21 @@ namespace Content.Server.Database
                 .HasPrincipalKey(author => author.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<DiscordPlayer>(entity =>
-            {
-                entity.HasIndex(p => p.Id).IsUnique();
-                entity.HasAlternateKey(p => p.SS14Id);
-                entity.Property(p => p.SS14Id).IsUnicode();
-                entity.HasIndex(p => p.DiscordId).IsUnique();
-                entity.Property(p => p.Id).ValueGeneratedOnAdd();
-            });
+            // SS220 Species bans begin
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasOne(ban => ban.CreatedBy)
+                .WithMany(author => author.AdminServerSpeciesBansCreated)
+                .HasForeignKey(ban => ban.BanningAdmin)
+                .HasPrincipalKey(author => author.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasOne(ban => ban.LastEditedBy)
+                .WithMany(author => author.AdminServerSpeciesBansLastEdited)
+                .HasForeignKey(ban => ban.LastEditedById)
+                .HasPrincipalKey(author => author.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+            // SS220 Species bans end
 
             modelBuilder.Entity<RoleWhitelist>()
                 .HasOne(w => w.Player)
@@ -371,6 +400,18 @@ namespace Content.Server.Database
                 .Property(p => p.Type)
                 .HasDefaultValue(HwidType.Legacy);
 
+            // SS220 Species bans begin
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .OwnsOne(p => p.HWId)
+                .Property(p => p.Hwid)
+                .HasColumnName("hwid");
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .OwnsOne(p => p.HWId)
+                .Property(p => p.Type)
+                .HasDefaultValue(HwidType.Legacy);
+            // SS220 Species bans end
+
             modelBuilder.Entity<ConnectionLog>()
                 .OwnsOne(p => p.HWId)
                 .Property(p => p.Hwid)
@@ -401,6 +442,7 @@ namespace Content.Server.Database
         public Guid UserId { get; set; }
         public int SelectedCharacterSlot { get; set; }
         public string AdminOOCColor { get; set; } = null!;
+        public List<string> ConstructionFavorites { get; set; } = new();
         public List<Profile> Profiles { get; } = new();
     }
 
@@ -489,6 +531,12 @@ namespace Content.Server.Database
         /// The corresponding role prototype on the profile.
         /// </summary>
         public string RoleName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Custom name of the role loadout if it supports it.
+        /// </summary>
+        [MaxLength(256)]
+        public string? EntityName { get; set; }
 
         /// <summary>
         /// Store the saved loadout groups. These may get validated and removed when loaded at runtime.
@@ -597,6 +645,10 @@ namespace Content.Server.Database
         public List<ServerBan> AdminServerBansLastEdited { get; set; } = null!;
         public List<ServerRoleBan> AdminServerRoleBansCreated { get; set; } = null!;
         public List<ServerRoleBan> AdminServerRoleBansLastEdited { get; set; } = null!;
+        // SS220 Species bans begin
+        public List<ServerSpeciesBan> AdminServerSpeciesBansCreated { get; set; } = null!;
+        public List<ServerSpeciesBan> AdminServerSpeciesBansLastEdited { get; set; } = null!;
+        // SS220 Species bans end
         public List<RoleWhitelist> JobWhitelists { get; set; } = null!;
     }
 
@@ -619,6 +671,16 @@ namespace Content.Server.Database
     {
         [Key] public Guid UserId { get; set; }
         public string? Title { get; set; }
+
+        /// <summary>
+        /// If true, the admin is voluntarily deadminned. They can re-admin at any time.
+        /// </summary>
+        public bool Deadminned { get; set; }
+
+        /// <summary>
+        /// If true, the admin is suspended by an admin with <c>PERMISSIONS</c>. They will not have in-game permissions.
+        /// </summary>
+        public bool Suspended { get; set; }
 
         public int? AdminRankId { get; set; }
         public AdminRank? AdminRank { get; set; }
@@ -977,12 +1039,16 @@ namespace Content.Server.Database
         Full = 2,
         Panic = 3,
         /*
-         * TODO: Remove baby jail code once a more mature gateway process is established. This code is only being issued as a stopgap to help with potential tiding in the immediate future.
-         *
          * If baby jail is removed, please reserve this value for as long as can reasonably be done to prevent causing ambiguity in connection denial reasons.
          * Reservation by commenting out the value is likely sufficient for this purpose, but may impact projects which depend on SS14 like SS14.Admin.
+         *
+         * Edit: It has
          */
         BabyJail = 4,
+        /// Results from rejected connections with external API checking tools
+        IPChecks = 5,
+        /// Results from rejected connections who are authenticated but have no modern hwid associated with them.
+        NoHwid = 6
     }
 
     public class ServerBanHit
@@ -1039,6 +1105,53 @@ namespace Content.Server.Database
 
         public DateTime UnbanTime { get; set; }
     }
+
+    // SS220 species ban begin
+    [Table("server_species_ban"), Index(nameof(PlayerUserId))]
+    public sealed class ServerSpeciesBan : IBanCommon<ServerSpeciesUnban>
+    {
+        public int Id { get; set; }
+        public int? RoundId { get; set; }
+        public Round? Round { get; set; }
+        public Guid? PlayerUserId { get; set; }
+        [Required] public TimeSpan PlaytimeAtNote { get; set; }
+        public NpgsqlInet? Address { get; set; }
+        public TypedHwid? HWId { get; set; }
+
+        public DateTime BanTime { get; set; }
+
+        public DateTime? ExpirationTime { get; set; }
+
+        public string Reason { get; set; } = null!;
+
+        public NoteSeverity Severity { get; set; }
+        [ForeignKey("CreatedBy")] public Guid? BanningAdmin { get; set; }
+        public Player? CreatedBy { get; set; }
+
+        [ForeignKey("LastEditedBy")] public Guid? LastEditedById { get; set; }
+        public Player? LastEditedBy { get; set; }
+        public DateTime? LastEditedAt { get; set; }
+
+        public ServerSpeciesUnban? Unban { get; set; }
+        public bool Hidden { get; set; }
+
+        public string SpeciesId { get; set; } = null!;
+    }
+
+    [Table("server_species_unban")]
+    public sealed class ServerSpeciesUnban : IUnbanCommon
+    {
+        [Column("species_unban_id")] public int Id { get; set; }
+
+        public int BanId { get; set; }
+        public ServerSpeciesBan Ban { get; set; } = null!;
+
+        public Guid? UnbanningAdmin { get; set; }
+
+        public DateTime UnbanTime { get; set; }
+
+    }
+    // SS220 species ban end
 
     [Table("play_time")]
     public sealed class PlayTime
@@ -1203,14 +1316,6 @@ namespace Content.Server.Database
         public bool Dismissed { get; set; }
     }
 
-    public record DiscordPlayer
-    {
-        public Guid Id { get; set; }
-        public Guid SS14Id { get; set; }
-        public string HashKey { get; set; } = string.Empty;
-        public ulong? DiscordId { get; set; }
-    }
-
     [PrimaryKey(nameof(PlayerUserId), nameof(RoleId))]
     public class RoleWhitelist
     {
@@ -1306,5 +1411,29 @@ namespace Content.Server.Database
 
             return new ImmutableTypedHwid(hwid.Hwid.ToImmutableArray(), hwid.Type);
         }
+    }
+
+
+    /// <summary>
+    ///  Cache for the IPIntel system
+    /// </summary>
+    public class IPIntelCache
+    {
+        public int Id { get; set; }
+
+        /// <summary>
+        /// The IP address (duh). This is made unique manually for psql cause of ef core bug.
+        /// </summary>
+        public IPAddress Address { get; set; } = null!;
+
+        /// <summary>
+        /// Date this record was added. Used to check if our cache is out of date.
+        /// </summary>
+        public DateTime Time { get; set; }
+
+        /// <summary>
+        /// The score IPIntel returned
+        /// </summary>
+        public float Score { get; set; }
     }
 }

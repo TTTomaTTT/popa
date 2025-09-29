@@ -20,6 +20,8 @@
     solution: drink
   - type: DrainableSolution
     solution: drink
+  - type: ExaminableSolution
+    solution: drink
   - type: SolutionTransfer
     canChangeTransferAmount: true
     maxTransferAmount: 10
@@ -53,6 +55,9 @@
     sprite: Objects/Consumable/Drinks/golden_cup.rsi
   - type: StaticPrice
     price: 125
+  - type: PhysicalComposition
+    materialComposition:
+      Gold: 100
 
 - type: entity
   parent: DrinkBaseCup
@@ -62,7 +67,7 @@
   description: A mug.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug.rsi #ss220 mug resprite
     layers:
       - state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
@@ -83,7 +88,7 @@
   description: A plain white mug.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -92,7 +97,7 @@
   description: A sleek black mug.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_black.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_black.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -101,7 +106,7 @@
   description: A blue and black mug.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_blue.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_blue.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -110,17 +115,16 @@
   description: A pale green and pink mug.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_green.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_green.rsi #ss220 mug resprite
 
 - type: entity
-  parent: DrinkBaseCup #this one doesn't have the proper layers in the rsi
+  parent: DrinkBaseMug
   id: DrinkMugDog
   name: funny dog mug
   description: It looks like a cartoon beagle.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_dog.rsi
-    state: icon-3
+    sprite: SS220/Objects/Consumable/Drinks/mug_dog.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -129,7 +133,7 @@
   description: A white mug, it prominently features a red heart.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_heart.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_heart.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -138,7 +142,7 @@
   description: A metal mug. You're not sure which metal.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_metal.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_metal.rsi #ss220 mug resprite
   - type: PhysicalComposition
     materialComposition:
       Steel: 25
@@ -150,7 +154,7 @@
   description: A mug with a Moebius Laboratories logo on it. Not even your morning coffee is safe from corporate advertising.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_moebius.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_moebius.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -159,7 +163,7 @@
   description: "A white mug, it prominently features a #1."
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_one.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_one.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -168,7 +172,7 @@
   description: A rainbow mug. The colors are almost as blinding as a welder.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_rainbow.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_rainbow.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseMug
@@ -177,7 +181,7 @@
   description: A red and black mug.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/mug_red.rsi
+    sprite: SS220/Objects/Consumable/Drinks/mug_red.rsi #ss220 mug resprite
 
 - type: entity
   parent: DrinkBaseCup
@@ -192,17 +196,17 @@
         - ReagentId: HotCocoa
           Quantity: 20
   - type: Icon
-    sprite: Objects/Consumable/Drinks/hot_coco.rsi
+    sprite: SS220/Objects/Consumable/Drinks/hot_coco.rsi #ss220 mug resprite
     state: icon-vend
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/hot_coco.rsi
+    sprite: SS220/Objects/Consumable/Drinks/hot_coco.rsi #ss220 mug resprite
     layers:
       - state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        state: icon-4
+        state: icon-3 #ss220 mug resprite
   - type: Appearance
   - type: SolutionContainerVisuals
-    maxFillLevels: 4
+    maxFillLevels: 3 #ss220 mug resprite
     fillBaseName: icon-
   - type: TrashOnSolutionEmpty
     solution: drink
@@ -220,17 +224,17 @@
         - ReagentId: Coffee
           Quantity: 20
   - type: Icon
-    sprite: Objects/Consumable/Drinks/hot_coffee.rsi
+    sprite: SS220/Objects/Consumable/Drinks/hot_coffee.rsi #ss220 mug resprite
     state: icon-vend
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/hot_coffee.rsi
+    sprite: SS220/Objects/Consumable/Drinks/hot_coffee.rsi #ss220 mug resprite
     layers:
       - state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
-        state: icon-4
+        state: icon-3 #ss220 mug resprite
   - type: Appearance
   - type: SolutionContainerVisuals
-    maxFillLevels: 4
+    maxFillLevels: 3 #ss220 mug resprite
     fillBaseName: icon-
   - type: TrashOnSolutionEmpty
     solution: drink
@@ -274,10 +278,10 @@
         - ReagentId: Tea
           Quantity: 20
   - type: Icon
-    sprite: Objects/Consumable/Drinks/teacup.rsi
+    sprite: SS220/Objects/Consumable/Drinks/teacup.rsi #ss220 mug resprite
     state: icon-vend-tea
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/teacup.rsi
+    sprite: SS220/Objects/Consumable/Drinks/teacup.rsi #ss220 mug resprite
     layers:
       - state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
@@ -302,10 +306,10 @@
         - ReagentId: GreenTea
           Quantity: 20
   - type: Icon
-    sprite: Objects/Consumable/Drinks/teacup.rsi
+    sprite: SS220/Objects/Consumable/Drinks/teacup.rsi #ss220 mug resprite
     state: icon-vend-green-tea
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/teacup.rsi
+    sprite: SS220/Objects/Consumable/Drinks/teacup.rsi #ss220 mug resprite
     layers:
       - state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
@@ -327,7 +331,7 @@
     solutions:
       drink:
         reagents:
-        - ReagentId: Water
+        - ReagentId: JuiceGrape
           Quantity: 20
   - type: Sprite
     sprite: Objects/Consumable/Drinks/lean.rsi

@@ -15,6 +15,7 @@
   - OreProcessorIndustrialMachineCircuitboard
   - ClothingMaskWeldingGas
   - ClothingEyesHudSupply #ss220 HUD CARGO ADD
+  - ClothingShoesBootsJump
 
 - type: technology
   id: SpaceScanning
@@ -28,7 +29,6 @@
   recipeUnlocks:
   - RadarConsoleCircuitboard
   - HandHeldMassScanner
-  - BorgModuleGPS
 
 - type: technology
   id: AdvancedPowercells
@@ -42,6 +42,8 @@
   recipeUnlocks:
   - PowerCellHigh
   - TurboItemRechargerCircuitboard
+  - SMESAdvancedMachineCircuitboard
+  - BlasterPowerCellAlt
 
 - type: technology
   id: MechanicalCompression
@@ -83,7 +85,6 @@
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
-  - PowerComputerCircuitboard #the actual solar panel itself should be in here
   - SuperMatterObserverCircuitboard # SS220 superMatter-crystal
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
@@ -93,7 +94,7 @@
   id: AtmosphericTech
   name: research-technology-atmospheric-tech
   icon:
-    sprite: Structures/Piping/Atmospherics/thermomachine.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/thermomachine.rsi #ss220-engineering-update-thermomachine
     state: freezerOff
   discipline: Industrial
   tier: 1
@@ -174,7 +175,10 @@
     - PowerDrill
     - JawsOfLife
     - BorgModuleAdvancedTool
+    - Fulton
+    - FultonBeacon
     - BorgModuleProtoKineticAccelerator # ss220
+    - BorgModuleFireAxe #SS220 Borg Modules
 
 # ss220 start thermoelectric generator
 - type: technology
@@ -206,6 +210,7 @@
     - OreBagOfHolding
     - MiningDrillDiamond
     - AdvancedMineralScannerEmpty
+    - BorgModuleAdvancedMining
 
 # Tier 3
 
@@ -224,8 +229,8 @@
   - ClothingBackpackDuffelHolding
 
 - type: technology
-  id: PortableFission
-  name: research-technology-portable-fission
+  id: OptimizedMicrogalvanism
+  name: research-technology-optimized-microgalvanism
   icon:
     sprite: Objects/Power/power_cells.rsi
     state: microreactor
@@ -234,5 +239,6 @@
   cost: 10000
   recipeUnlocks:
   - PowerCellMicroreactor
+  - PowerCellHyper
   technologyPrerequisites:
   - AdvancedPowercells

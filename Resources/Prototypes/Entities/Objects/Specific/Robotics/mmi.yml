@@ -53,6 +53,14 @@
     whitelist:
       components:
       - SecretStash
+  # SS220-Add-Languages begin
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: Binary
+    - id: Universal
+  # SS220-Add-Languages end
 
 - type: entity
   parent: MMI
@@ -89,6 +97,8 @@
       roleName: positronic-brain-role-name
       roleDescription: positronic-brain-role-description
       roleRules: ghost-role-information-silicon-rules
+      mindRoles:
+      - MindRoleGhostRoleSilicon
       wipeVerbText: positronic-brain-wipe-device-verb-text
       wipeVerbPopup: positronic-brain-wiped-device
       stopSearchVerbText: positronic-brain-stop-searching-verb-text
@@ -101,6 +111,14 @@
     - type: IntrinsicRadioTransmitter
       channels:
       - Binary
+    # SS220-Add-Languages begin
+    - type: Language
+      selectedLanguage: Galactic
+      availableLanguages:
+      - id: Galactic
+      - id: Binary
+      - id: Universal
+    # SS220-Add-Languages end
     - type: ActiveRadio
       channels:
       - Binary

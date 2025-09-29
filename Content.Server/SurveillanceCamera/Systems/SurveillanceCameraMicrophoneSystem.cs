@@ -1,6 +1,6 @@
 using Content.Server.Chat.Systems;
-using Content.Server.Speech;
-using Content.Server.Speech.Components;
+using Content.Shared.Speech;
+using Content.Shared.Speech.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Player;
 using static Content.Server.Chat.Systems.ChatSystem;
@@ -70,7 +70,16 @@ public sealed class SurveillanceCameraMicrophoneSystem : EntitySystem
         if (!TryComp(uid, out SurveillanceCameraComponent? camera))
             return;
 
-        var ev = new SurveillanceCameraSpeechSendEvent(args.Source, args.Message);
+        // SS220 languages begin
+        string message;
+        if (args.LanguageMessage is { } languageMessage)
+            message = languageMessage.GetMessageWithLanguageKeys();
+        else
+            message = args.Message;
+
+        var ev = new SurveillanceCameraSpeechSendEvent(args.Source, message);
+        //var ev = new SurveillanceCameraSpeechSendEvent(args.Source, args.Message);
+        // SS220 languages end
 
         foreach (var monitor in camera.ActiveMonitors)
         {

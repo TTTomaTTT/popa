@@ -8,10 +8,14 @@
   name: Spider queen
   description: spider dance
   components:
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: True
   - type: Emoting
-  - type: AutoImplant
-    implants:
-    - ThermalVisionImplant
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
   - type: NpcFactionMember
     factions:
     - SpiderQueen
@@ -128,6 +132,10 @@
   id: BaseMobSpiderServant
   abstract: true
   components:
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: true
   - type: Stamina
     critThreshold: 150
   - type: HTN
@@ -207,6 +215,9 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderQueen
@@ -293,6 +304,9 @@
       types:
         Piercing: 5 #Damage
         Structural: 20
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderDrone
@@ -358,6 +372,9 @@
         Piercing: 20
         Poison: 5
         Structural: 10
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderHunter
@@ -420,6 +437,9 @@
         Piercing: 5
         Poison: 10
         Structural: 5
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderGhost
@@ -503,6 +523,9 @@
         Poison: 5
         Piercing: 5
         Structural: 5
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderShooter
@@ -536,6 +559,7 @@
   parent:
   - BaseMobSpiderQueen
   - MobSpiderLittleGhostRole
+  - MobPassiveCollision # SS220 Add Mob Passive Collision
   id: MobSpiderLittle
   name: small spider
   description: spider dance

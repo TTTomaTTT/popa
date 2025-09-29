@@ -3,7 +3,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared.SS220.CCVars;
 
 [CVarDefs]
-public sealed class CCVars220
+public sealed partial class CCVars220
 {
     /// <summary>
     /// Whether is bloom lighting eanbled or not
@@ -45,12 +45,6 @@ public sealed class CCVars220
         CVarDef.Create("ahelp.volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     /// <summary>
-    /// (SS220) AHelp Sound on/off.
-    /// </summary>
-    public static readonly CVarDef<bool> AHelpSoundsEnabled =
-        CVarDef.Create("audio.ahelp_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
-
-    /// <summary>
     /// Delay Between raising the networked event <see cref="SuperMatterStateUpdate"/>.
     /// </summary>
     public static readonly CVarDef<float> SuperMatterUpdateNetworkDelay =
@@ -79,6 +73,9 @@ public sealed class CCVars220
 
     public static readonly CVarDef<float> AfkTeleportToCryo =
         CVarDef.Create("afk.teleport_to_cryo", 1800f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> AfkActivityMessageInterval =
+        CVarDef.Create("afk.activity_message_interval", 20f, CVar.CLIENTONLY | CVar.CHEAT);
 
     /// <summary>
     ///     Controls whether the server will deny any players that are not whitelisted in the Prime DB.
@@ -109,4 +106,44 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<string> DiscordLinkApiKey =
         CVarDef.Create("discord_auth.link_key", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Allow enter server with bypass link check.
+    /// </summary>
+    public static readonly CVarDef<bool> ByPassDiscordLinkCheck =
+        CVarDef.Create("discord_auth.bypass_check", false, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How different is the game year from the real one
+    /// </summary>
+    public static readonly CVarDef<int> GameYearDelta =
+        CVarDef.Create("date.game_year_delta", 544, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How many sponsors can connect to the server beyond the player limit
+    /// </summary>
+    public static readonly CVarDef<int> MaxSponsorsBypass =
+        CVarDef.Create("game.max_sponsors_bypass", 10, CVar.SERVER);
+
+    /// <summary>
+    /// How many languages can be used in one message
+    /// </summary>
+    public static readonly CVarDef<int> MaxLanguagesInOneMessage =
+        CVarDef.Create("chat.max_languages_in_one_message", 3, CVar.SERVER);
+
+    /// <summary>
+    /// Additional info into ban window shown if banned player connects
+    /// </summary>
+    public static readonly CVarDef<string> AdditionalBanInfo =
+        CVarDef.Create("ban.additional_info", "", CVar.SERVERONLY | CVar.ARCHIVE);
+    /// <summary>
+    /// Maximum entity capacity for tts queue
+    /// </summary>
+    public static readonly CVarDef<int> MaxQueuedPerEntity =
+        CVarDef.Create("tts.max_queued_entity", 20, CVar.CLIENTONLY | CVar.ARCHIVE);
+    /// <summary>
+    /// Maximum of queued tts entities
+    /// </summary>
+    public static readonly CVarDef<int> MaxEntitiesQueued =
+        CVarDef.Create("tts.max_entities_queued", 30, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

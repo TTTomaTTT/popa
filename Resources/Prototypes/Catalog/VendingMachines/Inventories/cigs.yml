@@ -18,6 +18,9 @@
     CheapLighter: 4
     Lighter: 2
     FlippoLighter: 2
-  emaggedInventory:
-    CigPackSyndicate: 1
+  contrabandInventory:
+    GroundTobacco: 3
+    CigarGold: 2
+    Igniter: 1
+    CigPackSyndicate: 1 # SS220-let-give-players-something-value-able-ish
     ExpensiveLighterSyndicate: 1 #SS220-Zippo

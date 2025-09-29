@@ -3,6 +3,11 @@
   categories: [ HideSpawnMenu ]
   description: Visualizer for shuttles arriving. You shouldn't see this!
   components:
+  - type: Transform
+    #ss220 fix rotation start
+    #noRot: true
+    #ss220 fix rotation end
+    gridTraversal: false
   - type: FtlVisualizer
     sprite:
       sprite: /Textures/Effects/medi_holo.rsi

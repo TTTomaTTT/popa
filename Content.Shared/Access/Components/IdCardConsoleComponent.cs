@@ -10,9 +10,6 @@ namespace Content.Shared.Access.Components;
 [Access(typeof(SharedIdCardConsoleSystem))]
 public sealed partial class IdCardConsoleComponent : Component
 {
-    public const int MaxFullNameLength = 30;
-    public const int MaxJobTitleLength = 30;
-
     public static string PrivilegedIdCardSlotId = "IdCardConsole-privilegedId";
     public static string TargetIdCardSlotId = "IdCardConsole-targetId";
 
@@ -78,6 +75,33 @@ public sealed partial class IdCardConsoleComponent : Component
         "Theatre",
         "Magistrate", //SS220-Magistrate Access Fix
     };
+
+    // SS220-ID console extended access button-Begin
+    /// <summary>
+    /// All access levels which will be given to ID card when "Extended" button is pressed
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<AccessLevelPrototype>> ExtendedAccessLevels = new()
+    {
+        "Bar",
+        "Cargo",
+        "Chapel",
+        "Paramedic",
+        "Cryogenics",
+        "Engineering",
+        "External",
+        "Hydroponics",
+        "Janitor",
+        "Kitchen",
+        "Lawyer",
+        "Maintenance",
+        "Medical",
+        "Research",
+        "Salvage",
+        "Service",
+        "Theatre",
+    };
+    // SS220-ID console extended access button-End
 
     [Serializable, NetSerializable]
     public sealed class IdCardConsoleBoundUserInterfaceState : BoundUserInterfaceState

@@ -1,10 +1,18 @@
+using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Radio;
+using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Server.Radio;
 
 [ByRefEvent]
-public readonly record struct RadioReceiveEvent(string Message, EntityUid MessageSource, RadioChannelPrototype Channel, EntityUid RadioSource, MsgChatMessage ChatMsg, List<EntityUid> Receivers);
+public readonly record struct RadioReceiveEvent(string Message, EntityUid MessageSource, RadioChannelPrototype Channel, EntityUid RadioSource, MsgChatMessage ChatMsg, List<RadioEventReceiver> Receivers, LanguageMessage? LanguageMessage = null);
+
+/// <summary>
+/// Event raised on the parent entity of a headset radio when a radio message is received
+/// </summary>
+[ByRefEvent]
+public readonly record struct HeadsetRadioReceiveRelayEvent(RadioReceiveEvent RelayedEvent);
 
 /// <summary>
 /// Use this event to cancel sending message per receiver

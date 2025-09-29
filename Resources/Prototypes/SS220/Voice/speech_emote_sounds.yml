@@ -19,7 +19,7 @@
     Crying:
       collection: MaleCry
     Whistle:
-      collection: Whistles                                                                      
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -49,15 +49,15 @@
     Giggle:
       collection: FemaleLaugh
     Cough:
-      collection: FemaleCoughs 
+      collection: FemaleCoughs
     Yawn:
-      collection: FemaleYawn  
+      collection: FemaleYawn
     Sigh:
       collection: FemaleSigh
     Crying:
       collection: FemaleCry
     Whistle:
-      collection: Whistles                           
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -106,7 +106,7 @@
       collection: MaleSneezes
     Cough:
       collection: MaleCoughs
-    Fart: 
+    Fart:
       collection: Fart
       params:
         volume: 2
@@ -149,7 +149,7 @@
       collection: FemaleSneezes
     Cough:
       collection: FemaleCoughs
-    Fart: 
+    Fart:
       collection: Fart
       params:
         volume: 2
@@ -182,3 +182,83 @@
     Purr:
       collection: FelinidPurrs
 # Cat emotes end
+
+- type: emoteSounds
+  id: MaleTajaran
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Laugh:
+      collection: MaleLaugh
+    Giggle:
+      collection: MaleLaugh
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: TajaranMeows
+    Mrow:
+      collection: TajaranAnnoyedMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+
+- type: emoteSounds
+  id: FemaleTajaran
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Laugh:
+      collection: FemaleLaugh
+    Giggle:
+      collection: FemaleLaugh
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: TajaranMeows
+    Mrow:
+      collection: TajaranAnnoyedMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp

@@ -6,6 +6,7 @@
   description: A large container for items.
   components:
   - type: Cart #SS220-Cart-system-fix
+  - type: Animateable
   - type: Transform
     noRot: true
   - type: Icon
@@ -76,8 +77,8 @@
           Invoice: { state: invoice }
   - type: PaperLabel
     labelSlot:
-      insertVerbText: Attach Label
-      ejectVerbText: Remove Label
+      insertVerbText: comp-paper-label-insert
+      ejectVerbText: comp-paper-label-eject
       whitelist:
         components:
         - Paper
@@ -160,3 +161,5 @@
     - Energy
     reflectProb: 0.2
     spread: 90
+  - type: Paintable
+    group: CrateSecure

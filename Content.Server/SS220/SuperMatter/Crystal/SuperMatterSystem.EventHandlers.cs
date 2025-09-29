@@ -1,19 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Events;
-using Content.Server.SS220.SuperMatterCrystal.Components;
+
+using Content.Server.SS220.SuperMatter.Crystal.Components;
+using Content.Shared.Database;
+using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Projectiles;
-using Content.Shared.Tools.Components;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using Content.Server.Construction.Completions;
-using Content.Shared.Destructible;
 using Content.Shared.SS220.SuperMatter.Ui;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using Content.Shared.Tools.Components;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Events;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal;
 
-public sealed partial class SuperMatterSystem : EntitySystem
+public sealed partial class SuperMatterSystem
 {
     private readonly string _anchoringTagName = "Anchoring";
 
@@ -39,16 +38,19 @@ public sealed partial class SuperMatterSystem : EntitySystem
         entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
         InitGasMolesAccumulator(entity.Comp);
     }
+
     private void OnRemove(Entity<SuperMatterComponent> entity, ref ComponentRemove args)
     {
         var ev = new SuperMatterStateDeleted(entity.Owner.Id);
         RaiseNetworkEvent(ev);
     }
+
     private void OnHandInteract(Entity<SuperMatterComponent> entity, ref InteractHandEvent args)
     {
         entity.Comp.Matter += MatterNondimensionalization;
         ConsumeObject(args.User, entity, true);
     }
+
     private void OnItemInteract(Entity<SuperMatterComponent> entity, ref InteractUsingEvent args)
     {
         if (TryComp<ToolComponent>(args.Used, out var toolComponent))
@@ -61,6 +63,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         entity.Comp.Matter += MatterNondimensionalization / 8f;
         ConsumeObject(args.Used, entity);
     }
+
     private void OnCollide(Entity<SuperMatterComponent> entity, ref StartCollideEvent args)
     {
         if (args.OtherBody.BodyType == BodyType.Static)
@@ -77,8 +80,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         }
 
-        ConsumeObject(args.OtherEntity, entity);
+        ConsumeObject(args.OtherEntity, entity, HasComp<HumanoidAppearanceComponent>(args.OtherEntity));
     }
+
     private void OnActivation(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
     {
         if (args.Handled)
@@ -87,6 +91,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (!entity.Comp.Activated)
         {
             SendAdminChatAlert(entity, Loc.GetString("supermatter-admin-alert-activated"), $"{EntityManager.ToPrettyString(args.Target)}");
+            _adminLog.Add(LogType.Action, LogImpact.High, $"Crystal {ToPrettyString(entity):user} was activated by {ToPrettyString(args.Target):target}");
             entity.Comp.Activated = true;
         }
         args.Handled = true;

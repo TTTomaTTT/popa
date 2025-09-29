@@ -22,7 +22,7 @@
   - Detective
 #  extendedAccess: #SS220-Transfer Detective To Security
   - Security
-  - Cryogenics 
+  - Cryogenics
   special: #SS220-Transfer Detective To Security begin
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ] #SS220-Transfer Detective To Security end
@@ -33,9 +33,19 @@
     eyes: ClothingEyesGlassesSecurity
     id: DetectivePDA
     ears: ClothingHeadsetSecurity
-    neck: ClothingBeltHolsterFilled #SS220 holster to neck
+    # neck: ClothingBeltHolsterFilled #SS220 Shoulder holster is now selectable in loadout
   storage:
     back:
     - Flash
     - ForensicPad
     - ForensicScanner
+
+- type: chameleonOutfit
+  id: DetectiveChameleonOutfit
+  job: Detective
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatFedoraBrown
+    mask: ClothingMaskGasSecurity
+    neck: ClothingNeckTieDet
+    gloves: ClothingHandsGlovesForensic

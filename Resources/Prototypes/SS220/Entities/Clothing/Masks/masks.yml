@@ -7,9 +7,9 @@
   description: Улучшенный противогаз, используемый атмосферными техниками. Огнеупорный!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/atmos_mask.rsi
+    sprite: SS220/Clothing/Mask/atmospheric_technician.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/atmos_mask.rsi
+    sprite: SS220/Clothing/Mask/atmospheric_technician.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -36,11 +36,63 @@
   description: Неоново-синяя маска, используемая для деморализации Грейтайда в дикой природе.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/blue-shield-mask.rsi
+    sprite: SS220/Clothing/Mask/blueshield_alt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/blue-shield-mask.rsi
+    sprite: SS220/Clothing/Mask/blueshield_alt.rsi
   - type: FlashImmunity
   - type: EyeProtection
+
+- type: entity
+  parent: ClothingMaskGasExplorer
+  id: BlueShieldGasMask
+  name: blue shield gas mask
+  description: An impeccable gas mask for Blue Shield officers. In addition to fire resistance, it also provides eye protection.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/blueshield.rsi
+    #SS220 - add-smart-mask-swat-and-blueshield - start
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+    #SS220 - add-smart-mask-swat-and-blueshield - end
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.9
+# Sec Tactical Gas Mask
+- type: entity
+  parent: [ClothingMaskGasExplorer, BaseSecurityContraband]
+  id: SecurityTacticalGasMask
+  name: security tactical gas mask
+  description: It is a cheaper modification of the Blue Shield gas mask, without flash protection, but with the same cool design.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/security_tac.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/security_tac.rsi
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
 
 # Syndie HOTLINE MIAMI MASKS
 

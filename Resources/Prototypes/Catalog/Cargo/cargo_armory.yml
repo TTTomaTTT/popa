@@ -35,7 +35,7 @@
     state: implanter0
   product: CrateTrackingImplants
   cost: 1000
-  category: cargoproduct-category-name-armory
+  category: cargoproduct-category-name-medical #SS220-move-tracking-to-med
   group: market
 
 - type: cargoProduct
@@ -65,5 +65,15 @@
     state: icon
   product: CrateArmoryPistols
   cost: 5200
+  category: cargoproduct-category-name-armory
+  group: market
+
+- type: cargoProduct
+  id: ArmoryRifle
+  icon:
+    sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
+    state: icon
+  product: CrateArmoryRifle
+  cost: 8000
   category: cargoproduct-category-name-armory
   group: market
