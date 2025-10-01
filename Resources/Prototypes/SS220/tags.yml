@@ -343,10 +343,3 @@
 - type: Tag
   id: Legalposter
 # ss220 Posters update end
-
-#PottedWallPlant
-- type: Tag
-  id: Hedge
-
-- type: Tag
-  id: FlowerHedge

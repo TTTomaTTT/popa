@@ -10,24 +10,3 @@
           completed:
             - !type:SnapToGrid
               southRotation: true
-
-    - node: HedgeFlower
-      entity: HedgeFlower
-      edges:
-        - to: Hedge
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-
-- type: constructionGraph
-  id: HedgeBioluminscent
-  start: start
-  graph:
-    - node: start
-      actions:
-        - !type:DeleteEntity {}
-      edges:
-        - to: HedgeBioluminscent
-          completed:
-            - !type:SnapToGrid
-              southRotation: true

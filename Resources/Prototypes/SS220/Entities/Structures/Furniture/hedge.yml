@@ -57,9 +57,6 @@
   - type: InteractionOutline
   - type: Transform
     anchored: true
-  - type: Tag
-    tags:
-      - Hedge
 
 - type: entity
   id: HedgeSeparate
@@ -98,12 +95,6 @@
   - type: IconSmooth
     key: hedge
     base: state_
-  - type: Construction
-    graph: Hedge
-    node: FlowerHedge
-  - type: Tag
-    tags:
-      - FlowerHedge
 
 - type: entity
   id: FlowerHedgeRed
@@ -182,9 +173,6 @@
   - type: PointLight
     radius: 1.5
     color: "#e6ba39"
-  - type: Construction
-    graph: HedgeBioluminscent
-    node: HedgeBioluminscent
 
 - type: entity
   id: HedgeNettle
@@ -207,9 +195,6 @@
     damage:
       types:
         Heat: 2
-  - type: Construction
-    graph: HedgeNettle
-    node: HedgeNettle
 
 - type: entity
   id: HedgeSnow
