@@ -43,9 +43,6 @@
           collection: WoodDestroy
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Construction
-    graph: Hedge
-    node: Hedge
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepGrass
