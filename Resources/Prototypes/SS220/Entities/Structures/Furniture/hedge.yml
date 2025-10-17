@@ -54,6 +54,9 @@
   - type: InteractionOutline
   - type: Transform
     anchored: true
+  - type: ContainerContainer
+    containers:
+      stash: !type:ContainerSlot {}
 
 - type: entity
   id: HedgeSeparate
