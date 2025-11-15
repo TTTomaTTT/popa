@@ -61,7 +61,7 @@
 - type: entity
   id: HedgeSeparate
   parent: Hedge
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: state
@@ -221,7 +221,7 @@
 - type: entity
   id: HedgeAutumnSeparate
   parent: HedgeAutumn
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -230,7 +230,7 @@
 - type: entity
   id: FlowerHedgeSeparate
   parent: FlowerHedge
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -239,7 +239,7 @@
 - type: entity
   id: FlowerHedgeRedSeparate
   parent: FlowerHedgeRed
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -248,7 +248,7 @@
 - type: entity
   id: FlowerHedgeOrangeSeparate
   parent: FlowerHedgeOrange
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -257,7 +257,7 @@
 - type: entity
   id: FlowerHedgeYellowSeparate
   parent: FlowerHedgeYellow
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -266,7 +266,7 @@
 - type: entity
   id: FlowerHedgeBlueSeparate
   parent: FlowerHedgeBlue
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -275,7 +275,7 @@
 - type: entity
   id: FlowerHedgeWhiteSeparate
   parent: FlowerHedgeWhite
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -284,7 +284,7 @@
 - type: entity
   id: HedgeBioluminscentSeparate
   parent: HedgeBioluminscent
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -293,7 +293,7 @@
 - type: entity
   id: HedgeNettleSeparate
   parent: HedgeNettle
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
@@ -302,7 +302,7 @@
 - type: entity
   id: HedgeSnowSeparate
   parent: HedgeSnow
-  suffix: "separate"
+  suffix: separate
   components:
   - type: IconSmooth
     key: separate
